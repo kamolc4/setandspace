@@ -64,12 +64,7 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
               id="hero-heading"
               style={{
                 fontFamily: "var(--font-cormorant)",
-                /*
-                 * Col-A text area ≈ 330px at 1440–1920px (maxWidth caps at 1400px).
-                 * "Opowiadamy" in Cormorant at 4.5rem (72px) ≈ 311px — ~19px right margin.
-                 * Min 2.25rem keeps readable size at tablet (768px col-A ≈ 177px).
-                 */
-                fontSize: "clamp(2.25rem, 4.5vw, 4.5rem)",
+                fontSize: "clamp(2rem, 3.2vw, 3.5rem)",
                 fontWeight: 400,
                 lineHeight: 1.05,
                 letterSpacing: "-0.02em",
