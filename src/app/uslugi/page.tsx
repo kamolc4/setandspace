@@ -43,7 +43,7 @@ export default function UslugiPage() {
           </h1>
           <p className="text-body" style={{ maxWidth: "520px" }}>
             Specjalizujemy się w kinematograficznym opowiadaniu przestrzeni. Każda usługa
-            jest dopasowana do specyfiki branży — hoteli, nieruchomości, architektury i marek.
+            jest dopasowana do specyfiki każdej branży: hoteli, nieruchomości, architektury i marek.
           </p>
         </header>
 

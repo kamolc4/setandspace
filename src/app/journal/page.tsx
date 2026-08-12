@@ -54,7 +54,7 @@ export default function JournalPage() {
             Journal.
           </h1>
           <p className="text-body" style={{ maxWidth: "480px", marginTop: "1rem" }}>
-            Piszemy o tym, co wiemy — o przygotowaniu do nagrań, roli światła, procesie produkcji
+            Piszemy o tym, co wiemy: o przygotowaniu do nagrań, roli światła, procesie produkcji
             i tym, co sprawia, że film dobrze służy przestrzeni i marce.
           </p>
         </header>

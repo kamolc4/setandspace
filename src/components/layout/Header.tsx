@@ -43,31 +43,42 @@ export default function Header() {
           zIndex: 50,
           padding: "0 1.5rem",
           height: "3.75rem",
-          display: "grid",
-          gridTemplateColumns: "1fr auto 1fr",
+          display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
           transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
           backgroundColor: scrolled ? "rgba(232,222,210,0.88)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         }}
       >
-        {/* Wordmark — column 1, left */}
+        {/* Wordmark */}
         <Link
           href="/"
-          aria-label="Set & Space — strona główna"
+          aria-label="Set & Space, strona główna"
           className="text-label"
-          style={{ color: "var(--text-primary)", letterSpacing: "0.15em" }}
+          style={{ color: "var(--text-primary)", letterSpacing: "0.15em", position: "relative", zIndex: 1 }}
           onClick={closeMenu}
         >
           SET & SPACE
         </Link>
 
-        {/* Desktop nav — column 2, truly centered relative to viewport */}
+        {/*
+          Desktop nav — absolutely positioned at left: 50%.
+          Because the header spans the full viewport (left: 0; right: 0),
+          left: 50% places the nav's left edge at exactly 50vw.
+          translateX(-50%) shifts it left by half its own width,
+          so navCenter = 50vw exactly, regardless of logo or hamburger width.
+        */}
         <nav
           aria-label="Główna nawigacja"
-          className="hidden md:flex"
-          style={{ gridColumn: 2 }}
+          className="header-desktop-nav"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
         >
           <ul
             style={{
@@ -101,9 +112,9 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* Mobile menu toggle — column 3, right */}
+        {/* Mobile menu toggle */}
         <button
-          className="md:hidden"
+          className="header-hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
           aria-expanded={menuOpen}
@@ -114,11 +125,10 @@ export default function Header() {
             cursor: "pointer",
             padding: "0.5rem",
             color: "var(--text-primary)",
-            display: "flex",
             flexDirection: "column",
             gap: "5px",
-            gridColumn: 3,
-            justifySelf: "end",
+            position: "relative",
+            zIndex: 1,
           }}
         >
           <span
@@ -218,6 +228,20 @@ export default function Header() {
           </p>
         </div>
       </div>
+
+      <style>{`
+        /* Desktop nav: hidden on mobile, shown (absolutely centred) on desktop */
+        .header-desktop-nav { display: none; }
+        @media (min-width: 768px) {
+          .header-desktop-nav { display: flex; }
+        }
+
+        /* Hamburger: shown on mobile, hidden on desktop */
+        .header-hamburger { display: flex; }
+        @media (min-width: 768px) {
+          .header-hamburger { display: none; }
+        }
+      `}</style>
     </>
   );
 }

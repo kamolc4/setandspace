@@ -45,7 +45,7 @@ export const projects: Project[] = [
     shortDescription:
       "Kinematograficzny film dla butikowego hotelu w Tatrach, oddający atmosferę górskiej ciszy, ciepło drewna i rytuał porannej kawy z widokiem na szczyty.",
     story:
-      "Celem projektu było uchwycenie nie tyle samego miejsca, co uczucia, które towarzyszy pobytowi w tym hotelu. Zaczęliśmy od wczesnego poranka — mgła nad doliną, pierwsze światło we wnętrzach, cisza przed przebudzeniem. Każde ujęcie budowaliśmy wokół detalu: faktury kamienia, refleksu w oknie, gestu podania filiżanki. Finalny materiał to trzyipółminutowa narracja bez słów, która robi więcej niż jakakolwiek ulotka.",
+      "Celem projektu było uchwycenie nie tyle samego miejsca, co uczucia, które towarzyszy pobytowi w tym hotelu. Zaczęliśmy od wczesnego poranka. Mgła nad doliną, pierwsze światło we wnętrzach, cisza przed przebudzeniem. Każde ujęcie budowaliśmy wokół detalu: faktury kamienia, refleksu w oknie, gestu podania filiżanki. Finalny materiał to trzyipółminutowa narracja bez słów, która robi więcej niż jakakolwiek ulotka.",
     scope: [
       "Film promocyjny (wersja pełna 3:30)",
       "Wersja social media :60 i :30",
@@ -53,7 +53,7 @@ export const projects: Project[] = [
       "Materiał B-roll do wykorzystania na stronie",
     ],
     posterImage: "/images/placeholder-hotel.jpg",
-    posterAlt: "Kadr z filmu promocyjnego górskiego hotelu — zimowy wschód słońca",
+    posterAlt: "Kadr z filmu promocyjnego górskiego hotelu, zimowy wschód słońca",
     videoProvider: "vimeo",
     vimeoId: null, // PLACEHOLDER — replace with real Vimeo ID
     youtubeId: null,
@@ -64,14 +64,14 @@ export const projects: Project[] = [
     relatedSlugs: ["apartamenty-w-centrum", "architektura-rezydencji"],
     relatedService: "filmy-dla-hoteli",
     seo: {
-      title: "Film dla hotelu górskiego — realizacja Set & Space",
+      title: "Film promocyjny dla górskiego hotelu | Set & Space",
       description:
-        "Kinematograficzny film promocyjny dla butikowego hotelu w Tatrach. Atmosfera, wnętrza, luz i naturalność — zrealizowane przez Set & Space.",
+        "Kinematograficzny film promocyjny dla butikowego hotelu w Tatrach. Atmosfera, wnętrza, luz i naturalność. Zrealizowane przez Set & Space.",
     },
   },
   {
     slug: "apartamenty-w-centrum",
-    title: "Video nieruchomości — apartamenty premium",
+    title: "Video apartamentów premium",
     category: "nieruchomosci",
     categoryLabel: "Nieruchomości",
     location: "Warszawa, Polska",
@@ -86,7 +86,7 @@ export const projects: Project[] = [
       "Materiał dla portali nieruchomości",
     ],
     posterImage: "/images/placeholder-apartment.jpg",
-    posterAlt: "Kadr z filmu nieruchomości — nowoczesny salon z panoramicznym oknem",
+    posterAlt: "Kadr z filmu nieruchomości, nowoczesny salon z panoramicznym oknem",
     videoProvider: "vimeo",
     vimeoId: null, // PLACEHOLDER
     youtubeId: null,
@@ -97,29 +97,29 @@ export const projects: Project[] = [
     relatedSlugs: ["hotel-w-gorach", "architektura-rezydencji"],
     relatedService: "video-nieruchomosci",
     seo: {
-      title: "Video nieruchomości — apartamenty premium w Warszawie | Set & Space",
+      title: "Video apartamentów premium w Warszawie | Set & Space",
       description:
         "Film nieruchomości dla dewelopera apartamentów premium w Warszawie. Kinematograficzne ujęcia przestrzeni, naturalnego światła i architektury.",
     },
   },
   {
     slug: "architektura-rezydencji",
-    title: "Film architektury — rezydencja prywatna",
+    title: "Film architektoniczny rezydencji prywatnej",
     category: "architektura",
     categoryLabel: "Architektura i wnętrza",
     location: "Mazury, Polska",
     year: 2024,
     shortDescription:
-      "Film dokumentujący pracownie architektoniczną i jej flagowy projekt — dom nad jeziorem zaprojektowany w duchu harmonii między budynkiem a krajobrazem.",
+      "Film dokumentujący pracownię architektoniczną i jej flagowy projekt: dom nad jeziorem zaprojektowany w harmonii między budynkiem a krajobrazem.",
     story:
-      "Architekt chciał pokazać projekt nie tylko jako budynek, ale jako odpowiedź na miejsce. Filmowaliśmy w czterech różnych porach dnia i przy dwóch różnych pogodach. Interesowało nas to, jak budynek zmienia się razem ze światłem — jak jest czymś innym o świcie i czymś innym pod wieczór. Finał to sześciominutowy esej wizualny o architekturze zakorzenionej w krajobrazie.",
+      "Architekt chciał pokazać projekt nie tylko jako budynek, ale jako odpowiedź na miejsce. Filmowaliśmy w czterech różnych porach dnia i przy dwóch różnych pogodach. Interesowało nas, jak budynek zmienia się razem ze światłem: jak o świcie wygląda inaczej niż pod wieczór. Finał to sześciominutowy esej wizualny o architekturze zakorzenionej w krajobrazie.",
     scope: [
       "Film architektoniczny (6:00)",
       "Wersja portfolio pracowni (2:30)",
       "Fotografia architektoniczna (20 kadrów)",
     ],
     posterImage: "/images/placeholder-architecture.jpg",
-    posterAlt: "Kadr z filmu architektury — dom nad jeziorem o złotej godzinie",
+    posterAlt: "Kadr z filmu architektury, dom nad jeziorem o złotej godzinie",
     videoProvider: "vimeo",
     vimeoId: null, // PLACEHOLDER
     youtubeId: null,
@@ -130,14 +130,14 @@ export const projects: Project[] = [
     relatedSlugs: ["hotel-w-gorach", "studio-designu"],
     relatedService: "filmy-architektury-i-wnetrz",
     seo: {
-      title: "Film architektury — rezydencja nad jeziorem | Set & Space",
+      title: "Film architektoniczny rezydencji nad jeziorem | Set & Space",
       description:
         "Kinematograficzny film dokumentujący prywatną rezydencję nad Mazurami. Architektura, światło i krajobraz uchwycone przez Set & Space.",
     },
   },
   {
     slug: "studio-designu",
-    title: "Brand content — studio designu i wyposażenia wnętrz",
+    title: "Brand content dla studia designu i wyposażenia wnętrz",
     category: "marki",
     categoryLabel: "Marki",
     location: "Kraków, Polska",
@@ -145,14 +145,14 @@ export const projects: Project[] = [
     shortDescription:
       "Film reklamowy dla krakowskiego studia designu specjalizującego się w autorskich meblach i tkaninach. Produkcja, materiał, rzemiosło.",
     story:
-      "Studio chciało pokazać proces twórczy — od szkicu po gotowy produkt. Interesowały nas ręce projektanta, faktura materiałów, ruch maszyny tkackiej. Zbudowaliśmy narrację wokół jednego krzesła — od pierwszej linii na papierze do finalnego kadru w showroomie.",
+      "Studio chciało pokazać cały proces twórczy: od szkicu po gotowy produkt. Interesowały nas ręce projektanta, faktura materiałów, ruch maszyny tkackiej. Zbudowaliśmy narrację wokół jednego krzesła: od pierwszej linii na papierze do finalnego kadru w showroomie.",
     scope: [
       "Film marki (2:00)",
       "Seria krótkich filmów produktowych",
       "Materiał za kulisami dla social media",
     ],
     posterImage: "/images/placeholder-brand.jpg",
-    posterAlt: "Kadr z brand contentu — detal materiału w warsztacie studia designu",
+    posterAlt: "Kadr z brand contentu, detal materiału w warsztacie studia designu",
     videoProvider: "youtube",
     vimeoId: null,
     youtubeId: null, // PLACEHOLDER
@@ -163,9 +163,9 @@ export const projects: Project[] = [
     relatedSlugs: ["architektura-rezydencji", "apartamenty-w-centrum"],
     relatedService: "filmy-reklamowe",
     seo: {
-      title: "Brand content — studio designu i wnętrz w Krakowie | Set & Space",
+      title: "Brand content studia designu i wnętrz w Krakowie | Set & Space",
       description:
-        "Film reklamowy dla krakowskiego studia designu. Rzemiosło, materiał, proces twórczy — uchwycone przez Set & Space.",
+        "Film reklamowy dla krakowskiego studia designu. Rzemiosło, materiał i proces twórczy. Uchwycone przez Set & Space.",
     },
   },
 ];

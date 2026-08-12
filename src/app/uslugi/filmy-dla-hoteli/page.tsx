@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Filmy dla hoteli i obiektów hospitality | Set & Space",
     description:
-      "Filmy, które pozwalają poczuć hotel zanim gość przekroczy próg. Set & Space — kinematograficzne realizacje dla hospitality.",
+      "Filmy, które pozwalają poczuć hotel zanim gość przekroczy próg. Kinematograficzne realizacje dla hospitality.",
     url: `${business.url}/uslugi/${SLUG}`,
   },
 };

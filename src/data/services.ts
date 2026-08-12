@@ -28,7 +28,7 @@ export const services: Service[] = [
     slug: "filmy-dla-hoteli",
     shortTitle: "Filmy dla hoteli",
     title: "Filmy dla hoteli i obiektów hospitality",
-    headline: "Twój hotel na ekranie — zanim gość przekroczy próg.",
+    headline: "Twój hotel na ekranie, zanim gość przekroczy próg.",
     intro:
       "Tworzymy filmy promocyjne, które pozwalają poczuć atmosferę obiektu przed rezerwacją. Nie robimy folderów wideo. Budujemy narracje, które sprzedają doświadczenie.",
     body:
@@ -96,7 +96,7 @@ export const services: Service[] = [
       {
         question: "Czy możecie filmować w trakcie pracy hotelu?",
         answer:
-          "Tak — pracujemy dyskretnie i planujemy realizację tak, by minimalizować wpływ na gości i pracowników. Najlepsze ujęcia często udaje się zrobić rano, przed największym ruchem.",
+          "Tak, pracujemy dyskretnie i planujemy realizację tak, by minimalizować wpływ na gości i pracowników. Najlepsze ujęcia często udaje się zrobić rano, przed największym ruchem.",
       },
     ],
     relatedProjectCategories: ["hotele"],
@@ -163,7 +163,7 @@ export const services: Service[] = [
       "Posprzątaj i zdekoruj nieruchomość jak do sesji fotograficznej",
       "Usuń niepotrzebne przedmioty, kable, bibeloty",
       "Zadbaj o świeże kwiaty lub rośliny jako akcenty dekoracyjne",
-      "Upewnij się, że okna są czyste — przepuszczają więcej naturalnego światła",
+      "Upewnij się, że okna są czyste. Przepuszczają zdecydowanie więcej naturalnego światła",
       "Sprawdź, czy wszystkie żarówki działają i mają tę samą temperaturę barwową",
       "Zaplanuj nakręcenie widoków o najbardziej atrakcyjnej porze dnia",
     ],
@@ -171,12 +171,12 @@ export const services: Service[] = [
       {
         question: "Czy film nieruchomości jest potrzebny przy sprzedaży?",
         answer:
-          "Na rynku premium coraz częściej tak. Kupujący oczekują więcej niż suchych zdjęć — chcą poczuć przestrzeń przed decyzją o wizycie.",
+          "Na rynku premium coraz częściej tak. Kupujący oczekują więcej niż suchych zdjęć. Chcą poczuć przestrzeń przed decyzją o wizycie.",
       },
       {
         question: "Czy filmujecie z drona?",
         answer:
-          "Tak — w zależności od lokalizacji i potrzeb projektu. Ujęcia z powietrza świetnie sprawdzają się przy domach z ogrodem, dużych działkach lub nieruchomościach z atrakcyjnym otoczeniem.",
+          "Tak, w zależności od lokalizacji i potrzeb projektu. Ujęcia z powietrza świetnie sprawdzają się przy domach z ogrodem, dużych działkach lub nieruchomościach z atrakcyjnym otoczeniem.",
       },
     ],
     relatedProjectCategories: ["nieruchomosci"],
@@ -201,7 +201,7 @@ export const services: Service[] = [
     title: "Filmy architektury i wnętrz",
     headline: "Architektura zasługuje na ruch.",
     intro:
-      "Projekty architektoniczne i aranżacje wnętrz żyją inaczej w filmie niż na fotografii — zmieniają się z perspektywą, ruchem i światłem. Tworzymy materiały, które oddają tę czwartą wymiar projektu.",
+      "Projekty architektoniczne i aranżacje wnętrz żyją inaczej w filmie niż na fotografii. Zmieniają się z perspektywą, ruchem i światłem. Tworzymy materiały, które oddają tę czwartą wymiar projektu.",
     body:
       "Współpracujemy z pracowniami architektonicznymi, projektantami wnętrz, studia projektowymi i inwestorami. Nasze filmy służą jako portfolio, materiał do prasy i publikacji, treść na strony oraz narzędzie do prezentacji klientom.",
     useCases: [
@@ -222,7 +222,7 @@ export const services: Service[] = [
       {
         step: "Wizja twórcza",
         description:
-          "Każdy projekt architektoniczny ma nastrój. Rozmawiamy z architektem o tym, co projekt ma opowiadać — o materiale, świetle, funkcji.",
+          "Każdy projekt architektoniczny ma nastrój. Rozmawiamy z architektem o tym, co projekt ma opowiadać: o materiale, świetle, funkcji.",
       },
       {
         step: "Reconnaissance",
@@ -237,20 +237,20 @@ export const services: Service[] = [
       {
         step: "Opowieść",
         description:
-          "Postprodukcja skupiona na narracji — jak film prowadzi widza przez przestrzeń i co mu opowiada.",
+          "Postprodukcja skupiona na narracji: jak film prowadzi widza przez przestrzeń i co mu opowiada.",
       },
     ],
     preparation: [
       "Upewnij się, że wszystkie prace wykończeniowe są zakończone",
       "Usuń tymczasowe elementy budowlane i narzędzia",
-      "Zadbaj o meble i dekoracje — finalny wystrój jak do oddania klientowi",
+      "Zadbaj o meble i dekoracje, jakby projekt miał być odebrany przez klienta",
       "Omów z nami, które elementy projektu chcesz szczególnie podkreślić",
     ],
     faq: [
       {
         question: "Czy filmujecie w trakcie budowy?",
         answer:
-          "Tak — dokumentacja budowy to osobna specjalizacja. Możemy zrealizować zarówno film procesu jak i finalną dokumentację gotowego projektu.",
+          "Tak, dokumentacja budowy to osobna specjalizacja. Możemy zrealizować zarówno film procesu jak i finalną dokumentację gotowego projektu.",
       },
       {
         question: "Co wyróżnia dobry film architektoniczny?",
@@ -278,11 +278,11 @@ export const services: Service[] = [
     slug: "filmy-reklamowe",
     shortTitle: "Filmy reklamowe",
     title: "Filmy reklamowe i brand content",
-    headline: "Marka, która ma coś do powiedzenia — powinna to powiedzieć obrazem.",
+    headline: "Marka, która ma coś do powiedzenia, powinna to powiedzieć obrazem.",
     intro:
       "Tworzymy filmy reklamowe i brand content dla wybranych marek, których estetyka współgra z naszym podejściem do obrazu. Pracujemy z markami z sektora design, lifestyle, hospitality i premium consumer.",
     body:
-      "Nie jesteśmy dla każdej marki — i to jest zamierzone. Pracujemy tam, gdzie klient rozumie, że film to nie po prostu ruchome zdjęcia, a środek wyrazu budujący tożsamość marki.",
+      "Nie jesteśmy dla każdej marki. I to jest zamierzone. Pracujemy tam, gdzie klient rozumie, że film to nie po prostu ruchome zdjęcia, a środek wyrazu budujący tożsamość marki.",
     useCases: [
       "Film wizerunkowy marki",
       "Kampania reklamowa (TV, online, OOH)",
@@ -338,7 +338,7 @@ export const services: Service[] = [
       {
         question: "Czy pracujecie ze wszystkimi markami?",
         answer:
-          "Nie. Wybieramy projekty, w których nasz styl ma sens — marki premium, design-oriented, hospitality i lifestyle. Nie robimy filmów sprzecznych z naszą estetyką.",
+          "Nie. Wybieramy projekty, w których nasz styl ma sens: marki premium, design-oriented, hospitality i lifestyle. Nie robimy filmów sprzecznych z naszą estetyką.",
       },
     ],
     relatedProjectCategories: ["marki"],

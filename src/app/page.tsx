@@ -71,7 +71,7 @@ export default function HomePage() {
             </p>
             <p className="text-body" style={{ marginBottom: "2rem" }}>
               Każdy projekt zaczyna się od rozmowy o tym, czym jest dane miejsce i jak
-              chcemy, żeby się je czuło — zanim w ogóle pomyślimy o kamerze.
+              chcemy, żeby się je czuło. Zanim w ogóle pomyślimy o kamerze.
             </p>
             <Link
               href="/o-nas"

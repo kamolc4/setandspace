@@ -10,7 +10,7 @@ const SLUG = "video-nieruchomosci";
 export const metadata: Metadata = {
   title: "Video nieruchomości i filmowanie apartamentów | Set & Space",
   description:
-    "Filmy nieruchomości dla deweloperów, biur i prywatnych sprzedających. Pokaż przestrzeń z charakterem — kinematograficzne video na rynek premium. Polska.",
+    "Filmy nieruchomości dla deweloperów, biur i prywatnych sprzedających. Pokaż przestrzeń z charakterem. Kinematograficzne video na rynek premium. Polska.",
   alternates: { canonical: `${business.url}/uslugi/${SLUG}` },
 };
 

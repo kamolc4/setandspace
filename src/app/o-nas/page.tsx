@@ -8,7 +8,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "O nas — filozofia i podejście do tworzenia filmów",
   description:
-    "Set & Space to studio filmowe skupione na kinematograficznym opowiadaniu przestrzeni. Hotele, nieruchomości, architektura — każde miejsce ma swoją historię.",
+    "Set & Space to studio filmowe skupione na kinematograficznym opowiadaniu przestrzeni. Hotele, nieruchomości, architektura. Każde miejsce ma swoją historię.",
   alternates: { canonical: `${business.url}/o-nas` },
 };
 
@@ -94,7 +94,7 @@ export default function ONasPage() {
                   fontStyle: "italic",
                 }}
               >
-                &ldquo;Każde miejsce ma atmosferę — naszą pracą jest ją uchwycić.&rdquo;
+                &ldquo;Każde miejsce ma atmosferę. Naszą pracą jest ją uchwycić.&rdquo;
               </p>
               <p
                 className="text-label"
@@ -145,7 +145,7 @@ export default function ONasPage() {
                     maxWidth: "600px",
                   }}
                 >
-                  Hotel, mieszkanie, budynek — każde miejsce ma coś do powiedzenia.
+                  Hotel, mieszkanie, budynek: każde miejsce ma coś do powiedzenia.
                   Zależy nam na tym, żeby film pokazał nie tylko jak to miejsce wygląda,
                   ale jak się w nim czuje.
                 </p>
@@ -200,7 +200,7 @@ export default function ONasPage() {
                   }}
                 >
                   Ruch kamery nie jest efektem specjalnym, lecz językiem narracji.
-                  Tempo, rytm, kierunek — każda decyzja służy historii, którą opowiadamy.
+                  Tempo, rytm, kierunek: każda decyzja służy historii, którą opowiadamy.
                 </p>
               </div>
             </div>

@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Kontakt — napisz do Set & Space",
   description:
-    "Masz projekt filmowy? Napisz do Set & Space — wrócimy do Ciebie w ciągu jednego dnia roboczego.",
+    "Masz projekt filmowy? Napisz do Set & Space. Odezwiemy się w ciągu jednego dnia roboczego.",
   alternates: { canonical: `${business.url}/kontakt` },
 };
 
@@ -116,7 +116,7 @@ export default function KontaktPage() {
                     </a>
                   ) : (
                     <span className="text-label" style={{ color: "var(--stone)" }}>
-                      Instagram — wkrótce
+                      Instagram (wkrótce)
                     </span>
                   )}
                   {business.social.vimeo ? (
@@ -185,7 +185,7 @@ export default function KontaktPage() {
             {[
               {
                 q: "Jak szybko odpiszecie?",
-                a: "W ciągu jednego dnia roboczego. Jeśli projekt jest pilny — zaznacz to w wiadomości.",
+                a: "W ciągu jednego dnia roboczego. Jeśli projekt jest pilny, zaznacz to w wiadomości.",
               },
               {
                 q: "Gdzie realizujecie projekty?",

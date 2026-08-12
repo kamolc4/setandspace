@@ -28,7 +28,7 @@ export const articles: JournalArticle[] = [
     excerpt:
       "Dobry film zaczyna się od dobrego przygotowania. Kilka rzeczy, które możesz zrobić przed przyjazdem ekipy, by materiał wyglądał najlepiej jak to możliwe.",
     content: `
-Dobry film promocyjny hotelu to efekt wspólnej pracy — z jednej strony ekipy filmowej, z drugiej obiektu, który wie, jak się do tej roli przygotować. Zebraliśmy najważniejsze wskazówki.
+Dobry film promocyjny hotelu to efekt wspólnej pracy: z jednej strony ekipy filmowej, z drugiej obiektu, który wie, jak się do tej roli przygotować. Zebraliśmy najważniejsze wskazówki.
 
 ## Porządek i staging
 
@@ -42,7 +42,7 @@ Szczególną uwagę zwróć na:
 
 ## Oświetlenie
 
-To jeden z najważniejszych elementów. Sprawdź wszystkie żarówki — burned-out żarówka w lampce nocnej widać od razu. Zadbaj o spójną temperaturę barwową źródeł światła w każdym pomieszczeniu.
+To jeden z najważniejszych elementów. Sprawdź wszystkie żarówki. Burned-out żarówka w lampce nocnej widać od razu. Zadbaj o spójną temperaturę barwową źródeł światła w każdym pomieszczeniu.
 
 Przed nagraniem:
 - Otwórz wszystkie zasłony i rolety — naturalne światło to najlepszy operator
@@ -55,7 +55,7 @@ Poinformuj pracowników o dniu zdjęciowym. Zaplanuj, które aktywności obiektu
 
 ## Pora roku i pogoda
 
-Najlepsze filmy hotelowe często korzystają z konkretnej pory roku — warto to zaplanować z wyprzedzeniem. Lato daje więcej naturalnego światła, jesień — dramę i kolory, zima w górach — magię mrozu i świec.
+Najlepsze filmy hotelowe często korzystają z konkretnej pory roku — warto to zaplanować z wyprzedzeniem. Lato daje więcej naturalnego światła, jesień przynosi dramę i kolory, zima w górach magię mrozu i świec.
 
 ## Przed dniem zdjęciowym
 
@@ -64,7 +64,7 @@ Skontaktuj się z ekipą filmową co najmniej tydzień wcześniej, by omówić:
 - Dostępność stref (SPA, restauracja, pokoje)
 - Wszelkie ograniczenia techniczne
 
-Dobre przygotowanie przekłada się bezpośrednio na efekt — i oszczędza czas ekipy na planie.
+Dobre przygotowanie przekłada się bezpośrednio na efekt. Oszczędza też czas ekipy na planie.
     `.trim(),
     author: null,
     publishDate: "2025-06-10",
@@ -101,7 +101,7 @@ Dobre przygotowanie przekłada się bezpośrednio na efekt — i oszczędza czas
     content: `
 Film nieruchomości to jeden z najskuteczniejszych narzędzi sprzedaży, ale tylko wtedy, gdy nieruchomość jest odpowiednio przygotowana. Kilka zasad, które znacząco wpływają na efekt końcowy.
 
-## Declutter — mniej znaczy więcej
+## Declutter: mniej znaczy więcej
 
 Aparat jest brutalnie szczery. Widzi każdy zbędny przedmiot, każdą kartkę na blacie, każdą parę butów przy wejściu. Przed dniem zdjęciowym przeprowadź radykalne czyszczenie przestrzeni.
 
@@ -116,17 +116,17 @@ Co usunąć:
 
 Jeśli mieszkanie jest zamieszkałe, postaraj się je wizualnie zneutralizować — tak by potencjalny nabywca mógł wyobrazić sobie siebie w tej przestrzeni, nie tylko poprzedniego właściciela.
 
-## Oświetlenie — klucz do nastroju
+## Oświetlenie: klucz do nastroju
 
 Naturalne światło jest bezcenne. Wyczyść okna, otwórz żaluzje i rolety. Uzupełnij oświetlenie sztuczne tak, by nie było zbyt zimne i dominujące — ciepłe, miękkie światło sprawia, że wnętrze wygląda przytulnie i przestronnie.
 
 Zamień żarówki fluorescencyjne na ciepłe LED (2700–3000K) — różnica jest wyraźna na ekranie.
 
-## Rośliny i kwiaty — prosty sposób na efekt
+## Rośliny i kwiaty: prosty sposób na efekt
 
 Kilka świeżych kwiatów lub zielona roślina pokojowa wizualnie ożywia przestrzeń. To jeden z najprostszych i najtańszych zabiegów staging'owych.
 
-## Łazienka i kuchnia — miejsca na detale
+## Łazienka i kuchnia: miejsca na detale
 
 Te dwa pomieszczenia wymagają szczególnej uwagi.
 
@@ -154,7 +154,7 @@ Zaplanuj nagranie na porę, gdy do kluczowych pomieszczeń wpada najlepsze natur
     seo: {
       title: "Jak przygotować mieszkanie do filmu nieruchomości? | Set & Space Journal",
       description:
-        "Przewodnik: jak przygotować mieszkanie lub apartament do profesjonalnego nagrania video. Staging, oświetlenie, porządek — wszystko co ważne.",
+        "Przewodnik: jak przygotować mieszkanie lub apartament do profesjonalnego nagrania video. Staging, oświetlenie, porządek: wszystko, co ważne.",
     },
   },
   {

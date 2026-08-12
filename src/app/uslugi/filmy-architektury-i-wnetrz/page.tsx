@@ -10,7 +10,7 @@ const SLUG = "filmy-architektury-i-wnetrz";
 export const metadata: Metadata = {
   title: "Filmy architektury i filmowanie wnętrz | Set & Space",
   description:
-    "Kinematograficzne filmy dla pracowni architektonicznych i projektantów wnętrz. Portfolio w ruchu — przestrzeń architektoniczna opowiedziana obrazem. Polska.",
+    "Kinematograficzne filmy dla pracowni architektonicznych i projektantów wnętrz. Portfolio w ruchu. Przestrzeń architektoniczna opowiedziana obrazem. Polska.",
   alternates: { canonical: `${business.url}/uslugi/${SLUG}` },
 };
 
