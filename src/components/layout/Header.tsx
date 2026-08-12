@@ -43,16 +43,16 @@ export default function Header() {
           zIndex: 50,
           padding: "0 1.5rem",
           height: "3.75rem",
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "1fr auto 1fr",
           alignItems: "center",
-          justifyContent: "space-between",
           transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
           backgroundColor: scrolled ? "rgba(232,222,210,0.88)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         }}
       >
-        {/* Wordmark */}
+        {/* Wordmark — column 1, left */}
         <Link
           href="/"
           aria-label="Set & Space — strona główna"
@@ -63,8 +63,12 @@ export default function Header() {
           SET & SPACE
         </Link>
 
-        {/* Desktop nav */}
-        <nav aria-label="Główna nawigacja" className="hidden md:flex">
+        {/* Desktop nav — column 2, truly centered relative to viewport */}
+        <nav
+          aria-label="Główna nawigacja"
+          className="hidden md:flex"
+          style={{ gridColumn: 2 }}
+        >
           <ul
             style={{
               display: "flex",
@@ -97,7 +101,7 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile menu toggle — column 3, right */}
         <button
           className="md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -113,6 +117,8 @@ export default function Header() {
             display: "flex",
             flexDirection: "column",
             gap: "5px",
+            gridColumn: 3,
+            justifySelf: "end",
           }}
         >
           <span
