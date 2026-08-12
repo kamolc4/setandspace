@@ -45,8 +45,6 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
             flexDirection: "column",
             justifyContent: "space-between",
             minHeight: "clamp(220px, 30vw, 340px)",
-            position: "relative",
-            overflow: "hidden",
           }}
         >
           {/* Decorative year */}
@@ -67,12 +65,11 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
               style={{
                 fontFamily: "var(--font-cormorant)",
                 /*
-                 * At 1440px col-A text area ≈ 330px; at 1920px ≈ 330px (maxWidth caps).
-                 * Cormorant "Opowiadamy" at 4rem (64px) ≈ 310px — fits with ~20px margin.
-                 * Previous clamp(2.75rem, 6vw, 5.5rem) reached 88px where the word
-                 * exceeded 400px and was hard-clipped by overflow:hidden on the cell.
+                 * Col-A text area ≈ 330px at 1440–1920px (maxWidth caps at 1400px).
+                 * "Opowiadamy" in Cormorant at 4.5rem (72px) ≈ 311px — ~19px right margin.
+                 * Min 2.25rem keeps readable size at tablet (768px col-A ≈ 177px).
                  */
-                fontSize: "clamp(2.25rem, 4vw, 4rem)",
+                fontSize: "clamp(2.25rem, 4.5vw, 4.5rem)",
                 fontWeight: 400,
                 lineHeight: 1.05,
                 letterSpacing: "-0.02em",
@@ -85,25 +82,6 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
               <em>przestrzeń</em><br />
               obrazem.
             </h1>
-          </div>
-
-          {/* Decorative mark */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              bottom: "1.5rem",
-              right: "1.75rem",
-              fontFamily: "var(--font-cormorant)",
-              fontSize: "clamp(5rem, 12vw, 10rem)",
-              fontWeight: 300,
-              lineHeight: 1,
-              color: "var(--dune)",
-              userSelect: "none",
-              pointerEvents: "none",
-            }}
-          >
-            S
           </div>
         </div>
 
