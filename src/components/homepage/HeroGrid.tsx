@@ -66,12 +66,19 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
               id="hero-heading"
               style={{
                 fontFamily: "var(--font-cormorant)",
-                fontSize: "clamp(2.75rem, 6vw, 5.5rem)",
+                /*
+                 * At 1440px col-A text area ≈ 330px; at 1920px ≈ 330px (maxWidth caps).
+                 * Cormorant "Opowiadamy" at 4rem (64px) ≈ 310px — fits with ~20px margin.
+                 * Previous clamp(2.75rem, 6vw, 5.5rem) reached 88px where the word
+                 * exceeded 400px and was hard-clipped by overflow:hidden on the cell.
+                 */
+                fontSize: "clamp(2.25rem, 4vw, 4rem)",
                 fontWeight: 400,
-                lineHeight: 1.0,
+                lineHeight: 1.05,
                 letterSpacing: "-0.02em",
                 color: "var(--text-primary)",
                 margin: 0,
+                maxWidth: "100%",
               }}
             >
               Opowiadamy<br />

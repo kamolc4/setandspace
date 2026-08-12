@@ -41,35 +41,27 @@ export default function Header() {
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: "0 1.5rem",
+          /*
+           * Outer padding matches the hero section's horizontal gutter (1rem).
+           * The inner max-width container matches hero's maxWidth: 1400px.
+           * Together these guarantee logo left-edge === hero-bento left-edge
+           * at every viewport width.
+           *
+           * The nav uses position:absolute on THIS element (the fixed header),
+           * so left:50% = 50% of the fixed header = 50vw regardless of padding
+           * or inner-container width — viewport-centering is preserved.
+           */
+          padding: "0 1rem",
           height: "3.75rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
           transition: "background-color 0.3s ease, backdrop-filter 0.3s ease",
           backgroundColor: scrolled ? "rgba(232,222,210,0.88)" : "transparent",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         }}
       >
-        {/* Wordmark */}
-        <Link
-          href="/"
-          aria-label="Set & Space, strona główna"
-          className="text-label"
-          style={{ color: "var(--text-primary)", letterSpacing: "0.15em", position: "relative", zIndex: 1 }}
-          onClick={closeMenu}
-        >
-          SET & SPACE
-        </Link>
-
-        {/*
-          Desktop nav — absolutely positioned at left: 50%.
-          Because the header spans the full viewport (left: 0; right: 0),
-          left: 50% places the nav's left edge at exactly 50vw.
-          translateX(-50%) shifts it left by half its own width,
-          so navCenter = 50vw exactly, regardless of logo or hamburger width.
-        */}
+        {/* Desktop nav — absolutely centred at 50vw. Positioned on the outer
+            fixed header so left:50% is always relative to the full viewport,
+            not the constrained inner container. */}
         <nav
           aria-label="Główna nawigacja"
           className="header-desktop-nav"
@@ -112,56 +104,81 @@ export default function Header() {
           </ul>
         </nav>
 
-        {/* Mobile menu toggle */}
-        <button
-          className="header-hamburger"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
+        {/* Inner container — maxWidth 1400px, same as hero bento grid.
+            Aligns logo to the left edge and hamburger to the right edge
+            of the page's main content column. */}
+        <div
           style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: "0.5rem",
-            color: "var(--text-primary)",
-            flexDirection: "column",
-            gap: "5px",
-            position: "relative",
-            zIndex: 1,
+            maxWidth: "1400px",
+            margin: "0 auto",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          <span
+          {/* Wordmark */}
+          <Link
+            href="/"
+            aria-label="Set & Space, strona główna"
+            className="text-label"
+            style={{ color: "var(--text-primary)", letterSpacing: "0.15em", position: "relative", zIndex: 1 }}
+            onClick={closeMenu}
+          >
+            SET & SPACE
+          </Link>
+
+          {/* Mobile menu toggle */}
+          <button
+            className="header-hamburger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Zamknij menu" : "Otwórz menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
             style={{
-              display: "block",
-              width: "22px",
-              height: "1.5px",
-              backgroundColor: "currentColor",
-              transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none",
-              transition: "transform 0.25s ease",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "0.5rem",
+              color: "var(--text-primary)",
+              flexDirection: "column",
+              gap: "5px",
+              position: "relative",
+              zIndex: 1,
             }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "1.5px",
-              backgroundColor: "currentColor",
-              opacity: menuOpen ? 0 : 1,
-              transition: "opacity 0.25s ease",
-            }}
-          />
-          <span
-            style={{
-              display: "block",
-              width: "22px",
-              height: "1.5px",
-              backgroundColor: "currentColor",
-              transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none",
-              transition: "transform 0.25s ease",
-            }}
-          />
-        </button>
+          >
+            <span
+              style={{
+                display: "block",
+                width: "22px",
+                height: "1.5px",
+                backgroundColor: "currentColor",
+                transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none",
+                transition: "transform 0.25s ease",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "22px",
+                height: "1.5px",
+                backgroundColor: "currentColor",
+                opacity: menuOpen ? 0 : 1,
+                transition: "opacity 0.25s ease",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: "22px",
+                height: "1.5px",
+                backgroundColor: "currentColor",
+                transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none",
+                transition: "transform 0.25s ease",
+              }}
+            />
+          </button>
+        </div>
       </header>
 
       {/* Mobile menu overlay */}
