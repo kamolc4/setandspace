@@ -36,7 +36,7 @@ export default function Footer() {
                 SET & SPACE
               </p>
               <p style={{ fontSize: "0.875rem", lineHeight: 1.6, maxWidth: "220px" }} className="footer-muted">
-                Filmy kinematograficzne dla przestrzeni i marek.
+                Filmy dla nieruchomości, architektury i wnętrz.
               </p>
             </div>
 

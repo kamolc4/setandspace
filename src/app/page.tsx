@@ -65,13 +65,12 @@ export default function HomePage() {
               <em>jako materiał filmowy.</em>
             </h2>
             <p className="text-body" style={{ marginBottom: "1.25rem" }}>
-              Set & Space to marka skupiona na jednym: kinematograficznym opowiadaniu o przestrzeni.
-              Nagrywam nieruchomości, projekty wnętrz, hotele i salony meblowe. Dla właścicieli,
-              architektów i wszystkich, którym zależy na tym, jak ich miejsce jest widziane.
+              Nagrywam filmy, które pokazują nie tylko wygląd przestrzeni, ale też jej
+              światło, proporcje i atmosferę.
             </p>
             <p className="text-body" style={{ marginBottom: "2rem" }}>
-              Każdy projekt zaczyna się od rozmowy o tym, czym jest dane miejsce i jak ma być
-              odczuwane przez tego, kto ogląda film.
+              Skupiam się na architekturze, wnętrzach i miejscach, które najlepiej
+              opowiada się obrazem.
             </p>
             <Link
               href="/o-mnie"

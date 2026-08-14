@@ -8,8 +8,14 @@ import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "O mnie — Set & Space",
   description:
-    "Set & Space to marka jednej twórczyni skupionej na kinematograficznym opowiadaniu przestrzeni. Nieruchomości, hotele, architektura i wnętrza.",
+    "Nagrywam filmy, które pokazują, jak naprawdę wygląda i czuje się dane miejsce. Architektura, wnętrza, nieruchomości i przestrzenie komercyjne w obrazie.",
   alternates: { canonical: `${business.url}/o-mnie` },
+  openGraph: {
+    title: "O mnie — Set & Space",
+    description:
+      "Nagrywam filmy, które pokazują, jak naprawdę wygląda i czuje się dane miejsce. Architektura, wnętrza, nieruchomości i przestrzenie komercyjne w obrazie.",
+    url: `${business.url}/o-mnie`,
+  },
 };
 
 export default function OMniePage() {
@@ -67,7 +73,9 @@ export default function OMniePage() {
                   maxWidth: "520px",
                 }}
               >
-                Set & Space skupia się na jednym: kinematograficznym opowiadaniu o przestrzeni.
+                Nagrywam filmy, które pokazują, jak naprawdę wygląda i czuje się dane miejsce.
+                Nie chodzi tylko o metraż czy układ pomieszczeń, ale też o atmosferę,
+                której nie da się oddać w standardowej ofercie sprzedażowej.
               </p>
             </div>
 
@@ -93,7 +101,7 @@ export default function OMniePage() {
                   fontStyle: "italic",
                 }}
               >
-                &ldquo;Każde miejsce ma atmosferę. Moją pracą jest ją uchwycić.&rdquo;
+                &ldquo;Łączę wyczucie kadru z wyczuciem przestrzeni.&rdquo;
               </p>
               <p
                 className="text-label"
@@ -102,6 +110,32 @@ export default function OMniePage() {
                 — Set & Space
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Bio prose */}
+        <div
+          style={{
+            maxWidth: "1280px",
+            margin: "0 auto",
+            padding: "0 1.5rem 5rem",
+          }}
+        >
+          <div style={{ maxWidth: "680px" }}>
+            <p className="text-body" style={{ marginBottom: "1.25rem" }}>
+              Skupiam się na architekturze i wnętrzach. Pracuję z mieszkaniami, domami,
+              nieruchomościami na sprzedaż oraz przestrzeniami komercyjnymi, takimi jak
+              salony meblowe, showroomy czy butikowe hotele.
+            </p>
+            <p className="text-body" style={{ marginBottom: "1.25rem" }}>
+              Zanim włączę kamerę, najpierw poznaję przestrzeń. Sprawdzam, skąd wpada
+              światło, co naturalnie przyciąga wzrok i które elementy warto pokazać w ruchu.
+            </p>
+            <p className="text-body">
+              Pracuję z szacunkiem do miejsca. Nie rozkładam niepotrzebnie dużej ilości
+              sprzętu i nie podporządkowuję całego wnętrza kamerze. Przestrzeń ma pozostać
+              sobą. Moją rolą jest pokazać ją w najlepszy możliwy sposób.
+            </p>
           </div>
         </div>
 
