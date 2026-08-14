@@ -287,7 +287,7 @@ export default async function ProjectPage({ params }: Props) {
                     textDecoration: "none",
                   }}
                 >
-                  Napisz do nas →
+                  Napisz do mnie →
                 </Link>
               </div>
             </aside>

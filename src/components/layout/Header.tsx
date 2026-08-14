@@ -75,7 +75,7 @@ export default function Header() {
           <ul
             style={{
               display: "flex",
-              gap: "2rem",
+              gap: "1.5rem",
               listStyle: "none",
               margin: 0,
               padding: 0,

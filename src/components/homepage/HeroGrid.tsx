@@ -73,7 +73,7 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
                 maxWidth: "100%",
               }}
             >
-              Opowiadamy<br />
+              Opowiadam<br />
               <em>przestrzeń</em><br />
               obrazem.
             </h1>
@@ -244,7 +244,7 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
           </ul>
         </div>
 
-        {/* ── Cell D: Studio intro ── */}
+        {/* ── Cell D: Brief intro ── */}
         <div
           className="panel-dune"
           style={{
@@ -256,7 +256,7 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
           }}
         >
           <p className="text-label" style={{ color: "var(--text-muted)", marginBottom: "1rem" }}>
-            Studio
+            Set & Space
           </p>
           <p
             style={{
@@ -266,8 +266,8 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
               lineHeight: 1.65,
             }}
           >
-            Tworzymy filmy dla hoteli, nieruchomości, architektury i wybranych marek.
-            Każdy projekt traktujemy indywidualnie. Żadnych szablonów.
+            Tworzę krótkie filmy dla nieruchomości, hoteli, architektów i salonów meblowych.
+            Każdy projekt traktuję indywidualnie. Żadnych szablonów.
           </p>
         </div>
 
@@ -329,7 +329,7 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
             alignItems: "center",
           }}
         >
-          {["Hotele", "Nieruchomości", "Architektura", "Wnętrza", "Marki"].map(
+          {["Nieruchomości", "Architektura", "Wnętrza", "Hotele", "Salony meblowe"].map(
             (tag) => (
               <span
                 key={tag}

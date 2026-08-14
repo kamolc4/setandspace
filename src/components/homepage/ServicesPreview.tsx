@@ -2,10 +2,10 @@ import Link from "next/link";
 import type { Service } from "@/data/services";
 
 const serviceIcons: Record<string, string> = {
-  "filmy-dla-hoteli": "◈",
-  "video-nieruchomosci": "◇",
-  "filmy-architektury-i-wnetrz": "△",
-  "filmy-reklamowe": "○",
+  "filmy-dla-nieruchomosci": "◇",
+  "filmy-dla-architektow-i-projektantow-wnetrz": "△",
+  "filmy-dla-salonow-meblowych-i-showroomow": "○",
+  "filmy-dla-butikowych-hoteli": "◈",
 };
 
 interface ServicesPreviewProps {
@@ -44,7 +44,7 @@ export default function ServicesPreview({ services }: ServicesPreviewProps) {
               className="text-headline"
               style={{ color: "var(--text-primary)", margin: 0 }}
             >
-              Co robimy.
+              Usługi.
             </h2>
           </div>
           <Link

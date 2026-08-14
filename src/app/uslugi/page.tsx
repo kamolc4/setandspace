@@ -6,9 +6,9 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Usługi — filmy dla hoteli, nieruchomości i architektury",
+  title: "Usługi — filmy dla nieruchomości, hoteli, architektów i salonów meblowych",
   description:
-    "Set & Space tworzy kinematograficzne filmy dla hoteli, nieruchomości, architektury i wnętrz oraz wybranych marek. Sprawdź zakres usług.",
+    "Set & Space tworzy krótkie filmy dla nieruchomości, butikowych hoteli, architektów, projektantów wnętrz i salonów meblowych. Sprawdź zakres usług.",
   alternates: { canonical: `${business.url}/uslugi` },
 };
 
@@ -33,17 +33,17 @@ export default function UslugiPage() {
             className="text-label"
             style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}
           >
-            Co robimy
+            Usługi
           </p>
           <h1
             className="text-headline"
             style={{ color: "var(--text-primary)", marginBottom: "1.25rem" }}
           >
-            Filmy, które sprzedają doświadczenie. Nie tylko miejsce.
+            Filmy, które pozwalają poczuć miejsce.
           </h1>
           <p className="text-body" style={{ maxWidth: "520px" }}>
-            Specjalizujemy się w kinematograficznym opowiadaniu przestrzeni. Każda usługa
-            jest dopasowana do specyfiki każdej branży: hoteli, nieruchomości, architektury i marek.
+            Specjalizuję się w kinematograficznym opowiadaniu przestrzeni. Tworzę krótkie filmy
+            dla nieruchomości, butikowych hoteli, architektów i salonów meblowych.
           </p>
         </header>
 

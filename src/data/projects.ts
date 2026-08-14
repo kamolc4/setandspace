@@ -45,7 +45,7 @@ export const projects: Project[] = [
     shortDescription:
       "Kinematograficzny film dla butikowego hotelu w Tatrach, oddający atmosferę górskiej ciszy, ciepło drewna i rytuał porannej kawy z widokiem na szczyty.",
     story:
-      "Celem projektu było uchwycenie nie tyle samego miejsca, co uczucia, które towarzyszy pobytowi w tym hotelu. Zaczęliśmy od wczesnego poranka. Mgła nad doliną, pierwsze światło we wnętrzach, cisza przed przebudzeniem. Każde ujęcie budowaliśmy wokół detalu: faktury kamienia, refleksu w oknie, gestu podania filiżanki. Finalny materiał to trzyipółminutowa narracja bez słów, która robi więcej niż jakakolwiek ulotka.",
+      "Celem projektu było uchwycenie nie tyle samego miejsca, co uczucia, które towarzyszy pobytowi w tym hotelu. Zaczęłam od wczesnego poranka. Mgła nad doliną, pierwsze światło we wnętrzach, cisza przed przebudzeniem. Każde ujęcie budowałam wokół detalu: faktury kamienia, refleksu w oknie, gestu podania filiżanki. Finalny materiał to trzyipółminutowa narracja bez słów, która robi więcej niż jakakolwiek ulotka.",
     scope: [
       "Film promocyjny (wersja pełna 3:30)",
       "Wersja social media :60 i :30",
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     gallery: [],
     featured: true,
     relatedSlugs: ["apartamenty-w-centrum", "architektura-rezydencji"],
-    relatedService: "filmy-dla-hoteli",
+    relatedService: "filmy-dla-butikowych-hoteli",
     seo: {
       title: "Film promocyjny dla górskiego hotelu | Set & Space",
       description:
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     shortDescription:
       "Kinematograficzny film nieruchomości dla dewelopera apartamentów w centrum Warszawy. Przestrzeń, światło dzienne i wyrafinowanie oddane w obrazie.",
     story:
-      "Apartamenty wymagały ujęć, które komunikują nie metry kwadratowe, a styl życia. Pracowaliśmy o złotej godzinie, by naturalne światło stało się głównym materiałem dekoracyjnym. Kamera poruszała się powoli i konsekwentnie, prowadząc widza przez przestrzeń jak przez własne mieszkanie. Film stał się centralnym punktem kampanii sprzedażowej.",
+      "Apartamenty wymagały ujęć, które komunikują nie metry kwadratowe, a styl życia. Pracowałam o złotej godzinie, by naturalne światło stało się głównym materiałem dekoracyjnym. Kamera poruszała się powoli i konsekwentnie, prowadząc widza przez przestrzeń jak przez własne mieszkanie. Film stał się centralnym punktem kampanii sprzedażowej.",
     scope: [
       "Film dla developera (wersja 2:00)",
       "Osobne klipy dla każdego apartamentu",
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     gallery: [],
     featured: true,
     relatedSlugs: ["hotel-w-gorach", "architektura-rezydencji"],
-    relatedService: "video-nieruchomosci",
+    relatedService: "filmy-dla-nieruchomosci",
     seo: {
       title: "Video apartamentów premium w Warszawie | Set & Space",
       description:
@@ -112,7 +112,7 @@ export const projects: Project[] = [
     shortDescription:
       "Film dokumentujący pracownię architektoniczną i jej flagowy projekt: dom nad jeziorem zaprojektowany w harmonii między budynkiem a krajobrazem.",
     story:
-      "Architekt chciał pokazać projekt nie tylko jako budynek, ale jako odpowiedź na miejsce. Filmowaliśmy w czterech różnych porach dnia i przy dwóch różnych pogodach. Interesowało nas, jak budynek zmienia się razem ze światłem: jak o świcie wygląda inaczej niż pod wieczór. Finał to sześciominutowy esej wizualny o architekturze zakorzenionej w krajobrazie.",
+      "Architekt chciał pokazać projekt nie tylko jako budynek, ale jako odpowiedź na miejsce. Filmowałam w czterech różnych porach dnia i przy dwóch różnych pogodach. Interesowało mnie, jak budynek zmienia się razem ze światłem: jak o świcie wygląda inaczej niż pod wieczór. Finał to sześciominutowy esej wizualny o architekturze zakorzenionej w krajobrazie.",
     scope: [
       "Film architektoniczny (6:00)",
       "Wersja portfolio pracowni (2:30)",
@@ -128,7 +128,7 @@ export const projects: Project[] = [
     gallery: [],
     featured: true,
     relatedSlugs: ["hotel-w-gorach", "studio-designu"],
-    relatedService: "filmy-architektury-i-wnetrz",
+    relatedService: "filmy-dla-architektow-i-projektantow-wnetrz",
     seo: {
       title: "Film architektoniczny rezydencji nad jeziorem | Set & Space",
       description:
@@ -145,7 +145,7 @@ export const projects: Project[] = [
     shortDescription:
       "Film reklamowy dla krakowskiego studia designu specjalizującego się w autorskich meblach i tkaninach. Produkcja, materiał, rzemiosło.",
     story:
-      "Studio chciało pokazać cały proces twórczy: od szkicu po gotowy produkt. Interesowały nas ręce projektanta, faktura materiałów, ruch maszyny tkackiej. Zbudowaliśmy narrację wokół jednego krzesła: od pierwszej linii na papierze do finalnego kadru w showroomie.",
+      "Studio chciało pokazać cały proces twórczy: od szkicu po gotowy produkt. Interesowały mnie ręce projektanta, faktura materiałów, ruch maszyny tkackiej. Zbudowałam narrację wokół jednego krzesła: od pierwszej linii na papierze do finalnego kadru w showroomie.",
     scope: [
       "Film marki (2:00)",
       "Seria krótkich filmów produktowych",
@@ -161,7 +161,7 @@ export const projects: Project[] = [
     gallery: [],
     featured: false,
     relatedSlugs: ["architektura-rezydencji", "apartamenty-w-centrum"],
-    relatedService: "filmy-reklamowe",
+    relatedService: "filmy-dla-salonow-meblowych-i-showroomow",
     seo: {
       title: "Brand content studia designu i wnętrz w Krakowie | Set & Space",
       description:

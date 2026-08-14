@@ -41,7 +41,7 @@ export function WebSiteJsonLd() {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${business.url}/journal?q={search_term_string}`,
+        urlTemplate: `${business.url}/poradniki?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -88,7 +88,7 @@ export function ArticleJsonLd({ article }: { article: JournalArticle }) {
     "@type": "BlogPosting",
     headline: article.title,
     description: article.excerpt,
-    url: `${business.url}/journal/${article.slug}`,
+    url: `${business.url}/poradniki/${article.slug}`,
     datePublished: article.publishDate,
     ...(article.modifiedDate && { dateModified: article.modifiedDate }),
     author: {

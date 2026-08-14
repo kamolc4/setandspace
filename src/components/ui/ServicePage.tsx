@@ -108,7 +108,7 @@ export default function ServicePage({ service, relatedProjects }: ServicePagePro
                 className="text-label"
                 style={{ color: "var(--text-muted)", marginBottom: "1.25rem" }}
               >
-                Kiedy to robimy
+                Kiedy się sprawdza
               </p>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {service.useCases.map((item) => (
@@ -138,7 +138,7 @@ export default function ServicePage({ service, relatedProjects }: ServicePagePro
                 className="text-label"
                 style={{ color: "var(--text-muted)", marginBottom: "1.25rem" }}
               >
-                Co dostarczamy
+                Co dostarczam
               </p>
               <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                 {service.deliverables.map((item) => (
@@ -170,7 +170,7 @@ export default function ServicePage({ service, relatedProjects }: ServicePagePro
             className="text-label"
             style={{ color: "var(--text-muted)", marginBottom: "2rem" }}
           >
-            Jak pracujemy
+            Jak pracuję
           </p>
           <div
             style={{
@@ -356,7 +356,7 @@ export default function ServicePage({ service, relatedProjects }: ServicePagePro
               className="text-body"
               style={{ maxWidth: "440px", margin: "0 auto 2rem" }}
             >
-              Opowiedz nam o swoim projekcie. Wrócimy do Ciebie w ciągu jednego dnia roboczego.
+              Opowiedz mi o swoim projekcie. Odpiszę w ciągu jednego dnia roboczego.
             </p>
             <Link
               href="/kontakt"
@@ -376,7 +376,7 @@ export default function ServicePage({ service, relatedProjects }: ServicePagePro
                 textDecoration: "none",
               }}
             >
-              Napisz do nas →
+              Napisz do mnie →
             </Link>
           </div>
         </div>

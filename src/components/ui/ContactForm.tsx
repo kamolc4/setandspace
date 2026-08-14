@@ -130,7 +130,7 @@ export default function ContactForm() {
           Wiadomość wysłana.
         </h3>
         <p style={{ color: "var(--text-secondary)", fontSize: "0.9375rem" }}>
-          Odezwiemy się w ciągu jednego dnia roboczego.
+          Odpiszę w ciągu jednego dnia roboczego.
         </p>
       </div>
     );

@@ -31,7 +31,7 @@ export default function RealizacjePage() {
 
         <header style={{ marginBottom: "3rem" }}>
           <p className="text-label" style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}>
-            Nasze prace
+            Portfolio
           </p>
           <h1 className="text-headline" style={{ color: "var(--text-primary)", maxWidth: "560px" }}>
             Realizacje.

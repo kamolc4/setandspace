@@ -17,7 +17,7 @@ function formatDate(dateString: string): string {
 export default function JournalPreview({ articles }: JournalPreviewProps) {
   return (
     <section
-      aria-labelledby="journal-heading"
+      aria-labelledby="poradniki-heading"
       style={{
         backgroundColor: "var(--surface)",
         padding: "5rem 1.5rem",
@@ -40,18 +40,18 @@ export default function JournalPreview({ articles }: JournalPreviewProps) {
               className="text-label"
               style={{ color: "var(--text-muted)", marginBottom: "0.75rem" }}
             >
-              Journal
+              Poradniki
             </p>
             <h2
-              id="journal-heading"
+              id="poradniki-heading"
               className="text-headline"
               style={{ color: "var(--text-primary)", margin: 0 }}
             >
-              Z naszego warsztatu.
+              O filmie i przygotowaniu do nagrania.
             </h2>
           </div>
           <Link
-            href="/journal"
+            href="/poradniki"
             className="text-label"
             style={{
               color: "var(--text-primary)",
@@ -59,7 +59,7 @@ export default function JournalPreview({ articles }: JournalPreviewProps) {
               paddingBottom: "2px",
             }}
           >
-            Wszystkie artykuły →
+            Wszystkie poradniki →
           </Link>
         </div>
 
@@ -73,7 +73,7 @@ export default function JournalPreview({ articles }: JournalPreviewProps) {
           {articles.map((article, i) => (
             <Link
               key={article.slug}
-              href={`/journal/${article.slug}`}
+              href={`/poradniki/${article.slug}`}
               style={{
                 display: "block",
                 borderRadius: "var(--radius-card)",

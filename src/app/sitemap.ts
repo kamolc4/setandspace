@@ -28,13 +28,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
     },
     {
-      url: `${BASE}/journal`,
+      url: `${BASE}/wspolpraca`,
+      lastModified: NOW,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE}/poradniki`,
       lastModified: NOW,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${BASE}/o-nas`,
+      url: `${BASE}/o-mnie`,
       lastModified: NOW,
       changeFrequency: "monthly",
       priority: 0.7,
@@ -62,7 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const articleRoutes: MetadataRoute.Sitemap = articles.map((a) => ({
-    url: `${BASE}/journal/${a.slug}`,
+    url: `${BASE}/poradniki/${a.slug}`,
     lastModified: a.modifiedDate ?? a.publishDate,
     changeFrequency: "monthly" as const,
     priority: 0.7,

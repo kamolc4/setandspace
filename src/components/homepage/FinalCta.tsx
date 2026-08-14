@@ -41,7 +41,7 @@ export default function FinalCta() {
             margin: "0 auto 2.5rem",
           }}
         >
-          Opowiedz nam o swoim projekcie. Odezwiemy się w ciągu jednego dnia roboczego.
+          Opowiedz mi o swoim projekcie. Odpiszę w ciągu jednego dnia roboczego.
         </p>
 
         <Link
@@ -63,7 +63,7 @@ export default function FinalCta() {
             transition: "background-color 0.25s ease",
           }}
         >
-          Napisz do nas
+          Napisz do mnie
           <span aria-hidden="true">→</span>
         </Link>
       </div>

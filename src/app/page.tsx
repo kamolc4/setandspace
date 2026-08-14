@@ -11,14 +11,14 @@ import JournalPreview from "@/components/homepage/JournalPreview";
 import FinalCta from "@/components/homepage/FinalCta";
 
 export const metadata: Metadata = {
-  title: `${business.name} — Filmy kinematograficzne dla przestrzeni i marek`,
+  title: `${business.name} — Krótkie filmy dla nieruchomości, hoteli i wnętrz`,
   description:
-    "Set & Space tworzy filmy kinematograficzne dla hoteli, nieruchomości, architektury i marek premium. Opowiadamy przestrzeń obrazem.",
+    "Set & Space tworzy krótkie, estetyczne filmy dla nieruchomości, hoteli, architektów i salonów meblowych. Przestrzeń w obrazie.",
   alternates: { canonical: business.url },
   openGraph: {
-    title: `${business.name} — Filmy kinematograficzne dla przestrzeni i marek`,
+    title: `${business.name} — Krótkie filmy dla nieruchomości, hoteli i wnętrz`,
     description:
-      "Filmy, które pozwalają poczuć miejsce. Hotele, nieruchomości, architektura i marki premium.",
+      "Filmy, które pozwalają poczuć miejsce. Nieruchomości, hotele, architektura i wnętrza.",
     url: business.url,
   },
 };
@@ -61,20 +61,20 @@ export default function HomePage() {
               className="text-headline"
               style={{ color: "var(--text-primary)", marginBottom: "1.5rem" }}
             >
-              Traktujemy przestrzeń<br />
+              Traktuję przestrzeń<br />
               <em>jako materiał filmowy.</em>
             </h2>
             <p className="text-body" style={{ marginBottom: "1.25rem" }}>
-              Set & Space to studio filmowe, które skupiło się na jednym: kinematograficznym
-              opowiadaniu o przestrzeni. Pracujemy z hotelami, deweloperami, architektami
-              i wybranymi markami, którym zależy na tym, jak ich miejsce jest widziane.
+              Set & Space to marka skupiona na jednym: kinematograficznym opowiadaniu o przestrzeni.
+              Nagrywam nieruchomości, projekty wnętrz, hotele i salony meblowe. Dla właścicieli,
+              architektów i wszystkich, którym zależy na tym, jak ich miejsce jest widziane.
             </p>
             <p className="text-body" style={{ marginBottom: "2rem" }}>
-              Każdy projekt zaczyna się od rozmowy o tym, czym jest dane miejsce i jak
-              chcemy, żeby się je czuło. Zanim w ogóle pomyślimy o kamerze.
+              Każdy projekt zaczyna się od rozmowy o tym, czym jest dane miejsce i jak ma być
+              odczuwane przez tego, kto ogląda film.
             </p>
             <Link
-              href="/o-nas"
+              href="/o-mnie"
               className="text-label"
               style={{
                 color: "var(--text-primary)",
@@ -82,7 +82,7 @@ export default function HomePage() {
                 paddingBottom: "2px",
               }}
             >
-              Poznaj nasze podejście →
+              O mnie →
             </Link>
           </div>
 
@@ -99,16 +99,24 @@ export default function HomePage() {
               margin: 0,
             }}
           >
-            &ldquo;Nie robimy filmów o przestrzeni. Robimy filmy, które pozwalają ją poczuć.&rdquo;
+            &ldquo;Nie tworzę filmów o przestrzeni. Tworzę filmy, które pozwalają ją poczuć.&rdquo;
           </blockquote>
         </div>
       </section>
 
-      {/* Journal preview */}
+      {/* Poradniki preview */}
       <JournalPreview articles={latestArticles} />
 
       {/* Final CTA */}
       <FinalCta />
+
+      <style>{`
+        @media (min-width: 900px) {
+          .homepage-about-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

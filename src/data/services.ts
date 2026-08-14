@@ -25,335 +25,305 @@ export interface Service {
 
 export const services: Service[] = [
   {
-    slug: "filmy-dla-hoteli",
-    shortTitle: "Filmy dla hoteli",
-    title: "Filmy dla hoteli i obiektów hospitality",
-    headline: "Twój hotel na ekranie, zanim gość przekroczy próg.",
+    slug: "filmy-dla-nieruchomosci",
+    shortTitle: "Filmy dla nieruchomości",
+    title: "Filmy dla nieruchomości",
+    headline: "Przestrzeń, którą widać prawdziwie.",
     intro:
-      "Tworzymy filmy promocyjne, które pozwalają poczuć atmosferę obiektu przed rezerwacją. Nie robimy folderów wideo. Budujemy narracje, które sprzedają doświadczenie.",
+      "Materiał, który pokazuje przestrzeń tak, jak wygląda naprawdę. Światło, proporcje i atmosfera są równie ważne jak metraż. Sprawdza się przy sprzedaży, wynajmie i prezentacjach inwestorskich.",
     body:
-      "Każdy hotel ma swój klimat, który trudno opisać słowami, ale który od razu wyczuwa się po przekroczeniu progu. Naszą pracą jest przetłumaczenie tej atmosfery na język obrazu. Pracujemy z butikowym hotelami, pensjonatami górskimi, resortami spa i obiektami designerskimi w całej Polsce.",
+      "Nagrywam nieruchomości dla deweloperów, biur i prywatnych właścicieli. Każdy materiał dopasuję do przeznaczenia: może być krótki i pionowy na Instagram, dłuższy na stronę inwestycji lub w formacie do prezentacji. Zależy mi na tym, żeby przestrzeń wyglądała jak w rzeczywistości, nie jak w katalogu.",
     useCases: [
-      "Film wizerunkowy dla strony www i rezerwacji online",
-      "Materiał dla portali booking i OTA",
-      "Treści dla mediów społecznościowych (Instagram, Facebook)",
-      "Kampanie Google Ads / Meta Ads",
-      "Pitch dla inwestorów lub grup hotelowych",
-      "Materiały na targi turystyczne",
+      "Instagram i social media",
+      "Strona internetowa inwestycji lub biura",
+      "Portale nieruchomości",
+      "Prezentacja inwestorska",
+      "Sprzedaż i wynajem premium",
     ],
     deliverables: [
-      "Film promocyjny (pełna wersja, typowo 1:30–3:30)",
-      "Wersja skrócona :60 do reklam",
-      "Wersje 9:16 dla Stories i Reels",
-      "Zdjęcia stills z realizacji",
-      "Surowy materiał B-roll do dalszego wykorzystania",
+      "Film główny (format poziomy, do 2:00)",
+      "Wersja pionowa na Reels i Stories",
+      "Wersja skrócona 30–60 sekund",
     ],
     process: [
       {
-        step: "Brief i research",
+        step: "Rozmowa o projekcie",
         description:
-          "Zanim pojawimy się z kamerą, rozmawiamy o tym, co czyni ten obiekt wyjątkowym. Co powinna poczuć osoba oglądająca film? Co ma zapamiętać?",
+          "Pytam o nieruchomość, jej charakter i to, jak ma być wykorzystany film. Na tej podstawie planuję dzień nagrania.",
       },
       {
-        step: "Plan produkcyjny",
+        step: "Wskazówki przed nagraniem",
         description:
-          "Przygotowujemy harmonogram uwzględniający najlepsze pory dnia, aktywności gości, warunki oświetleniowe i logistykę obiektu.",
+          "Przesyłam wytyczne dotyczące przygotowania przestrzeni, żeby każde ujęcie wyglądało jak najlepiej.",
       },
       {
-        step: "Realizacja",
+        step: "Dzień nagrania",
         description:
-          "1–3 dni zdjęciowe zależnie od skali obiektu. Pracujemy dyskretnie, by nie zakłócać codziennej pracy hotelu.",
+          "Nagrywam w naturalnym świetle, pracując przez przestrzeń spokojnie. Zazwyczaj to jeden dzień.",
       },
       {
-        step: "Postprodukcja i kolor",
+        step: "Montaż i dostarczenie",
         description:
-          "Montaż, korekcja barwna i oprawa dźwiękowa. Typowo 2–3 tygodnie od zakończenia zdjęć.",
-      },
-      {
-        step: "Dostarczenie i konsultacja",
-        description:
-          "Przekazujemy gotowy materiał w uzgodnionych formatach. Służymy radą w kwestii dystrybucji.",
+          "Przygotowuję wersję roboczą do akceptacji, uwzględniam uwagi i dostarczam gotowy materiał w uzgodnionych formatach.",
       },
     ],
     preparation: [
-      "Zadbaj o czystość i porządek we wszystkich filmowanych pomieszczeniach",
-      "Upewnij się, że wnętrza są właściwie oświetlone (sprawdź żarówki, żaluzje)",
-      "Przygotuj obiekty na zdjęcia: usuń zbędne przedmioty, zadbaj o detale",
-      "Zaplanuj, które aktywności i przestrzenie chcesz pokazać",
-      "Poinformuj pracowników o dniu zdjęciowym",
+      "Posprzątaj i zdekoruj przestrzeń jak do sesji fotograficznej",
+      "Usuń zbędne przedmioty z blatów, schowaj kable i ładowarki",
+      "Zadbaj o czyste okna, otwórz zasłony i rolety",
+      "Wymień przepalone żarówki, zadbaj o spójną temperaturę barwową",
+      "Zaplanuj nagranie na porę najlepszego naturalnego światła",
     ],
     faq: [
       {
-        question: "Ile kosztuje film dla hotelu?",
+        question: "Czy film jest potrzebny przy sprzedaży nieruchomości?",
         answer:
-          "Cena zależy od skali obiektu, liczby dni zdjęciowych, oczekiwanej długości i wersji materiałów. Skontaktuj się z nami. Przygotujemy wycenę po krótkim briefie.",
+          "Na rynku premium coraz częściej tak. Zdjęcia pokazują, jak mieszkanie wygląda. Film pozwala poczuć proporcje, kierunek światła i rytm przestrzeni.",
       },
       {
-        question: "Ile czasu zajmuje realizacja?",
+        question: "Jakie formaty dostarczam?",
         answer:
-          "Typowy projekt trwa od 1 do 3 dni zdjęciowych plus 2–4 tygodnie postprodukcji. Harmonogram ustalamy indywidualnie.",
-      },
-      {
-        question: "Czy możecie filmować w trakcie pracy hotelu?",
-        answer:
-          "Tak, pracujemy dyskretnie i planujemy realizację tak, by minimalizować wpływ na gości i pracowników. Najlepsze ujęcia często udaje się zrobić rano, przed największym ruchem.",
-      },
-    ],
-    relatedProjectCategories: ["hotele"],
-    seo: {
-      title: "Filmy dla hoteli i obiektów hospitality | Set & Space",
-      description:
-        "Kinematograficzne filmy promocyjne dla hoteli, pensjonatów i resortów. Uchwytujemy atmosferę miejsca, zanim gość przekroczy próg. Set & Space, Polska.",
-      keywords: [
-        "film dla hotelu",
-        "filmy promocyjne dla hoteli",
-        "video marketing hotelowy",
-        "film promocyjny hotelu",
-        "filmy hospitality",
-        "video dla obiektu turystycznego",
-      ],
-    },
-  },
-  {
-    slug: "video-nieruchomosci",
-    shortTitle: "Video nieruchomości",
-    title: "Video nieruchomości i apartamentów",
-    headline: "Sprzedaj przestrzeń, zanim ktoś ją zobaczy na żywo.",
-    intro:
-      "Film nieruchomości to jeden z najskuteczniejszych narzędzi sprzedaży i marketingu na rynku premium. Tworzymy materiały, które pokazują przestrzeń z charakterem, nie z metrami kwadratowymi.",
-    body:
-      "Oferty z filmem wideo generują zdecydowanie większe zainteresowanie i angażują potencjalnych nabywców znacznie dłużej niż same zdjęcia. Współpracujemy z deweloperami premium, biurami nieruchomości i prywatnymi właścicielami, którym zależy na wyróżnieniu oferty na rynku.",
-    useCases: [
-      "Film dla portalu nieruchomości (Otodom, Morizon, OLX)",
-      "Materiał na stronę inwestycji dewelopera",
-      "Wideo dla kampanii digital",
-      "Prezentacja dla agentów i kupujących",
-      "Film wirtualnej wycieczki",
-      "Materiał na Instagram i YouTube",
-    ],
-    deliverables: [
-      "Film nieruchomości (1:30–3:00)",
-      "Wersja skrócona :60 dla reklam",
-      "Wybrane klatki stills",
-      "Wersja pionowa dla Stories",
-    ],
-    process: [
-      {
-        step: "Brief i ogląd",
-        description:
-          "Rozmawiamy o nieruchomości, jej unikalnych cechach, grupie docelowej i pożądanym tonie materiału.",
-      },
-      {
-        step: "Home staging guidance",
-        description:
-          "Podpowiadamy, jak przygotować nieruchomość do zdjęć, by wyglądała najlepiej na ekranie.",
-      },
-      {
-        step: "Realizacja",
-        description:
-          "Najczęściej jeden dzień zdjęciowy, zaplanowany pod optymalne warunki świetlne.",
-      },
-      {
-        step: "Postprodukcja",
-        description:
-          "Montaż, korekcja barwna, muzyka, teksty (opcjonalnie). Czas: 7–14 dni.",
-      },
-    ],
-    preparation: [
-      "Posprzątaj i zdekoruj nieruchomość jak do sesji fotograficznej",
-      "Usuń niepotrzebne przedmioty, kable, bibeloty",
-      "Zadbaj o świeże kwiaty lub rośliny jako akcenty dekoracyjne",
-      "Upewnij się, że okna są czyste. Przepuszczają zdecydowanie więcej naturalnego światła",
-      "Sprawdź, czy wszystkie żarówki działają i mają tę samą temperaturę barwową",
-      "Zaplanuj nakręcenie widoków o najbardziej atrakcyjnej porze dnia",
-    ],
-    faq: [
-      {
-        question: "Czy film nieruchomości jest potrzebny przy sprzedaży?",
-        answer:
-          "Na rynku premium coraz częściej tak. Kupujący oczekują więcej niż suchych zdjęć. Chcą poczuć przestrzeń przed decyzją o wizycie.",
-      },
-      {
-        question: "Czy filmujecie z drona?",
-        answer:
-          "Tak, w zależności od lokalizacji i potrzeb projektu. Ujęcia z powietrza świetnie sprawdzają się przy domach z ogrodem, dużych działkach lub nieruchomościach z atrakcyjnym otoczeniem.",
+          "Dostarczam film w formatach dopasowanych do zastosowania: poziomym na stronę i YouTube, pionowym na Instagram i TikTok. Zawsze omawiamy to wcześniej.",
       },
     ],
     relatedProjectCategories: ["nieruchomosci"],
     seo: {
-      title: "Video nieruchomości i filmowanie apartamentów | Set & Space",
+      title: "Filmy dla nieruchomości | Set & Space",
       description:
-        "Kinematograficzne filmy nieruchomości dla deweloperów, biur i prywatnych sprzedających. Pokaż przestrzeń z charakterem. Set & Space, Polska.",
+        "Krótkie, estetyczne filmy dla nieruchomości. Sprzedaż, wynajem i prezentacje inwestorskie. Instagram, social media, strona internetowa. Set & Space.",
       keywords: [
+        "filmy dla nieruchomości",
         "video nieruchomości",
+        "filmowanie nieruchomości",
+        "rolki nieruchomości",
+        "video nieruchomości na Instagram",
         "film nieruchomości",
-        "filmowanie mieszkania",
-        "film domu",
-        "wideo marketing nieruchomości",
-        "film dla dewelopera",
-        "filmowanie apartamentów",
       ],
     },
   },
   {
-    slug: "filmy-architektury-i-wnetrz",
-    shortTitle: "Architektura i wnętrza",
-    title: "Filmy architektury i wnętrz",
-    headline: "Architektura zasługuje na ruch.",
+    slug: "filmy-dla-architektow-i-projektantow-wnetrz",
+    shortTitle: "Filmy dla architektów i projektantów",
+    title: "Filmy dla architektów i projektantów wnętrz",
+    headline: "Architektura inaczej żyje w ruchu niż na zdjęciu.",
     intro:
-      "Projekty architektoniczne i aranżacje wnętrz żyją inaczej w filmie niż na fotografii. Zmieniają się z perspektywą, ruchem i światłem. Tworzymy materiały, które oddają tę czwartą wymiar projektu.",
+      "Dokumentacja zrealizowanych projektów w formie, która oddaje intencję projektu, nie tylko jego wygląd. Przestrzeń zmienia się z ruchem kamery i światłem inaczej niż na zdjęciu.",
     body:
-      "Współpracujemy z pracowniami architektonicznymi, projektantami wnętrz, studia projektowymi i inwestorami. Nasze filmy służą jako portfolio, materiał do prasy i publikacji, treść na strony oraz narzędzie do prezentacji klientom.",
+      "Nagrywam skończone realizacje dla pracowni architektonicznych i projektantów wnętrz. Zależy mi na tym, żeby film pokazał projekt tak, jak naprawdę wygląda: w naturalnym świetle, z faktyczną głębią i atmosferą, które trudno oddać fotografią. Materiał sprawdza się w portfolio, na stronie pracowni i w social mediach.",
     useCases: [
       "Portfolio pracowni architektonicznej",
-      "Film na stronę www studia",
-      "Materiał do branżowych portali i magazynów",
-      "Prezentacja dla klientów i inwestorów",
-      "Film dokumentujący budowę/remont",
-      "Content na Instagram i LinkedIn",
+      "Instagram i LinkedIn",
+      "Strona internetowa studia",
+      "Prezentacja klientom i inwestorom",
+      "Branżowe portale i publikacje",
     ],
     deliverables: [
-      "Film główny (2:00–6:00 zależnie od projektu)",
-      "Wersja portfolio :90",
-      "Seria krótkich ujęć na social media",
-      "Fotografia architektoniczna (opcjonalnie)",
+      "Film dokumentacyjny projektu (do 3:00)",
+      "Wersje pionowe na social media",
+      "Krótka wersja do portfolio (do 60 sekund)",
     ],
     process: [
       {
-        step: "Wizja twórcza",
+        step: "Rozmowa o projekcie",
         description:
-          "Każdy projekt architektoniczny ma nastrój. Rozmawiamy z architektem o tym, co projekt ma opowiadać: o materiale, świetle, funkcji.",
+          "Pytam o intencję projektu i to, co chcesz pokazać. Planuję nagranie pod naturalne światło i logikę przestrzeni.",
       },
       {
-        step: "Reconnaissance",
+        step: "Dzień nagrania",
         description:
-          "Często przed dniem zdjęciowym odwiedzamy obiekt, by zaplanować kąty, pory dnia i kolejność ujęć.",
+          "Nagrywam po zakończeniu wszystkich prac. Pracuję z naturalnym światłem, często w kilku porach dnia.",
       },
       {
-        step: "Realizacja",
+        step: "Montaż",
         description:
-          "Praca na miejscu, często w kilku porach dnia, przy różnych warunkach naturalnego oświetlenia.",
+          "Montuję film tak, żeby poprowadził widza przez przestrzeń w logiczny i wizualnie spójny sposób.",
       },
       {
-        step: "Opowieść",
+        step: "Dostarczenie",
         description:
-          "Postprodukcja skupiona na narracji: jak film prowadzi widza przez przestrzeń i co mu opowiada.",
+          "Przekazuję gotowy materiał w uzgodnionych formatach do portfolio, strony lub social mediów.",
       },
     ],
     preparation: [
       "Upewnij się, że wszystkie prace wykończeniowe są zakończone",
       "Usuń tymczasowe elementy budowlane i narzędzia",
-      "Zadbaj o meble i dekoracje, jakby projekt miał być odebrany przez klienta",
-      "Omów z nami, które elementy projektu chcesz szczególnie podkreślić",
+      "Zadbaj o ustawienie mebli i dekoracji zgodnie z projektem",
+      "Poinformuj mnie wcześniej o szczegółach, które chcesz podkreślić",
     ],
     faq: [
       {
-        question: "Czy filmujecie w trakcie budowy?",
+        question: "Czy filmowanie może odbywać się etapami?",
         answer:
-          "Tak, dokumentacja budowy to osobna specjalizacja. Możemy zrealizować zarówno film procesu jak i finalną dokumentację gotowego projektu.",
+          "Tak, w zależności od harmonogramu realizacji. Możemy zaplanować dokumentację zakończonego projektu lub kilka wizyt w różnych momentach prac.",
       },
       {
         question: "Co wyróżnia dobry film architektoniczny?",
         answer:
-          "Dobry film architektoniczny idzie dalej niż samo pokazanie budynku. Opowiada o nim. Pokazuje relację między przestrzenią a człowiekiem, między architekturą a otoczeniem. Nie jest katalogiem ujęć, lecz doświadczeniem.",
+          "To, że pokazuje projekt, a nie tylko budynek. Ruch kamery przez przestrzeń, zmieniające się światło i rytm ujęć opowiadają o intencji projektu lepiej niż statyczne zdjęcia.",
       },
     ],
     relatedProjectCategories: ["architektura"],
     seo: {
-      title: "Filmy architektury i filmowanie wnętrz | Set & Space",
+      title: "Filmy dla architektów i projektantów wnętrz | Set & Space",
       description:
-        "Kinematograficzne filmy dla pracowni architektonicznych i projektantów wnętrz. Portfolio w ruchu, przestrzeń w obrazie. Set & Space, Polska.",
+        "Krótkie filmy dokumentujące realizacje architektoniczne i projekty wnętrz. Portfolio w ruchu, social media, strona pracowni. Set & Space.",
       keywords: [
-        "film architektury",
-        "filmowanie wnętrz",
+        "filmy dla architektów",
+        "video dla architektów",
+        "filmy dla projektantów wnętrz",
         "video wnętrz",
-        "film dla architekta",
-        "video dla biura architektonicznego",
-        "film architektoniczny",
-        "dokumentacja architektoniczna",
+        "filmowanie wnętrz",
       ],
     },
   },
   {
-    slug: "filmy-reklamowe",
-    shortTitle: "Filmy reklamowe",
-    title: "Filmy reklamowe i brand content",
-    headline: "Marka, która ma coś do powiedzenia, powinna to powiedzieć obrazem.",
+    slug: "filmy-dla-salonow-meblowych-i-showroomow",
+    shortTitle: "Filmy dla salonów meblowych",
+    title: "Filmy dla salonów meblowych i showroomów",
+    headline: "Meble wyglądają inaczej we własnym kontekście.",
     intro:
-      "Tworzymy filmy reklamowe i brand content dla wybranych marek, których estetyka współgra z naszym podejściem do obrazu. Pracujemy z markami z sektora design, lifestyle, hospitality i premium consumer.",
+      "Prezentacja przestrzeni ekspozycyjnej i wybranych realizacji w formacie dopasowanym do social mediów i strony sklepu. Pokazuję meble tam, gdzie żyją, w konkretnym świetle i kontekście wnętrza.",
     body:
-      "Nie jesteśmy dla każdej marki. I to jest zamierzone. Pracujemy tam, gdzie klient rozumie, że film to nie po prostu ruchome zdjęcia, a środek wyrazu budujący tożsamość marki.",
+      "Nagrywam salony meblowe, showroomy i realizacje aranżacji wnętrz. Krótki film na Instagram pokazuje meble inaczej niż katalog: w ruchu, w prawdziwym świetle, w kontekście pomieszczenia. Takie materiały sprawdzają się zarówno w social mediach, jak i na stronie salonu.",
     useCases: [
-      "Film wizerunkowy marki",
-      "Kampania reklamowa (TV, online, OOH)",
-      "Film produktowy z narracją",
-      "Content na social media",
-      "Materiał dla inwestorów i partnerów",
-      "Film dokumentujący markę / behind the scenes",
+      "Instagram i Reels",
+      "Strona internetowa salonu",
+      "Prezentacja wybranych kolekcji",
+      "Dokumentacja realizacji aranżacji wnętrz",
+      "Materiały sezonowe",
     ],
     deliverables: [
-      "Film reklamowy główny (15–90s zależnie od formatu)",
-      "Pakiet wersji do różnych kanałów",
-      "Materiał dodatkowy / making of",
+      "Krótki film prezentacyjny (do 60 sekund)",
+      "Wersje pionowe na Instagram i TikTok",
+      "Dłuższa wersja na stronę internetową (do 2:00)",
     ],
     process: [
       {
-        step: "Warsztat briefu",
+        step: "Ustalenie celu",
         description:
-          "Rozmawiamy o marce, jej wartościach i tym, co ma wywołać film. Nie robimy nic bez solidnego briefu.",
+          "Pytam, co chcesz pokazać: showroom jako całość, konkretną kolekcję czy wybrane realizacje u klientów.",
       },
       {
-        step: "Koncepcja i scenariusz",
+        step: "Dzień nagrania",
         description:
-          "Przygotowujemy koncepcję kreatywną z opisem nastroju, podejścia i wizualnego języka.",
+          "Nagrywam w Twoim salonie lub u klienta. Pracuję z naturalnym i sztucznym światłem dostępnym na miejscu.",
       },
       {
-        step: "Preprodukcja",
+        step: "Montaż i muzyka",
         description:
-          "Planowanie lokacji, castingu (jeśli potrzebny), harmonogramu i logistyki.",
+          "Montuję materiał dopasowany do tempa social mediów. Dobór muzyki jest częścią procesu.",
       },
       {
-        step: "Realizacja",
+        step: "Dostarczenie w formatach",
         description:
-          "Jeden lub kilka dni zdjęciowych zależnie od skali projektu.",
-      },
-      {
-        step: "Postprodukcja",
-        description:
-          "Montaż, VFX (jeśli potrzebne), kolor, dźwięk, muzyka lub voiceover.",
+          "Przekazuję materiał w formatach gotowych do publikacji na Instagramie, stronie i innych kanałach.",
       },
     ],
     preparation: [
-      "Przygotuj brief obejmujący: cel, grupę docelową, ton komunikacji, budżet",
-      "Zbierz materiały o marce: logo, paleta kolorów, tone of voice",
-      "Określ kanały dystrybucji i wymagania techniczne",
-      "Zaplanuj zaangażowanie kluczowych decydentów po stronie marki",
+      "Przygotuj ekspozycję jak do sesji fotograficznej",
+      "Sprawdź oświetlenie i usuń niepotrzebne elementy z planowanego kadru",
+      "Zdecyduj, które produkty lub przestrzenie mają być w centrum",
+      "Poinformuj mnie wcześniej o planowanym zastosowaniu materiału",
     ],
     faq: [
       {
-        question: "Ile kosztuje film reklamowy?",
+        question: "Czy nagrania odbywają się tylko w showroomie?",
         answer:
-          "Zakres cenowy jest bardzo szeroki: zależy od koncepcji, ekipy, lokacji, castingu i wymagań postprodukcji. Krótki film produktowy to zupełnie inny budżet niż rozbudowana kampania telewizyjna. Porozmawiajmy. Dopasujemy zakres do możliwości.",
+          "Nie, nagrywam też realizacje aranżacji u klientów. Dokumentacja prawdziwych wnętrz sprawdza się szczególnie dobrze w social mediach.",
       },
       {
-        question: "Czy pracujecie ze wszystkimi markami?",
+        question: "Jak długi film jest optymalny na Instagram?",
         answer:
-          "Nie. Wybieramy projekty, w których nasz styl ma sens: marki premium, design-oriented, hospitality i lifestyle. Nie robimy filmów sprzecznych z naszą estetyką.",
+          "Reels do 30–60 sekund angażują najlepiej. Jeśli potrzebujesz dłuższej wersji na stronę internetową, przygotuję ją jako osobny format.",
       },
     ],
-    relatedProjectCategories: ["marki"],
+    relatedProjectCategories: ["architektura"],
     seo: {
-      title: "Filmy reklamowe i brand content | Set & Space",
+      title: "Filmy dla salonów meblowych i showroomów | Set & Space",
       description:
-        "Produkcja filmów reklamowych i brand contentu dla marek premium. Estetyczna komunikacja, kinematograficzne podejście. Set & Space, Polska.",
+        "Krótkie filmy dla salonów meblowych, showroomów i realizacji wnętrz. Instagram, Reels, strona salonu. Set & Space.",
       keywords: [
-        "film reklamowy",
-        "produkcja filmów reklamowych",
-        "film promocyjny",
-        "brand content",
-        "produkcja video",
-        "film wizerunkowy",
-        "film dla marki",
+        "filmy dla salonów meblowych",
+        "video dla salonów meblowych",
+        "filmy showroomów",
+        "video showroomu",
+        "rolki dla salonu meblowego",
+        "filmy mebli",
+      ],
+    },
+  },
+  {
+    slug: "filmy-dla-butikowych-hoteli",
+    shortTitle: "Filmy dla butikowych hoteli",
+    title: "Filmy dla butikowych hoteli",
+    headline: "Nastrój miejsca, zanim gość dokona rezerwacji.",
+    intro:
+      "Materiał budujący nastrój miejsca. Coś więcej niż folder z pokojami. Pozwala poczuć atmosferę obiektu, zanim gość dokona rezerwacji.",
+    body:
+      "Tworzę krótkie filmy promocyjne dla butikowych hoteli, pensjonatów i obiektów z charakterem. Zależy mi na tym, żeby film pokazał nie tylko jak wygląda obiekt, ale jak się w nim czuje. Taki materiał sprawdza się na stronie hotelu, Instagramie i przy kampaniach sezonowych.",
+    useCases: [
+      "Strona internetowa i rezerwacje online",
+      "Instagram i social media",
+      "Kampanie sezonowe",
+      "Materiały dla portali OTA",
+      "Prezentacja dla partnerów i inwestorów",
+    ],
+    deliverables: [
+      "Film wizerunkowy (do 2:30)",
+      "Wersje pionowe na Instagram i Stories",
+      "Krótka wersja do kampanii (do 30 sekund)",
+    ],
+    process: [
+      {
+        step: "Rozmowa o obiekcie",
+        description:
+          "Pytam o charakter hotelu, grupę gości i cel materiału. Planuję realizację pod naturalne światło i rytm obiektu.",
+      },
+      {
+        step: "Przygotowanie przestrzeni",
+        description:
+          "Przed nagraniem przesyłam wskazówki, na co zwrócić uwagę. Hotel może pracować normalnie w dniu nagrania.",
+      },
+      {
+        step: "Dzień nagrania",
+        description:
+          "Nagrywam spokojnie, bez nadmiaru sprzętu. Dopasowuję się do rytmu dnia i naturalnego oświetlenia obiektu.",
+      },
+      {
+        step: "Montaż i przekazanie",
+        description:
+          "Przygotowuję wersję roboczą do akceptacji. Po poprawkach dostarczam gotowy materiał w uzgodnionych formatach.",
+      },
+    ],
+    preparation: [
+      "Przejdź przez każde filmowane pomieszczenie z perspektywy gościa",
+      "Zadbaj o detale: czyste szyby, schowane kable, świeże kwiaty w recepcji",
+      "Sprawdź żarówki i oświetlenie we wszystkich pomieszczeniach",
+      "Poinformuj personel o dniu nagrania",
+    ],
+    faq: [
+      {
+        question: "Czy film można nakręcić w trakcie pracy hotelu?",
+        answer:
+          "Tak, planuję realizację tak, żeby minimalizować wpływ na gości i personel. Najlepsze ujęcia często powstają rano, przed największym ruchem.",
+      },
+      {
+        question: "Ile trwa realizacja?",
+        answer:
+          "Zazwyczaj jeden dzień nagrania i do dwóch tygodni na montaż. Harmonogram ustalamy indywidualnie na etapie wyceny.",
+      },
+    ],
+    relatedProjectCategories: ["hotele"],
+    seo: {
+      title: "Filmy dla butikowych hoteli | Set & Space",
+      description:
+        "Krótkie filmy promocyjne dla butikowych hoteli i obiektów z charakterem. Instagram, strona hotelu, kampanie sezonowe. Set & Space.",
+      keywords: [
+        "filmy dla hoteli",
+        "video dla hoteli",
+        "film promocyjny hotelu",
+        "rolki dla hoteli",
+        "video hotelu na Instagram",
       ],
     },
   },

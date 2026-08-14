@@ -26,9 +26,9 @@ export const articles: JournalArticle[] = [
     slug: "jak-przygotowac-hotel-do-nagrania-filmu",
     title: "Jak przygotować hotel do nagrania filmu promocyjnego?",
     excerpt:
-      "Dobry film zaczyna się od dobrego przygotowania. Kilka rzeczy, które możesz zrobić przed przyjazdem ekipy, by materiał wyglądał najlepiej jak to możliwe.",
+      "Dobry film zaczyna się od dobrego przygotowania. Kilka rzeczy, które możesz zrobić przed dniem nagrania, by materiał wyglądał jak najlepiej.",
     content: `
-Dobry film promocyjny hotelu to efekt wspólnej pracy: z jednej strony ekipy filmowej, z drugiej obiektu, który wie, jak się do tej roli przygotować. Zebraliśmy najważniejsze wskazówki.
+Dobry film promocyjny hotelu to efekt wspólnej pracy: z jednej strony ekipy filmowej, z drugiej obiektu, który wie, jak się do tej roli przygotować. Zebrałam najważniejsze wskazówki.
 
 ## Porządek i staging
 
@@ -42,10 +42,10 @@ Szczególną uwagę zwróć na:
 
 ## Oświetlenie
 
-To jeden z najważniejszych elementów. Sprawdź wszystkie żarówki. Burned-out żarówka w lampce nocnej widać od razu. Zadbaj o spójną temperaturę barwową źródeł światła w każdym pomieszczeniu.
+To jeden z najważniejszych elementów. Sprawdź wszystkie żarówki. Przepalona żarówka w lampce nocnej widać od razu. Zadbaj o spójną temperaturę barwową źródeł światła w każdym pomieszczeniu.
 
 Przed nagraniem:
-- Otwórz wszystkie zasłony i rolety — naturalne światło to najlepszy operator
+- Otwórz wszystkie zasłony i rolety — naturalne światło to najlepszy sprzymierzeniec
 - Wyczyść szyby — zaskakująco mocno wpływają na jakość światła wpadającego do środka
 - Wyłącz agresywne neonowe oświetlenie robocze tam, gdzie jest nieestetyczne
 
@@ -55,16 +55,16 @@ Poinformuj pracowników o dniu zdjęciowym. Zaplanuj, które aktywności obiektu
 
 ## Pora roku i pogoda
 
-Najlepsze filmy hotelowe często korzystają z konkretnej pory roku — warto to zaplanować z wyprzedzeniem. Lato daje więcej naturalnego światła, jesień przynosi dramę i kolory, zima w górach magię mrozu i świec.
+Najlepsze filmy hotelowe często korzystają z konkretnej pory roku — warto to zaplanować z wyprzedzeniem. Lato daje więcej naturalnego światła, jesień przynosi dramę i kolory, zima w górach tworzy magię mrozu i świec.
 
-## Przed dniem zdjęciowym
+## Przed dniem nagrania
 
-Skontaktuj się z ekipą filmową co najmniej tydzień wcześniej, by omówić:
+Skontaktuj się ze mną co najmniej tydzień wcześniej, by omówić:
 - Plan dnia (które przestrzenie, w jakiej kolejności)
 - Dostępność stref (SPA, restauracja, pokoje)
 - Wszelkie ograniczenia techniczne
 
-Dobre przygotowanie przekłada się bezpośrednio na efekt. Oszczędza też czas ekipy na planie.
+Dobre przygotowanie przekłada się bezpośrednio na efekt końcowy.
     `.trim(),
     author: null,
     publishDate: "2025-06-10",
@@ -73,18 +73,18 @@ Dobre przygotowanie przekłada się bezpośrednio na efekt. Oszczędza też czas
     heroImageAlt: "Wnętrze pokoju hotelowego przygotowanego do nagrania",
     category: "Produkcja",
     tags: ["hotel", "przygotowanie", "film promocyjny", "hospitality"],
-    relatedService: "filmy-dla-hoteli",
+    relatedService: "filmy-dla-butikowych-hoteli",
     relatedProjectSlugs: ["hotel-w-gorach"],
     seo: {
-      title: "Jak przygotować hotel do nagrania filmu promocyjnego? | Set & Space Journal",
+      title: "Jak przygotować hotel do nagrania filmu promocyjnego? | Set & Space Poradniki",
       description:
         "Praktyczny przewodnik dla obiektów hotelowych: jak przygotować wnętrza, personel i harmonogram, by film promocyjny wyglądał jak najlepiej.",
     },
     faq: [
       {
-        question: "Ile czasu przed nagraniem powinienem zacząć przygotowania?",
+        question: "Ile czasu przed nagraniem warto zacząć przygotowania?",
         answer:
-          "Najlepiej zacząć co najmniej 2 tygodnie wcześniej. Daje to czas na drobne naprawy, uzupełnienie dekoracji i koordynację z personelem.",
+          "Najlepiej co najmniej dwa tygodnie wcześniej. Daje to czas na drobne naprawy, uzupełnienie dekoracji i koordynację z personelem.",
       },
       {
         question: "Czy hotel musi być pusty podczas nagrania?",
@@ -97,13 +97,13 @@ Dobre przygotowanie przekłada się bezpośrednio na efekt. Oszczędza też czas
     slug: "jak-przygotowac-mieszkanie-do-filmu-nieruchomosci",
     title: "Jak przygotować mieszkanie do filmu nieruchomości?",
     excerpt:
-      "Film nieruchomości zaczyna się na długo przed dniem zdjęciowym. Oto co możesz zrobić, by Twoje mieszkanie wyglądało jak z katalogu.",
+      "Film nieruchomości zaczyna się na długo przed dniem nagrania. Oto co możesz zrobić, by Twoje mieszkanie wyglądało jak z katalogu.",
     content: `
 Film nieruchomości to jeden z najskuteczniejszych narzędzi sprzedaży, ale tylko wtedy, gdy nieruchomość jest odpowiednio przygotowana. Kilka zasad, które znacząco wpływają na efekt końcowy.
 
 ## Declutter: mniej znaczy więcej
 
-Aparat jest brutalnie szczery. Widzi każdy zbędny przedmiot, każdą kartkę na blacie, każdą parę butów przy wejściu. Przed dniem zdjęciowym przeprowadź radykalne czyszczenie przestrzeni.
+Kamera jest brutalnie szczera. Widzi każdy zbędny przedmiot, każdą kartkę na blacie, każdą parę butów przy wejściu. Przed dniem nagrania przeprowadź radykalne czyszczenie przestrzeni.
 
 Co usunąć:
 - Artykuły toaletowe z blatów łazienek
@@ -114,7 +114,7 @@ Co usunąć:
 
 ## Neutralizacja przestrzeni
 
-Jeśli mieszkanie jest zamieszkałe, postaraj się je wizualnie zneutralizować — tak by potencjalny nabywca mógł wyobrazić sobie siebie w tej przestrzeni, nie tylko poprzedniego właściciela.
+Jeśli mieszkanie jest zamieszkałe, postaraj się je wizualnie zneutralizować — tak by potencjalny nabywca mógł wyobrazić sobie siebie w tej przestrzeni.
 
 ## Oświetlenie: klucz do nastroju
 
@@ -124,19 +124,19 @@ Zamień żarówki fluorescencyjne na ciepłe LED (2700–3000K) — różnica je
 
 ## Rośliny i kwiaty: prosty sposób na efekt
 
-Kilka świeżych kwiatów lub zielona roślina pokojowa wizualnie ożywia przestrzeń. To jeden z najprostszych i najtańszych zabiegów staging'owych.
+Kilka świeżych kwiatów lub zielona roślina pokojowa wizualnie ożywia przestrzeń. To jeden z najprostszych i najtańszych zabiegów stagingowych.
 
 ## Łazienka i kuchnia: miejsca na detale
 
 Te dwa pomieszczenia wymagają szczególnej uwagi.
 
-Łazienka: schowaj codzienne kosmetyki, zostaw tylko piękne ręczniki, może plic roślinkę, wyczyść armaturę do połysku.
+Łazienka: schowaj codzienne kosmetyki, zostaw tylko piękne ręczniki, może roślinę, wyczyść armaturę do połysku.
 
-Kuchnia: wyczyść blaty, chowaj ekspres do kawy i inne sprzęty (chyba że są designerskie), zadbaj o świeże owoce lub zioła jako dekorację.
+Kuchnia: wyczyść blaty, schowaj ekspres do kawy i inne sprzęty (chyba że są designerskie), zadbaj o świeże owoce lub zioła jako dekorację.
 
 ## Zewnętrze i balkon
 
-Jeśli nieruchomość ma balkon, ogród lub taras — to potencjał, który warto pokazać. Upewnij się, że mebel ogrodowe są czyste i estetycznie ustawione.
+Jeśli nieruchomość ma balkon, ogród lub taras — to potencjał, który warto pokazać. Upewnij się, że meble ogrodowe są czyste i estetycznie ustawione.
 
 ## Pora dnia ma znaczenie
 
@@ -149,10 +149,10 @@ Zaplanuj nagranie na porę, gdy do kluczowych pomieszczeń wpada najlepsze natur
     heroImageAlt: "Nowoczesne wnętrze salonu przygotowanego do sesji video",
     category: "Nieruchomości",
     tags: ["nieruchomości", "przygotowanie", "film", "staging"],
-    relatedService: "video-nieruchomosci",
+    relatedService: "filmy-dla-nieruchomosci",
     relatedProjectSlugs: ["apartamenty-w-centrum"],
     seo: {
-      title: "Jak przygotować mieszkanie do filmu nieruchomości? | Set & Space Journal",
+      title: "Jak przygotować mieszkanie do filmu nieruchomości? | Set & Space Poradniki",
       description:
         "Przewodnik: jak przygotować mieszkanie lub apartament do profesjonalnego nagrania video. Staging, oświetlenie, porządek: wszystko, co ważne.",
     },
@@ -169,11 +169,11 @@ W fotografii mówi się, że zdjęcia robi się światłem, a nie aparatem. W fi
 
 Najlepsze filmy wnętrzarskie korzystają z naturalnego światła jako podstawy. Daje ono wnętrzu głębię, teksturę i autentyczność, której żadne sztuczne źródło nie odtworzy w pełni.
 
-Dlatego planujemy realizacje pod porę dnia i orientację okien. Pokój z oknami na południe będzie wyglądał inaczej o 8 rano i o 2 po południu — i oba te momenty mogą być piękne, ale na różne sposoby.
+Dlatego planuję realizacje pod porę dnia i orientację okien. Pokój z oknami na południe będzie wyglądał inaczej o 8 rano i o 2 po południu — i oba te momenty mogą być piękne, ale na różne sposoby.
 
 ## Temperatura barwowa i spójność
 
-Mieszanie zimnego dziennego światła z ciepłym oświetleniem sztucznym tworzy problemy na etapie postprodukcji i może sprawić, że wnętrze wygląda tanio lub chaotycznie. Staramy się pracować w jednej tonacji barwowej — albo naturalne, albo starannie dobrane sztuczne.
+Mieszanie zimnego dziennego światła z ciepłym oświetleniem sztucznym tworzy problemy na etapie postprodukcji i może sprawić, że wnętrze wygląda chaotycznie. Staram się pracować w jednej tonacji barwowej — albo naturalne, albo starannie dobrane sztuczne.
 
 ## Cień jest równie ważny jak światło
 
@@ -185,13 +185,11 @@ Dwa szczególne momenty doby mają niesamowity wpływ na wygląd wnętrz:
 
 **Złota godzina** (tuż po wschodzie lub przed zachodem słońca) — ciepłe, miękkie, złote światło. Idealne do wnętrz, które mają komunikować ciepło, przytulność i luksus.
 
-**Niebieska godzina** (chwila po zachodzie) — chłodne, równe, dramatyczne. Nadaje wnętrzu dramatyzm i nowoczesność. Szczególnie efektowna przy rozświetlonych oknach.
+**Niebieska godzina** (chwila po zachodzie) — chłodne, równe, dramatyczne. Nadaje wnętrzu nowoczesność i dramatyzm. Szczególnie efektowna przy rozświetlonych oknach.
 
 ## Konsekwencja w postprodukcji
 
-Korekcja barwna (color grading) to etap, na którym świecenie wnętrza jest finalizowane i ujednolicane. Dobry colorist to artysta — może wzmocnić ciepło drewna, podkreślić chłód betonu, wyciągnąć szczegóły w cieniach.
-
-Dla nas color grading to część narracji, nie kosmetyka.
+Korekcja barwna (color grading) to etap, na którym oświetlenie wnętrza jest finalizowane i ujednolicane. Color grading to dla mnie część narracji, nie kosmetyka. Dobry colorist wzmacnia ciepło drewna, podkreśla chłód betonu, wyciąga szczegóły w cieniach.
     `.trim(),
     author: null,
     publishDate: "2025-07-22",
@@ -200,10 +198,10 @@ Dla nas color grading to część narracji, nie kosmetyka.
     heroImageAlt: "Złota godzina wpada przez okno do minimalistycznego wnętrza",
     category: "Craft",
     tags: ["światło", "wnętrza", "filmowanie", "kolor", "architektura"],
-    relatedService: "filmy-architektury-i-wnetrz",
+    relatedService: "filmy-dla-architektow-i-projektantow-wnetrz",
     relatedProjectSlugs: ["architektura-rezydencji"],
     seo: {
-      title: "Jak światło wpływa na odbiór wnętrza w filmie? | Set & Space Journal",
+      title: "Jak światło wpływa na odbiór wnętrza w filmie? | Set & Space Poradniki",
       description:
         "Dlaczego światło to najważniejszy element kinematograficznego filmu wnętrzarskiego. Naturalne światło, temperatura barwowa i kolor w postprodukcji.",
     },

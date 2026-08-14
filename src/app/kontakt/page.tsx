@@ -7,7 +7,7 @@ import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 export const metadata: Metadata = {
   title: "Kontakt — napisz do Set & Space",
   description:
-    "Masz projekt filmowy? Napisz do Set & Space. Odezwiemy się w ciągu jednego dnia roboczego.",
+    "Masz projekt filmowy? Napisz do Set & Space. Odpiszę w ciągu jednego dnia roboczego.",
   alternates: { canonical: `${business.url}/kontakt` },
 };
 
@@ -52,8 +52,8 @@ export default function KontaktPage() {
               <em>o Twoim projekcie.</em>
             </h1>
             <p className="text-body" style={{ marginBottom: "2.5rem", maxWidth: "420px" }}>
-              Opowiedz nam, czego szukasz. Odezwiemy się w ciągu jednego dnia roboczego,
-              żeby dowiedzieć się więcej i omówić, jak możemy pomóc.
+              Opowiedz mi, czego szukasz. Odpiszę w ciągu jednego dnia roboczego,
+              żeby dowiedzieć się więcej i omówić, jak mogę pomóc.
             </p>
 
             {/* Contact details */}
@@ -157,7 +157,7 @@ export default function KontaktPage() {
                   marginBottom: "1.75rem",
                 }}
               >
-                Napisz do nas
+                Napisz do mnie
               </p>
               <ContactForm />
             </div>
@@ -184,16 +184,16 @@ export default function KontaktPage() {
           >
             {[
               {
-                q: "Jak szybko odpiszecie?",
+                q: "Jak szybko odpiszesz?",
                 a: "W ciągu jednego dnia roboczego. Jeśli projekt jest pilny, zaznacz to w wiadomości.",
               },
               {
-                q: "Gdzie realizujecie projekty?",
-                a: "Przede wszystkim w Polsce, ale jesteśmy otwarci na realizacje zagraniczne. Napisz do nas. Omówimy szczegóły.",
+                q: "Gdzie realizujesz projekty?",
+                a: "Przede wszystkim w Polsce, ale jestem otwarta na realizacje zagraniczne. Napisz do mnie. Omówimy szczegóły.",
               },
               {
                 q: "Od czego zależy cena?",
-                a: "Od skali projektu, liczby dni zdjęciowych, zakresu postprodukcji i oczekiwanych formatów. Wycena jest indywidualna.",
+                a: "Od skali projektu, liczby dni nagrania, zakresu postprodukcji i oczekiwanych formatów. Wycena jest indywidualna.",
               },
             ].map((item) => (
               <div key={item.q}>
