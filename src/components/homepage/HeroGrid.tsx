@@ -14,8 +14,8 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
   return (
     <section
       aria-labelledby="hero-heading"
+      className="hero-section"
       style={{
-        minHeight: "100svh",
         padding: "5rem 1rem 1rem",
         display: "flex",
         flexDirection: "column",
@@ -82,16 +82,15 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
 
         {/* ── Cell B: Main featured video ── */}
         <div
-          className="panel-dune"
+          className="panel-dune hero-video-cell"
           style={{
             gridArea: "video",
             borderRadius: "var(--radius-panel)",
             overflow: "hidden",
-            minHeight: "clamp(220px, 40vw, 480px)",
           }}
         >
           {mainProject ? (
-            <div style={{ height: "100%", minHeight: "inherit" }}>
+            <div className="hero-video-inner">
               <VideoFacade
                 provider={mainProject.videoProvider}
                 videoId={mainProject.vimeoId ?? mainProject.youtubeId}
@@ -129,9 +128,8 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
             </div>
           ) : (
             <div
+              className="hero-video-inner"
               style={{
-                height: "100%",
-                minHeight: "inherit",
                 background: "linear-gradient(135deg, var(--dune) 0%, var(--surface-alt) 100%)",
                 display: "flex",
                 alignItems: "center",
@@ -351,7 +349,13 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
 
       {/* Inline CSS for responsive bento grid */}
       <style>{`
+        /* ── Defaults (all screen sizes) ── */
+        .hero-video-cell  { min-height: clamp(220px, 40vw, 480px); }
+        .hero-video-inner { height: 100%; }
+
+        /* ── Desktop bento: 3-column layout ── */
         @media (min-width: 768px) {
+          .hero-section { min-height: 100svh; }
           .hero-bento {
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: auto auto auto;
@@ -369,13 +373,22 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
         }
 
         @media (min-width: 1100px) {
-          .hero-bento {
-            grid-template-columns: 1.1fr 1.6fr 1fr;
-          }
+          .hero-bento { grid-template-columns: 1.1fr 1.6fr 1fr; }
         }
 
+        /* ── Mobile layout: single column, explicit order ── */
         @media (max-width: 767px) {
-          .hero-bento > *:nth-child(6) { display: none; }
+          /* Override desktop-only height constraints */
+          .hero-video-cell  { min-height: 0; }
+          .hero-video-inner { height: auto; }
+
+          /* Reading order: statement → video → intro → projects → tags → cta */
+          .hero-bento > *:nth-child(1) { order: 1; }
+          .hero-bento > *:nth-child(2) { order: 2; }
+          .hero-bento > *:nth-child(3) { order: 4; }
+          .hero-bento > *:nth-child(4) { order: 3; }
+          .hero-bento > *:nth-child(5) { order: 6; }
+          .hero-bento > *:nth-child(6) { order: 5; }
         }
       `}</style>
     </section>
