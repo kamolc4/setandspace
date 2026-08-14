@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Project } from "@/data/projects";
 import VideoFacade from "@/components/ui/VideoFacade";
 
@@ -91,15 +92,28 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
         >
           {mainProject ? (
             <div className="hero-video-inner">
-              <VideoFacade
-                provider={mainProject.videoProvider}
-                videoId={mainProject.vimeoId ?? mainProject.youtubeId}
-                posterSrc={undefined}
-                posterAlt={mainProject.posterAlt}
-                title={mainProject.title}
-                aspectRatio="16/9"
-                className="h-full"
-              />
+              {/* Mobile only: camera photo replacing the gradient placeholder */}
+              <div className="hero-mobile-poster">
+                <Image
+                  src="/images/camera-mobile.png"
+                  alt="Aparat do profesjonalnej produkcji filmowej Set & Space"
+                  fill
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                  sizes="(max-width: 767px) calc(100vw - 2rem)"
+                />
+              </div>
+              {/* Desktop only: VideoFacade with gradient placeholder */}
+              <div className="hero-desktop-video">
+                <VideoFacade
+                  provider={mainProject.videoProvider}
+                  videoId={mainProject.vimeoId ?? mainProject.youtubeId}
+                  posterSrc={undefined}
+                  posterAlt={mainProject.posterAlt}
+                  title={mainProject.title}
+                  aspectRatio="16/9"
+                  className="h-full"
+                />
+              </div>
               <div
                 style={{
                   padding: "1rem 1.25rem 1.25rem",
@@ -352,6 +366,8 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
         /* ── Defaults (all screen sizes) ── */
         .hero-video-cell  { min-height: clamp(220px, 40vw, 480px); }
         .hero-video-inner { height: 100%; }
+        .hero-mobile-poster { display: none; position: relative; aspect-ratio: 16 / 9; }
+        .hero-desktop-video { display: block; }
 
         /* ── Desktop bento: 3-column layout ── */
         @media (min-width: 768px) {
@@ -381,6 +397,10 @@ export default function HeroGrid({ featuredProjects, allProjects }: HeroGridProp
           /* Override desktop-only height constraints */
           .hero-video-cell  { min-height: 0; }
           .hero-video-inner { height: auto; }
+
+          /* Camera poster visible, VideoFacade hidden */
+          .hero-mobile-poster { display: block; }
+          .hero-desktop-video { display: none; }
 
           /* Reading order: statement → video → intro → projects → tags → cta */
           .hero-bento > *:nth-child(1) { order: 1; }
