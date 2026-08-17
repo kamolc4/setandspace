@@ -41,7 +41,7 @@ export const services: Service[] = [
       "Sprzedaż i wynajem premium",
     ],
     deliverables: [
-      "Film główny (format poziomy, do 2:00)",
+      "Film główny (format poziomy)",
       "Wersja pionowa na Reels i Stories",
       "Wersja skrócona 30–60 sekund",
     ],
@@ -118,7 +118,7 @@ export const services: Service[] = [
       "Branżowe portale i publikacje",
     ],
     deliverables: [
-      "Film dokumentacyjny projektu (do 3:00)",
+      "Film dokumentacyjny projektu",
       "Wersje pionowe na social media",
       "Krótka wersja do portfolio (do 60 sekund)",
     ],
@@ -195,7 +195,7 @@ export const services: Service[] = [
     deliverables: [
       "Krótki film prezentacyjny (do 60 sekund)",
       "Wersje pionowe na Instagram i TikTok",
-      "Dłuższa wersja na stronę internetową (do 2:00)",
+      "Dłuższa wersja na stronę internetową",
     ],
     process: [
       {
@@ -269,7 +269,7 @@ export const services: Service[] = [
       "Prezentacja dla partnerów i inwestorów",
     ],
     deliverables: [
-      "Film wizerunkowy (do 2:30)",
+      "Film wizerunkowy",
       "Wersje pionowe na Instagram i Stories",
       "Krótka wersja do kampanii (do 30 sekund)",
     ],

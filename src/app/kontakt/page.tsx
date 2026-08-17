@@ -52,8 +52,7 @@ export default function KontaktPage() {
               <em>o Twoim projekcie.</em>
             </h1>
             <p className="text-body" style={{ marginBottom: "2.5rem", maxWidth: "420px" }}>
-              Opowiedz mi, czego szukasz. Odpiszę w ciągu jednego dnia roboczego,
-              żeby dowiedzieć się więcej i omówić, jak mogę pomóc.
+              Napisz kilka słów o miejscu, które chcesz pokazać: rodzaj wnętrza, przybliżony termin i to do czego ma służyć film?
             </p>
 
             {/* Contact details */}
@@ -185,7 +184,7 @@ export default function KontaktPage() {
             {[
               {
                 q: "Jak szybko odpiszesz?",
-                a: "W ciągu jednego dnia roboczego. Jeśli projekt jest pilny, zaznacz to w wiadomości.",
+                a: "Odpisuję w ciągu jednego dnia roboczego.",
               },
               {
                 q: "Gdzie realizujesz projekty?",

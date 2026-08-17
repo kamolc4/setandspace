@@ -67,7 +67,7 @@ Skontaktuj się ze mną co najmniej tydzień wcześniej, by omówić:
 Dobre przygotowanie przekłada się bezpośrednio na efekt końcowy.
     `.trim(),
     author: null,
-    publishDate: "2025-06-10",
+    publishDate: "2026-04-08",
     modifiedDate: null,
     heroImage: null,
     heroImageAlt: "Wnętrze pokoju hotelowego przygotowanego do nagrania",
@@ -143,7 +143,7 @@ Jeśli nieruchomość ma balkon, ogród lub taras — to potencjał, który wart
 Zaplanuj nagranie na porę, gdy do kluczowych pomieszczeń wpada najlepsze naturalne światło. Najczęściej jest to poranek lub wczesne popołudnie — zależy od orientacji mieszkania.
     `.trim(),
     author: null,
-    publishDate: "2025-07-02",
+    publishDate: "2026-04-24",
     modifiedDate: null,
     heroImage: null,
     heroImageAlt: "Nowoczesne wnętrze salonu przygotowanego do sesji video",
@@ -192,7 +192,7 @@ Dwa szczególne momenty doby mają niesamowity wpływ na wygląd wnętrz:
 Korekcja barwna (color grading) to etap, na którym oświetlenie wnętrza jest finalizowane i ujednolicane. Color grading to dla mnie część narracji, nie kosmetyka. Dobry colorist wzmacnia ciepło drewna, podkreśla chłód betonu, wyciąga szczegóły w cieniach.
     `.trim(),
     author: null,
-    publishDate: "2025-07-22",
+    publishDate: "2026-05-14",
     modifiedDate: null,
     heroImage: null,
     heroImageAlt: "Złota godzina wpada przez okno do minimalistycznego wnętrza",
