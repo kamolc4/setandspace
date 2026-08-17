@@ -2,6 +2,7 @@ import Link from "next/link";
 import { footerLinks } from "@/data/navigation";
 import { business } from "@/data/business";
 import { services } from "@/data/services";
+import { PrivacySettingsButton } from "@/components/ui/PrivacySettingsButton";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -139,12 +140,13 @@ export default function Footer() {
             <p className="footer-copyright">
               © {currentYear} Set & Space. Wszelkie prawa zastrzeżone.
             </p>
-            <div style={{ display: "flex", gap: "1.5rem" }}>
+            <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
               {footerLinks.legal.map((link) => (
                 <Link key={link.href} href={link.href} className="footer-copyright">
                   {link.label}
                 </Link>
               ))}
+              <PrivacySettingsButton />
             </div>
           </div>
         </div>

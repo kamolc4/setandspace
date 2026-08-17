@@ -5,6 +5,7 @@ import { business } from "@/data/business";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Analytics } from "@/components/Analytics";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -97,6 +98,7 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <Analytics />
+        <CookieBanner />
       </body>
     </html>
   );
