@@ -69,15 +69,7 @@ export default function UslugiPage() {
               }}
               className="service-link"
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  gap: "1rem",
-                }}
-              >
-                <div style={{ flex: 1 }}>
+              <div>
                   <div
                     style={{
                       display: "flex",
@@ -147,20 +139,6 @@ export default function UslugiPage() {
                       </span>
                     ))}
                   </div>
-                </div>
-
-                <div style={{ flexShrink: 0, paddingTop: "0.25rem" }}>
-                  <span
-                    style={{
-                      fontFamily: "var(--font-cormorant)",
-                      fontSize: "1.5rem",
-                      color: "var(--clay)",
-                    }}
-                    aria-hidden="true"
-                  >
-                    ↗
-                  </span>
-                </div>
               </div>
             </Link>
           ))}

@@ -188,7 +188,7 @@ export default function KontaktPage() {
               },
               {
                 q: "Gdzie realizujesz projekty?",
-                a: "Przede wszystkim w Polsce, ale jestem otwarta na realizacje zagraniczne. Napisz do mnie. Omówimy szczegóły.",
+                a: "Przede wszystkim w Warszawie, ale jestem otwarta na realizacje w innych miastach oraz na współpracę zagraniczną. Napisz do mnie. Omówimy szczegóły.",
               },
               {
                 q: "Od czego zależy cena?",
