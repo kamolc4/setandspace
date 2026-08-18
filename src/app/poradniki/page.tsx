@@ -1,16 +1,34 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { articles } from "@/data/journal";
+import { getPrisma } from "@/lib/prisma";
+import { articles as staticArticles } from "@/data/journal";
+import { dbToJournalArticle } from "@/lib/db-adapter";
 import { business } from "@/data/business";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import type { JournalArticle } from "@/data/journal";
 
 export const metadata: Metadata = {
   title: "Poradniki — o filmie, przestrzeni i przygotowaniu do nagrania",
   description:
-    "Set & Space Poradniki: praktyczne artykuły o przygotowaniu do nagrania, roli światła, filmach dla nieruchomości, hoteli i architektury.",
+    "Set & Space Poradniki: praktyczne artykuły o przygotowaniu do nagrań, roli światła, filmach dla nieruchomości, hoteli i architektury.",
   alternates: { canonical: `${business.url}/poradniki` },
 };
+
+async function getPublishedArticles(): Promise<JournalArticle[]> {
+  try {
+    const db = getPrisma();
+    const rows = await db.article.findMany({
+      where: { status: "PUBLISHED" },
+      orderBy: { publishedAt: "desc" },
+    });
+    return rows.map(dbToJournalArticle);
+  } catch {
+    return [...staticArticles].sort(
+      (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+    );
+  }
+}
 
 function formatDate(dateString: string): string {
   return new Intl.DateTimeFormat("pl-PL", {
@@ -20,11 +38,9 @@ function formatDate(dateString: string): string {
   }).format(new Date(dateString));
 }
 
-const sortedArticles = [...articles].sort(
-  (a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-);
+export default async function PoradnikiPage() {
+  const sortedArticles = await getPublishedArticles();
 
-export default function PoradnikiPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ label: "Poradniki", href: "/poradniki" }]} />

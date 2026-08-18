@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Article {
+  id             String    @id @default(cuid())
+  title          String
+  slug           String    @unique
+  excerpt        String    @default("")
+  content        String    @default("")
+  status         Status    @default(DRAFT)
+  category       String    @default("")
+  author         String?
+  publishedAt    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  seoTitle       String?
+  seoDescription String?
+  canonical      String?
+  ogImage        String?
+  featured       Boolean   @default(false)
+  faq            Json?
+  relatedService String?
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+}

@@ -1,25 +1,57 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { articles, getArticleBySlug } from "@/data/journal";
+import { getPrisma } from "@/lib/prisma";
+import { articles as staticArticles, getArticleBySlug as getStaticBySlug } from "@/data/journal";
+import { dbToJournalArticle } from "@/lib/db-adapter";
 import { getServiceBySlug } from "@/data/services";
 import { getProjectBySlug } from "@/data/projects";
 import { business } from "@/data/business";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import ProjectCard from "@/components/ui/ProjectCard";
+import { ContentRenderer } from "@/components/poradniki/ContentRenderer";
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
+import type { JournalArticle } from "@/data/journal";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.slug }));
+async function getPublishedArticle(slug: string): Promise<JournalArticle | null> {
+  try {
+    const db = getPrisma();
+    const row = await db.article.findUnique({ where: { slug } });
+    if (!row || row.status !== "PUBLISHED") return null;
+    return dbToJournalArticle(row);
+  } catch {
+    const a = getStaticBySlug(slug);
+    return a ?? null;
+  }
 }
+
+async function getAllPublishedSlugs(): Promise<string[]> {
+  try {
+    const db = getPrisma();
+    const rows = await db.article.findMany({
+      where: { status: "PUBLISHED" },
+      select: { slug: true },
+    });
+    return rows.map((r) => r.slug);
+  } catch {
+    return staticArticles.map((a) => a.slug);
+  }
+}
+
+export async function generateStaticParams() {
+  const slugs = await getAllPublishedSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await getPublishedArticle(slug);
   if (!article) return {};
 
   return {
@@ -48,45 +80,9 @@ function formatDate(dateString: string): string {
   }).format(new Date(dateString));
 }
 
-function renderContent(content: string) {
-  const lines = content.split("\n");
-  const elements: React.ReactNode[] = [];
-  let i = 0;
-  let keyCounter = 0;
-
-  while (i < lines.length) {
-    const line = lines[i];
-
-    if (line.startsWith("## ")) {
-      elements.push(<h2 key={keyCounter++}>{line.slice(3)}</h2>);
-    } else if (line.startsWith("### ")) {
-      elements.push(<h3 key={keyCounter++}>{line.slice(4)}</h3>);
-    } else if (line.startsWith("- ")) {
-      const items: string[] = [];
-      while (i < lines.length && lines[i].startsWith("- ")) {
-        items.push(lines[i].slice(2));
-        i++;
-      }
-      elements.push(
-        <ul key={keyCounter++}>
-          {items.map((item, j) => (
-            <li key={j}>{item}</li>
-          ))}
-        </ul>
-      );
-      continue;
-    } else if (line.trim() !== "") {
-      elements.push(<p key={keyCounter++}>{line}</p>);
-    }
-    i++;
-  }
-
-  return elements;
-}
-
 export default async function PoradnikArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const article = await getPublishedArticle(slug);
   if (!article) notFound();
 
   const relatedService = article.relatedService
@@ -180,7 +176,9 @@ export default async function PoradnikArticlePage({ params }: Props) {
           </header>
 
           {/* Prose content */}
-          <div className="prose">{renderContent(article.content)}</div>
+          <div className="prose">
+            <ContentRenderer content={article.content} />
+          </div>
 
           {/* FAQ */}
           {article.faq && article.faq.length > 0 && (
