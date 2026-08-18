@@ -2,10 +2,10 @@ import Link from "next/link";
 import type { Service } from "@/data/services";
 
 const serviceIcons: Record<string, string> = {
-  "filmy-dla-nieruchomosci": "◇",
-  "filmy-dla-architektow-i-projektantow-wnetrz": "△",
+  "filmy-dla-nieruchomosci": "○",
+  "filmy-dla-architektow-i-projektantow-wnetrz": "○",
   "filmy-dla-salonow-meblowych-i-showroomow": "○",
-  "filmy-dla-butikowych-hoteli": "◈",
+  "filmy-dla-butikowych-hoteli": "○",
 };
 
 interface ServicesPreviewProps {
