@@ -6,8 +6,7 @@ import { z } from "zod";
 import { getPrisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
 import { generateSlug } from "@/lib/slug";
-import { Prisma } from "@prisma/client";
-import type { Status } from "@prisma/client";
+import { Prisma, type Status } from "@/generated/prisma/client";
 
 async function requireAuth() {
   const session = await getAdminSession();

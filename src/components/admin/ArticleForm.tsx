@@ -3,7 +3,7 @@
 import { useActionState, useCallback, useRef, useState } from "react";
 import { generateSlug } from "@/lib/slug";
 import { parseArticle } from "@/lib/article-parser";
-import type { Article } from "@prisma/client";
+import type { Article } from "@/generated/prisma/client";
 
 type FaqItem = { question: string; answer: string };
 type FormState = { error?: string; fieldErrors?: Record<string, string[]> } | null;

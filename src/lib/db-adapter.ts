@@ -1,4 +1,4 @@
-import type { Article } from "@prisma/client";
+import type { Article } from "@/generated/prisma/client";
 import type { JournalArticle } from "@/data/journal";
 
 export function dbToJournalArticle(a: Article): JournalArticle {

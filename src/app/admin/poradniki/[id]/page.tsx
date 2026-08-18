@@ -2,8 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPrisma } from "@/lib/prisma";
 import { ArticleForm } from "@/components/admin/ArticleForm";
-import { updateArticleAction, deleteArticleAction, toggleStatusAction } from "@/app/admin/_actions/articles";
-import type { Status } from "@prisma/client";
+import { updateArticleAction, toggleStatusAction } from "@/app/admin/_actions/articles";
+import { DeleteButton } from "@/components/admin/DeleteButton";
+import type { Status } from "@/generated/prisma/client";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -67,18 +68,7 @@ export default async function EditPoradnikPage({ params }: Props) {
             </button>
           </form>
 
-          <form action={async () => {
-            "use server";
-            await deleteArticleAction(id);
-          }}>
-            <button
-              type="submit"
-              style={{ padding: "0.5rem 1rem", border: "1px solid #fecaca", color: "#dc2626", borderRadius: "6px", fontSize: "0.875rem", cursor: "pointer", background: "#fff" }}
-              onClick={(e) => { if (!confirm(`Usunąć "${article?.title}"?`)) e.preventDefault(); }}
-            >
-              Usuń
-            </button>
-          </form>
+          <DeleteButton id={id} title={article.title} />
         </div>
       </div>
 

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { getPrisma } from "@/lib/prisma";
-import { toggleStatusAction, deleteArticleAction } from "@/app/admin/_actions/articles";
-import type { Article, Status } from "@prisma/client";
+import { toggleStatusAction } from "@/app/admin/_actions/articles";
+import { DeleteButton } from "@/components/admin/DeleteButton";
+import type { Article, Status } from "@/generated/prisma/client";
 
 async function getArticles() {
   try {
@@ -82,14 +83,7 @@ export default async function AdminPoradnikiPage() {
                       {a.status === "PUBLISHED" ? "Cofnij" : "Opublikuj"}
                     </button>
                   </form>
-                  <form action={async () => {
-                    "use server";
-                    await deleteArticleAction(a.id);
-                  }}>
-                    <button type="submit" style={{ padding: "0.25rem 0.6rem", backgroundColor: "#fff", color: "#dc2626", border: "1px solid #fecaca", borderRadius: "5px", fontSize: "0.75rem", cursor: "pointer" }} onClick={(e) => { if (!confirm(`Usunąć "${a.title}"?`)) e.preventDefault(); }}>
-                      Usuń
-                    </button>
-                  </form>
+                  <DeleteButton id={a.id} title={a.title} small />
                 </div>
               </div>
             );
