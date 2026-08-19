@@ -7,8 +7,8 @@ export const business = {
   tagline: "Filmy, które pozwalają poczuć miejsce.",
   description:
     "Set & Space tworzy krótkie filmy dla nieruchomości, hoteli, architektów i salonów meblowych. Przestrzeń w obrazie.",
-  domain: "setandspace.pl",
-  url: "https://setandspace.pl",
+  domain: "www.setandspace.pl",
+  url: "https://www.setandspace.pl",
 
   // PLACEHOLDER — replace with real contact data
   email: "kontakt@setandspace.pl",
