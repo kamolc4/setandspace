@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description:
     "Osiem etapów współpracy z Set & Space: od formularza zgłoszeniowego i rozmowy, przez dzień nagrania i montaż, aż do przekazania gotowego materiału.",
   alternates: { canonical: `${business.url}/wspolpraca` },
+  openGraph: { url: `${business.url}/wspolpraca` },
 };
 
 const steps = [

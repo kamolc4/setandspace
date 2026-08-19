@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description:
     "Portfolio filmów kinematograficznych Set & Space dla nieruchomości, hoteli, architektury i wnętrz.",
   alternates: { canonical: `${business.url}/realizacje` },
+  openGraph: { url: `${business.url}/realizacje` },
 };
 
 export const dynamic = "force-dynamic";

@@ -2,19 +2,25 @@ import type { Metadata } from "next";
 import { business } from "@/data/business";
 import ContactForm from "@/components/ui/ContactForm";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Kontakt — napisz do Set & Space",
   description:
     "Masz projekt filmowy? Napisz do Set & Space. Odpiszę w ciągu jednego dnia roboczego.",
   alternates: { canonical: `${business.url}/kontakt` },
+  openGraph: { url: `${business.url}/kontakt` },
 };
 
 export default function KontaktPage() {
   return (
     <>
       <BreadcrumbJsonLd items={[{ label: "Kontakt", href: "/kontakt" }]} />
+      <FaqJsonLd faq={[
+        { question: "Jak szybko odpiszesz?", answer: "Odpisuję w ciągu jednego dnia roboczego." },
+        { question: "Gdzie realizujesz projekty?", answer: "Przede wszystkim w Warszawie, ale jestem otwarta na realizacje w innych miastach oraz na współpracę zagraniczną. Napisz do mnie. Omówimy szczegóły." },
+        { question: "Od czego zależy cena?", answer: "Od skali projektu, liczby dni nagrania, zakresu postprodukcji i oczekiwanych formatów. Wycena jest indywidualna." },
+      ]} />
 
       <div
         style={{

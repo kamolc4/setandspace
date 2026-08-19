@@ -8,11 +8,14 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 import type { JournalArticle } from "@/data/journal";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Poradniki — o filmie, przestrzeni i przygotowaniu do nagrania",
   description:
     "Set & Space Poradniki: praktyczne artykuły o przygotowaniu do nagrań, roli światła, filmach dla nieruchomości, hoteli i architektury.",
   alternates: { canonical: `${business.url}/poradniki` },
+  openGraph: { url: `${business.url}/poradniki` },
 };
 
 async function getPublishedArticles(): Promise<JournalArticle[]> {

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     "Set & Space tworzy krótkie filmy dla nieruchomości, butikowych hoteli, architektów, projektantów wnętrz i salonów meblowych. Sprawdź zakres usług.",
   alternates: { canonical: `${business.url}/uslugi` },
+  openGraph: { url: `${business.url}/uslugi` },
 };
 
 export default function UslugiPage() {

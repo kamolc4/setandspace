@@ -7,6 +7,7 @@ export function OrganizationJsonLd() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": business.url,
     name: business.name,
     url: business.url,
     description: business.description,
@@ -37,14 +38,6 @@ export function WebSiteJsonLd() {
     url: business.url,
     description: business.description,
     inLanguage: "pl",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${business.url}/poradniki?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 
   return (
