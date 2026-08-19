@@ -4,6 +4,8 @@ import { toggleProjectStatusAction } from "@/app/admin/_actions/portfolio";
 import { DeleteProjectButton } from "@/components/admin/DeleteProjectButton";
 import type { PortfolioProject, Status } from "@/generated/prisma/client";
 
+export const dynamic = "force-dynamic";
+
 async function getProjects() {
   try {
     const db = getPrisma();
