@@ -60,7 +60,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ============================================================
@@ -131,7 +131,7 @@ body {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--stone);
+  background: var(--color-stone);
   border-radius: 3px;
 }
 
@@ -221,9 +221,16 @@ img {
   line-height: 1.75;
 }
 
-.prose ul,
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.75rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-secondary);
+}
+
 .prose ol {
-  padding-left: 1.5rem;
+  list-style-type: decimal;
+  padding-left: 1.75rem;
   margin-bottom: 1.25rem;
   color: var(--text-secondary);
 }
@@ -232,6 +239,7 @@ img {
   margin-bottom: 0.4rem;
   font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
   line-height: 1.7;
+  padding-left: 0.25rem;
 }
 
 .prose strong {
@@ -248,6 +256,33 @@ img {
 
 .prose a:hover {
   text-decoration-color: var(--umber);
+}
+
+.prose em {
+  font-style: italic;
+}
+
+.prose code {
+  font-family: monospace;
+  font-size: 0.875em;
+  background-color: var(--surface-alt);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  color: var(--text-primary);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-stone);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
 }
 
 /* ============================================================

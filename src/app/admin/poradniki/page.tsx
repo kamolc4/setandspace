@@ -4,6 +4,8 @@ import { toggleStatusAction } from "@/app/admin/_actions/articles";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 import type { Article, Status } from "@/generated/prisma/client";
 
+export const dynamic = "force-dynamic";
+
 async function getArticles() {
   try {
     const db = getPrisma();
