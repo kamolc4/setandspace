@@ -9,4 +9,5 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Article'
+export type * from './models/PortfolioProject'
 export type * from './commonInputTypes'

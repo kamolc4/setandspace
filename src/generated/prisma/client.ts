@@ -46,3 +46,8 @@ export { Prisma }
  * 
  */
 export type Article = Prisma.ArticleModel
+/**
+ * Model PortfolioProject
+ * 
+ */
+export type PortfolioProject = Prisma.PortfolioProjectModel

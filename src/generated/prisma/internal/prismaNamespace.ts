@@ -397,7 +397,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Article: 'Article'
+  Article: 'Article',
+  PortfolioProject: 'PortfolioProject'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "article"
+    modelProps: "article" | "portfolioProject"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -491,6 +492,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PortfolioProject: {
+      payload: Prisma.$PortfolioProjectPayload<ExtArgs>
+      fields: Prisma.PortfolioProjectFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PortfolioProjectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PortfolioProjectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>
+        }
+        findFirst: {
+          args: Prisma.PortfolioProjectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PortfolioProjectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>
+        }
+        findMany: {
+          args: Prisma.PortfolioProjectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>[]
+        }
+        create: {
+          args: Prisma.PortfolioProjectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>
+        }
+        createMany: {
+          args: Prisma.PortfolioProjectCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PortfolioProjectCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>[]
+        }
+        delete: {
+          args: Prisma.PortfolioProjectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>
+        }
+        update: {
+          args: Prisma.PortfolioProjectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>
+        }
+        deleteMany: {
+          args: Prisma.PortfolioProjectDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PortfolioProjectUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PortfolioProjectUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>[]
+        }
+        upsert: {
+          args: Prisma.PortfolioProjectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PortfolioProjectPayload>
+        }
+        aggregate: {
+          args: Prisma.PortfolioProjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePortfolioProject>
+        }
+        groupBy: {
+          args: Prisma.PortfolioProjectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortfolioProjectGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PortfolioProjectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PortfolioProjectCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -553,6 +628,35 @@ export const ArticleScalarFieldEnum = {
 } as const
 
 export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
+
+
+export const PortfolioProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  shortDescription: 'shortDescription',
+  description: 'description',
+  status: 'status',
+  category: 'category',
+  location: 'location',
+  clientName: 'clientName',
+  videoUrl: 'videoUrl',
+  videoProvider: 'videoProvider',
+  videoId: 'videoId',
+  videoAspectRatio: 'videoAspectRatio',
+  posterImage: 'posterImage',
+  posterAlt: 'posterAlt',
+  featured: 'featured',
+  sortOrder: 'sortOrder',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  seoTitle: 'seoTitle',
+  seoDescription: 'seoDescription',
+  canonical: 'canonical'
+} as const
+
+export type PortfolioProjectScalarFieldEnum = (typeof PortfolioProjectScalarFieldEnum)[keyof typeof PortfolioProjectScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -666,6 +770,20 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'AspectRatio'
+ */
+export type EnumAspectRatioFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AspectRatio'>
+    
+
+
+/**
+ * Reference to a field of type 'AspectRatio[]'
+ */
+export type ListEnumAspectRatioFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AspectRatio[]'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -676,6 +794,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -830,6 +962,7 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   article?: Prisma.ArticleOmit
+  portfolioProject?: Prisma.PortfolioProjectOmit
 }
 
 /* Types for Logging */

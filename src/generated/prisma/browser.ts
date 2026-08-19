@@ -22,3 +22,8 @@ export * from './enums';
  * 
  */
 export type Article = Prisma.ArticleModel
+/**
+ * Model PortfolioProject
+ * 
+ */
+export type PortfolioProject = Prisma.PortfolioProjectModel

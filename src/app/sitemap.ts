@@ -69,5 +69,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
   }
 
-  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...articleRoutes];
+  // DB portfolio projects (PUBLISHED)
+  let dbProjectRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const db = getPrisma();
+    const rows = await db.portfolioProject.findMany({
+      where: { status: "PUBLISHED" },
+      select: { slug: true, publishedAt: true, updatedAt: true },
+    });
+    dbProjectRoutes = rows.map((p) => ({
+      url: `${BASE}/realizacje/${p.slug}`,
+      lastModified: (p.updatedAt ?? p.publishedAt ?? new Date()).toISOString().slice(0, 10),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    }));
+  } catch {
+    // DB unavailable — static project routes already included above
+  }
+
+  // Merge: DB routes take precedence over static routes for same slug
+  const dbSlugs = new Set(dbProjectRoutes.map((r) => r.url));
+  const filteredStaticProjectRoutes = projectRoutes.filter((r) => !dbSlugs.has(r.url));
+
+  return [...staticRoutes, ...serviceRoutes, ...filteredStaticProjectRoutes, ...dbProjectRoutes, ...articleRoutes];
 }

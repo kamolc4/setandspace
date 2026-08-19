@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Article: 'Article'
+  Article: 'Article',
+  PortfolioProject: 'PortfolioProject'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -93,6 +94,35 @@ export const ArticleScalarFieldEnum = {
 } as const
 
 export type ArticleScalarFieldEnum = (typeof ArticleScalarFieldEnum)[keyof typeof ArticleScalarFieldEnum]
+
+
+export const PortfolioProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  shortDescription: 'shortDescription',
+  description: 'description',
+  status: 'status',
+  category: 'category',
+  location: 'location',
+  clientName: 'clientName',
+  videoUrl: 'videoUrl',
+  videoProvider: 'videoProvider',
+  videoId: 'videoId',
+  videoAspectRatio: 'videoAspectRatio',
+  posterImage: 'posterImage',
+  posterAlt: 'posterAlt',
+  featured: 'featured',
+  sortOrder: 'sortOrder',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  seoTitle: 'seoTitle',
+  seoDescription: 'seoDescription',
+  canonical: 'canonical'
+} as const
+
+export type PortfolioProjectScalarFieldEnum = (typeof PortfolioProjectScalarFieldEnum)[keyof typeof PortfolioProjectScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -15,3 +15,12 @@ export const Status = {
 } as const
 
 export type Status = (typeof Status)[keyof typeof Status]
+
+
+export const AspectRatio = {
+  PORTRAIT: 'PORTRAIT',
+  LANDSCAPE: 'LANDSCAPE',
+  SQUARE: 'SQUARE'
+} as const
+
+export type AspectRatio = (typeof AspectRatio)[keyof typeof AspectRatio]

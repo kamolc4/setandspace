@@ -33,3 +33,35 @@ enum Status {
   DRAFT
   PUBLISHED
 }
+
+enum AspectRatio {
+  PORTRAIT
+  LANDSCAPE
+  SQUARE
+}
+
+model PortfolioProject {
+  id               String      @id @default(cuid())
+  title            String
+  slug             String      @unique
+  shortDescription String      @default("")
+  description      String?
+  status           Status      @default(DRAFT)
+  category         String      @default("")
+  location         String?
+  clientName       String?
+  videoUrl         String?
+  videoProvider    String?
+  videoId          String?
+  videoAspectRatio AspectRatio @default(PORTRAIT)
+  posterImage      String?
+  posterAlt        String?
+  featured         Boolean     @default(false)
+  sortOrder        Int         @default(0)
+  publishedAt      DateTime?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  seoTitle         String?
+  seoDescription   String?
+  canonical        String?
+}

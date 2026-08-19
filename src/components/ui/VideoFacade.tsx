@@ -10,7 +10,7 @@ interface VideoFacadeProps {
   posterSrc?: string;
   posterAlt: string;
   title: string;
-  aspectRatio?: "16/9" | "4/3" | "1/1";
+  aspectRatio?: "16/9" | "9/16" | "4/3" | "1/1";
   className?: string;
 }
 
@@ -39,11 +39,10 @@ export default function VideoFacade({
   const hasVideo = provider !== "none" && videoId !== null;
 
   const paddingPercent =
-    aspectRatio === "16/9"
-      ? "56.25%"
-      : aspectRatio === "4/3"
-      ? "75%"
-      : "100%";
+    aspectRatio === "16/9" ? "56.25%" :
+    aspectRatio === "9/16" ? "177.78%" :
+    aspectRatio === "4/3"  ? "75%" :
+    "100%";
 
   if (active && hasVideo) {
     return (
