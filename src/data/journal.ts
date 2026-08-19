@@ -2,6 +2,7 @@ export interface JournalArticle {
   slug: string;
   title: string;
   excerpt: string;
+  quickAnswer?: string | null;
   content: string;
   author: string | null;
   publishDate: string; // ISO 8601

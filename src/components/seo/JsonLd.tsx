@@ -83,19 +83,22 @@ export function BreadcrumbJsonLd({
 }
 
 export function ArticleJsonLd({ article }: { article: JournalArticle }) {
-  const schema = {
+  const articleUrl = `${business.url}/poradniki/${article.slug}`;
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: article.title,
     description: article.excerpt,
-    url: `${business.url}/poradniki/${article.slug}`,
+    url: articleUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
     datePublished: article.publishDate,
     ...(article.modifiedDate && { dateModified: article.modifiedDate }),
-    author: {
-      "@type": "Organization",
-      name: business.name,
-      url: business.url,
-    },
+    author: article.author
+      ? { "@type": "Person", name: article.author }
+      : { "@type": "Organization", name: business.name, url: business.url },
     publisher: {
       "@type": "Organization",
       name: business.name,
@@ -103,7 +106,9 @@ export function ArticleJsonLd({ article }: { article: JournalArticle }) {
     },
     inLanguage: "pl",
     ...(article.heroImage && {
-      image: `${business.url}${article.heroImage}`,
+      image: article.heroImage.startsWith("http")
+        ? article.heroImage
+        : `${business.url}${article.heroImage}`,
     }),
   };
 

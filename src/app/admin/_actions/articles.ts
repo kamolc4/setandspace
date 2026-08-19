@@ -17,6 +17,7 @@ const ArticleSchema = z.object({
   title: z.string().min(1),
   slug: z.string().min(1).regex(/^[a-z0-9-]+$/, "Slug może zawierać tylko małe litery, cyfry i myślniki"),
   excerpt: z.string().default(""),
+  quickAnswer: z.string().optional(),
   content: z.string().default(""),
   category: z.string().default(""),
   author: z.string().optional(),
@@ -46,6 +47,7 @@ function extractFormData(formData: FormData): Record<string, unknown> {
     title: formData.get("title") as string,
     slug: formData.get("slug") as string,
     excerpt: formData.get("excerpt") as string ?? "",
+    quickAnswer: (formData.get("quickAnswer") as string | null) || undefined,
     content: formData.get("content") as string ?? "",
     category: formData.get("category") as string ?? "",
     author: (formData.get("author") as string | null) || undefined,
@@ -77,7 +79,7 @@ export async function createArticleAction(
   const data = parsed.data;
 
   if (data.status === "PUBLISHED" && (!data.seoTitle || !data.seoDescription || !data.excerpt)) {
-    return { error: "Przed publikacją uzupełnij excerpt, SEO title i SEO description." };
+    return { error: "Przed publikacją uzupełnij krótki opis, tytuł SEO i opis meta." };
   }
 
   const db = getPrisma();
@@ -91,6 +93,7 @@ export async function createArticleAction(
       title: data.title,
       slug: data.slug,
       excerpt: data.excerpt,
+      quickAnswer: data.quickAnswer ?? null,
       content: data.content,
       category: data.category,
       author: data.author ?? null,
@@ -133,7 +136,7 @@ export async function updateArticleAction(
   const data = parsed.data;
 
   if (data.status === "PUBLISHED" && (!data.seoTitle || !data.seoDescription || !data.excerpt)) {
-    return { error: "Przed publikacją uzupełnij excerpt, SEO title i SEO description." };
+    return { error: "Przed publikacją uzupełnij krótki opis, tytuł SEO i opis meta." };
   }
 
   const db = getPrisma();
@@ -153,6 +156,7 @@ export async function updateArticleAction(
       title: data.title,
       slug: data.slug,
       excerpt: data.excerpt,
+      quickAnswer: data.quickAnswer ?? null,
       content: data.content,
       category: data.category,
       author: data.author ?? null,
@@ -195,12 +199,7 @@ export async function toggleStatusAction(id: string, status: Status): Promise<vo
   const db = getPrisma();
   const article = await db.article.update({
     where: { id },
-    data: {
-      status,
-      publishedAt: status === "PUBLISHED"
-        ? undefined
-        : undefined,
-    },
+    data: { status },
   });
 
   if (status === "PUBLISHED" && !article.publishedAt) {

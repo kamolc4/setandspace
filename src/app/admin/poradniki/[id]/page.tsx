@@ -24,24 +24,23 @@ export default async function EditPoradnikPage({ params }: Props) {
   if (!article) notFound();
 
   const boundUpdate = updateArticleAction.bind(null, id);
-
   const isPublished = article.status === "PUBLISHED";
 
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
-        <div>
-          <Link href="/admin/poradniki" style={{ fontSize: "0.875rem", color: "#6b7280", textDecoration: "none" }}>
+        <div style={{ minWidth: 0 }}>
+          <Link href="/admin/poradniki" style={{ fontSize: "0.875rem", color: "#765C49", textDecoration: "none" }}>
             ← Poradniki
           </Link>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#111827", marginTop: "0.5rem" }}>
+          <h1 style={{ fontSize: "1.375rem", fontWeight: 700, color: "#1F1916", marginTop: "0.5rem", wordBreak: "break-word" }}>
             Edycja: {article.title}
           </h1>
           {article.slug && (
-            <p style={{ fontSize: "0.8125rem", color: "#9ca3af", marginTop: "0.25rem" }}>
+            <p style={{ fontSize: "0.8125rem", color: "#8C7B6E", marginTop: "0.25rem", wordBreak: "break-all" }}>
               /poradniki/{article.slug}
               {isPublished && (
-                <Link href={`/poradniki/${article.slug}`} target="_blank" style={{ color: "#1d4ed8", marginLeft: "0.75rem" }}>
+                <Link href={`/poradniki/${article.slug}`} target="_blank" style={{ color: "#765C49", marginLeft: "0.75rem" }}>
                   Otwórz ↗
                 </Link>
               )}
@@ -49,11 +48,11 @@ export default async function EditPoradnikPage({ params }: Props) {
           )}
         </div>
 
-        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", flexShrink: 0 }}>
           <Link
             href={`/poradniki/${article.slug}`}
             target="_blank"
-            style={{ padding: "0.5rem 1rem", border: "1px solid #d1d5db", borderRadius: "6px", color: "#374151", fontSize: "0.875rem", textDecoration: "none" }}
+            style={{ padding: "0.5rem 1rem", border: "1px solid #C4B5A5", borderRadius: "6px", color: "#1F1916", fontSize: "0.875rem", textDecoration: "none", whiteSpace: "nowrap" }}
           >
             Podgląd ↗
           </Link>
@@ -63,7 +62,7 @@ export default async function EditPoradnikPage({ params }: Props) {
             const next: Status = isPublished ? "DRAFT" : "PUBLISHED";
             await toggleStatusAction(id, next);
           }}>
-            <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: isPublished ? "#fff7ed" : "#f0fdf4", color: isPublished ? "#c2410c" : "#166534", border: "1px solid", borderColor: isPublished ? "#fed7aa" : "#bbf7d0", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>
+            <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: isPublished ? "#fff7ed" : "#f0fdf4", color: isPublished ? "#c2410c" : "#166534", border: "1px solid", borderColor: isPublished ? "#fed7aa" : "#bbf7d0", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
               {isPublished ? "Cofnij do draftu" : "Opublikuj"}
             </button>
           </form>
@@ -78,13 +77,7 @@ export default async function EditPoradnikPage({ params }: Props) {
         </div>
       )}
 
-      {article.status === "PUBLISHED" && article.slug !== article.slug && (
-        <div style={{ backgroundColor: "#fff7ed", border: "1px solid #fed7aa", borderRadius: "8px", padding: "0.75rem 1rem", marginBottom: "1.5rem", fontSize: "0.875rem", color: "#c2410c" }}>
-          ⚠ Zmiana slug opublikowanego artykułu może wpłynąć na SEO. Rozważ dodanie przekierowania.
-        </div>
-      )}
-
-      <div style={{ backgroundColor: "#fff", border: "1px solid #e5e7eb", borderRadius: "10px", padding: "2rem" }}>
+      <div style={{ backgroundColor: "#fff", border: "1px solid #C4B5A5", borderRadius: "10px", padding: "1.5rem" }}>
         <ArticleForm action={boundUpdate} article={article} submitLabel="Zapisz zmiany" />
       </div>
     </div>

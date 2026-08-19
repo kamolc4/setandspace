@@ -7,6 +7,7 @@ export function dbToJournalArticle(a: Article): JournalArticle {
     slug: a.slug,
     title: a.title,
     excerpt: a.excerpt,
+    quickAnswer: a.quickAnswer ?? null,
     content: a.content,
     author: a.author,
     publishDate: toDateStr(a.publishedAt ?? a.createdAt),

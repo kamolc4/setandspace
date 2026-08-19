@@ -29,6 +29,7 @@ export type ArticleMinAggregateOutputType = {
   title: string | null
   slug: string | null
   excerpt: string | null
+  quickAnswer: string | null
   content: string | null
   status: $Enums.Status | null
   category: string | null
@@ -49,6 +50,7 @@ export type ArticleMaxAggregateOutputType = {
   title: string | null
   slug: string | null
   excerpt: string | null
+  quickAnswer: string | null
   content: string | null
   status: $Enums.Status | null
   category: string | null
@@ -69,6 +71,7 @@ export type ArticleCountAggregateOutputType = {
   title: number
   slug: number
   excerpt: number
+  quickAnswer: number
   content: number
   status: number
   category: number
@@ -92,6 +95,7 @@ export type ArticleMinAggregateInputType = {
   title?: true
   slug?: true
   excerpt?: true
+  quickAnswer?: true
   content?: true
   status?: true
   category?: true
@@ -112,6 +116,7 @@ export type ArticleMaxAggregateInputType = {
   title?: true
   slug?: true
   excerpt?: true
+  quickAnswer?: true
   content?: true
   status?: true
   category?: true
@@ -132,6 +137,7 @@ export type ArticleCountAggregateInputType = {
   title?: true
   slug?: true
   excerpt?: true
+  quickAnswer?: true
   content?: true
   status?: true
   category?: true
@@ -226,6 +232,7 @@ export type ArticleGroupByOutputType = {
   title: string
   slug: string
   excerpt: string
+  quickAnswer: string | null
   content: string
   status: $Enums.Status
   category: string
@@ -268,6 +275,7 @@ export type ArticleWhereInput = {
   title?: Prisma.StringFilter<"Article"> | string
   slug?: Prisma.StringFilter<"Article"> | string
   excerpt?: Prisma.StringFilter<"Article"> | string
+  quickAnswer?: Prisma.StringNullableFilter<"Article"> | string | null
   content?: Prisma.StringFilter<"Article"> | string
   status?: Prisma.EnumStatusFilter<"Article"> | $Enums.Status
   category?: Prisma.StringFilter<"Article"> | string
@@ -289,6 +297,7 @@ export type ArticleOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   excerpt?: Prisma.SortOrder
+  quickAnswer?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -313,6 +322,7 @@ export type ArticleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ArticleWhereInput | Prisma.ArticleWhereInput[]
   title?: Prisma.StringFilter<"Article"> | string
   excerpt?: Prisma.StringFilter<"Article"> | string
+  quickAnswer?: Prisma.StringNullableFilter<"Article"> | string | null
   content?: Prisma.StringFilter<"Article"> | string
   status?: Prisma.EnumStatusFilter<"Article"> | $Enums.Status
   category?: Prisma.StringFilter<"Article"> | string
@@ -334,6 +344,7 @@ export type ArticleOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   excerpt?: Prisma.SortOrder
+  quickAnswer?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -361,6 +372,7 @@ export type ArticleScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"Article"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Article"> | string
   excerpt?: Prisma.StringWithAggregatesFilter<"Article"> | string
+  quickAnswer?: Prisma.StringNullableWithAggregatesFilter<"Article"> | string | null
   content?: Prisma.StringWithAggregatesFilter<"Article"> | string
   status?: Prisma.EnumStatusWithAggregatesFilter<"Article"> | $Enums.Status
   category?: Prisma.StringWithAggregatesFilter<"Article"> | string
@@ -382,6 +394,7 @@ export type ArticleCreateInput = {
   title: string
   slug: string
   excerpt?: string
+  quickAnswer?: string | null
   content?: string
   status?: $Enums.Status
   category?: string
@@ -403,6 +416,7 @@ export type ArticleUncheckedCreateInput = {
   title: string
   slug: string
   excerpt?: string
+  quickAnswer?: string | null
   content?: string
   status?: $Enums.Status
   category?: string
@@ -424,6 +438,7 @@ export type ArticleUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.StringFieldUpdateOperationsInput | string
+  quickAnswer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -445,6 +460,7 @@ export type ArticleUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.StringFieldUpdateOperationsInput | string
+  quickAnswer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -466,6 +482,7 @@ export type ArticleCreateManyInput = {
   title: string
   slug: string
   excerpt?: string
+  quickAnswer?: string | null
   content?: string
   status?: $Enums.Status
   category?: string
@@ -487,6 +504,7 @@ export type ArticleUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.StringFieldUpdateOperationsInput | string
+  quickAnswer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -508,6 +526,7 @@ export type ArticleUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   excerpt?: Prisma.StringFieldUpdateOperationsInput | string
+  quickAnswer?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   category?: Prisma.StringFieldUpdateOperationsInput | string
@@ -529,6 +548,7 @@ export type ArticleCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   excerpt?: Prisma.SortOrder
+  quickAnswer?: Prisma.SortOrder
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -550,6 +570,7 @@ export type ArticleMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   excerpt?: Prisma.SortOrder
+  quickAnswer?: Prisma.SortOrder
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -570,6 +591,7 @@ export type ArticleMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   excerpt?: Prisma.SortOrder
+  quickAnswer?: Prisma.SortOrder
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   category?: Prisma.SortOrder
@@ -589,12 +611,12 @@ export type StringFieldUpdateOperationsInput = {
   set?: string
 }
 
-export type EnumStatusFieldUpdateOperationsInput = {
-  set?: $Enums.Status
-}
-
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type EnumStatusFieldUpdateOperationsInput = {
+  set?: $Enums.Status
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -616,6 +638,7 @@ export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   title?: boolean
   slug?: boolean
   excerpt?: boolean
+  quickAnswer?: boolean
   content?: boolean
   status?: boolean
   category?: boolean
@@ -637,6 +660,7 @@ export type ArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   slug?: boolean
   excerpt?: boolean
+  quickAnswer?: boolean
   content?: boolean
   status?: boolean
   category?: boolean
@@ -658,6 +682,7 @@ export type ArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   title?: boolean
   slug?: boolean
   excerpt?: boolean
+  quickAnswer?: boolean
   content?: boolean
   status?: boolean
   category?: boolean
@@ -679,6 +704,7 @@ export type ArticleSelectScalar = {
   title?: boolean
   slug?: boolean
   excerpt?: boolean
+  quickAnswer?: boolean
   content?: boolean
   status?: boolean
   category?: boolean
@@ -695,7 +721,7 @@ export type ArticleSelectScalar = {
   relatedService?: boolean
 }
 
-export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "excerpt" | "content" | "status" | "category" | "author" | "publishedAt" | "createdAt" | "updatedAt" | "seoTitle" | "seoDescription" | "canonical" | "ogImage" | "featured" | "faq" | "relatedService", ExtArgs["result"]["article"]>
+export type ArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "excerpt" | "quickAnswer" | "content" | "status" | "category" | "author" | "publishedAt" | "createdAt" | "updatedAt" | "seoTitle" | "seoDescription" | "canonical" | "ogImage" | "featured" | "faq" | "relatedService", ExtArgs["result"]["article"]>
 
 export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Article"
@@ -705,6 +731,7 @@ export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     title: string
     slug: string
     excerpt: string
+    quickAnswer: string | null
     content: string
     status: $Enums.Status
     category: string
@@ -1146,6 +1173,7 @@ export interface ArticleFieldRefs {
   readonly title: Prisma.FieldRef<"Article", 'String'>
   readonly slug: Prisma.FieldRef<"Article", 'String'>
   readonly excerpt: Prisma.FieldRef<"Article", 'String'>
+  readonly quickAnswer: Prisma.FieldRef<"Article", 'String'>
   readonly content: Prisma.FieldRef<"Article", 'String'>
   readonly status: Prisma.FieldRef<"Article", 'Status'>
   readonly category: Prisma.FieldRef<"Article", 'String'>
