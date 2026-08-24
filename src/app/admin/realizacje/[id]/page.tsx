@@ -63,7 +63,7 @@ export default async function EditRealizacjaPage({ params }: Props) {
             await toggleProjectStatusAction(id, next);
           }}>
             <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: isPublished ? "#fff7ed" : "#f0fdf4", color: isPublished ? "#c2410c" : "#166534", border: "1px solid", borderColor: isPublished ? "#fed7aa" : "#bbf7d0", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
-              {isPublished ? "Cofnij do draftu" : "Opublikuj"}
+              {isPublished ? "Cofnij do szkicu" : "Opublikuj"}
             </button>
           </form>
 

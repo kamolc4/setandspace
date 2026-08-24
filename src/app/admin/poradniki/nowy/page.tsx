@@ -15,7 +15,7 @@ export default function NowyPoradnikPage() {
       </div>
 
       <div style={{ backgroundColor: "#fff", border: "1px solid #C4B5A5", borderRadius: "10px", padding: "1.5rem" }}>
-        <ArticleForm action={createArticleAction} submitLabel="Zapisz draft" />
+        <ArticleForm action={createArticleAction} />
       </div>
     </div>
   );

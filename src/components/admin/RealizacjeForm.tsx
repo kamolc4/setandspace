@@ -377,7 +377,7 @@ export function RealizacjeForm({ action, project, submitLabel = "Zapisz" }: Real
           <div style={FIELD}>
             <label style={LABEL}>Status</label>
             <select name="status" value={status} onChange={(e) => setStatus(e.target.value as "DRAFT" | "PUBLISHED")} style={INPUT}>
-              <option value="DRAFT">Draft (roboczy)</option>
+              <option value="DRAFT">Szkic (roboczy)</option>
               <option value="PUBLISHED">Opublikowana</option>
             </select>
             <p style={HINT}>{status === "DRAFT" ? "Realizacja nie jest widoczna publicznie." : "Realizacja jest widoczna na stronie."}</p>
@@ -407,7 +407,7 @@ export function RealizacjeForm({ action, project, submitLabel = "Zapisz" }: Real
           </button>
           {status === "DRAFT" && (
             <p style={{ fontSize: "0.8125rem", color: C.textMut, alignSelf: "center", margin: 0 }}>
-              Realizacja zostanie zapisana jako draft.
+              Realizacja zostanie zapisana jako szkic.
             </p>
           )}
         </div>

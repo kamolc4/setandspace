@@ -114,7 +114,7 @@ export default async function EditPoradnikPage({ params }: Props) {
       )}
 
       <div style={{ backgroundColor: "#fff", border: "1px solid #C4B5A5", borderRadius: "10px", padding: "1.5rem" }}>
-        <ArticleForm action={boundUpdate} article={article} submitLabel="Zapisz zmiany" />
+        <ArticleForm action={boundUpdate} article={article} />
       </div>
     </div>
   );

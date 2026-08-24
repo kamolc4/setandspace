@@ -17,7 +17,7 @@ async function getProjects() {
 
 const STATUS_BADGE = {
   PUBLISHED: { bg: "#dcfce7", color: "#166534", label: "Opublikowana" },
-  DRAFT: { bg: "#E8DED2", color: "#6B5040", label: "Draft" },
+  DRAFT: { bg: "#E8DED2", color: "#6B5040", label: "Szkic" },
 };
 
 const AR_LABEL: Record<string, string> = {
@@ -147,7 +147,7 @@ export default async function AdminRealizacjePage() {
                       await toggleProjectStatusAction(p.id, next);
                     }}>
                       <button type="submit" style={{ padding: "0.4rem 0.875rem", backgroundColor: p.status === "PUBLISHED" ? "#fff7ed" : "#f0fdf4", color: p.status === "PUBLISHED" ? "#c2410c" : "#166534", border: "1px solid", borderColor: p.status === "PUBLISHED" ? "#fed7aa" : "#bbf7d0", borderRadius: "5px", fontSize: "0.8125rem", cursor: "pointer" }}>
-                        {p.status === "PUBLISHED" ? "Cofnij do draftu" : "Opublikuj"}
+                        {p.status === "PUBLISHED" ? "Cofnij do szkicu" : "Opublikuj"}
                       </button>
                     </form>
                     <DeleteProjectButton id={p.id} title={p.title} small />

@@ -13,7 +13,6 @@ type PubStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED";
 interface ArticleFormProps {
   action: (prev: FormState, formData: FormData) => Promise<FormState>;
   article?: Article | null;
-  submitLabel?: string;
 }
 
 // ── Palette ──────────────────────────────────────────────────────────────────
@@ -192,7 +191,7 @@ function getInitialTime(article?: Article | null): string {
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
-export function ArticleForm({ action, article, submitLabel = "Zapisz" }: ArticleFormProps) {
+export function ArticleForm({ action, article }: ArticleFormProps) {
   const [state, formAction, pending] = useActionState(action, null);
 
   const [tab, setTab] = useState<"form" | "paste">("form");
@@ -273,6 +272,11 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
   const previewTitle = seoTitle || title || "Tytuł poradnika";
   const previewSlug = slug || "adres-url";
   const previewDesc = seoDescription || excerpt || "Opis artykułu pojawi się tutaj.";
+
+  const submitLabel =
+    pubStatus === "SCHEDULED" ? "Zaplanuj publikację"
+    : pubStatus === "PUBLISHED" ? "Opublikuj teraz"
+    : "Zapisz jako szkic";
 
   // Tomorrow date for min attribute (Warsaw, close enough)
   const tomorrow = new Date();
