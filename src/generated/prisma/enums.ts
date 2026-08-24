@@ -11,6 +11,7 @@
 
 export const Status = {
   DRAFT: 'DRAFT',
+  SCHEDULED: 'SCHEDULED',
   PUBLISHED: 'PUBLISHED'
 } as const
 

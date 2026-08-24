@@ -2,9 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPrisma } from "@/lib/prisma";
 import { ArticleForm } from "@/components/admin/ArticleForm";
-import { updateArticleAction, toggleStatusAction } from "@/app/admin/_actions/articles";
+import { updateArticleAction, cancelScheduleAction, publishNowAction } from "@/app/admin/_actions/articles";
 import { DeleteButton } from "@/components/admin/DeleteButton";
-import type { Status } from "@/generated/prisma/client";
+import { formatWarsawDateTime } from "@/lib/timezone";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -25,6 +25,7 @@ export default async function EditPoradnikPage({ params }: Props) {
 
   const boundUpdate = updateArticleAction.bind(null, id);
   const isPublished = article.status === "PUBLISHED";
+  const isScheduled = article.status === "SCHEDULED";
 
   return (
     <div>
@@ -50,22 +51,46 @@ export default async function EditPoradnikPage({ params }: Props) {
 
         <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", flexShrink: 0 }}>
           <Link
-            href={`/poradniki/${article.slug}`}
+            href={`/admin/podglad/${article.id}`}
             target="_blank"
             style={{ padding: "0.5rem 1rem", border: "1px solid #C4B5A5", borderRadius: "6px", color: "#1F1916", fontSize: "0.875rem", textDecoration: "none", whiteSpace: "nowrap" }}
           >
             Podgląd ↗
           </Link>
 
-          <form action={async () => {
-            "use server";
-            const next: Status = isPublished ? "DRAFT" : "PUBLISHED";
-            await toggleStatusAction(id, next);
-          }}>
-            <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: isPublished ? "#fff7ed" : "#f0fdf4", color: isPublished ? "#c2410c" : "#166534", border: "1px solid", borderColor: isPublished ? "#fed7aa" : "#bbf7d0", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
-              {isPublished ? "Cofnij do draftu" : "Opublikuj"}
-            </button>
-          </form>
+          {isScheduled && (
+            <form action={async () => {
+              "use server";
+              await publishNowAction(id);
+            }}>
+              <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: "#f0fdf4", color: "#166534", border: "1px solid #bbf7d0", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+                Opublikuj teraz
+              </button>
+            </form>
+          )}
+
+          {isScheduled && (
+            <form action={async () => {
+              "use server";
+              await cancelScheduleAction(id);
+            }}>
+              <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: "#fff7ed", color: "#c2410c", border: "1px solid #fed7aa", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+                Anuluj planowanie
+              </button>
+            </form>
+          )}
+
+          {isPublished && (
+            <form action={async () => {
+              "use server";
+              const { toggleStatusAction } = await import("@/app/admin/_actions/articles");
+              await toggleStatusAction(id, "DRAFT");
+            }}>
+              <button type="submit" style={{ padding: "0.5rem 1rem", backgroundColor: "#fff7ed", color: "#c2410c", border: "1px solid #fed7aa", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" }}>
+                Cofnij do szkicu
+              </button>
+            </form>
+          )}
 
           <DeleteButton id={id} title={article.title} />
         </div>
@@ -74,6 +99,17 @@ export default async function EditPoradnikPage({ params }: Props) {
       {isPublished && (
         <div style={{ backgroundColor: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "8px", padding: "0.75rem 1rem", marginBottom: "1.5rem", fontSize: "0.875rem", color: "#166534" }}>
           ✓ Ten artykuł jest opublikowany.
+          {article.publishedAt && (
+            <span style={{ marginLeft: "0.75rem", color: "#166534", opacity: 0.8 }}>
+              Opublikowano: {formatWarsawDateTime(article.publishedAt)}
+            </span>
+          )}
+        </div>
+      )}
+
+      {isScheduled && article.publishedAt && (
+        <div style={{ backgroundColor: "#1F1916", color: "#F7F3EE", borderRadius: "8px", padding: "0.75rem 1rem", marginBottom: "1.5rem", fontSize: "0.875rem" }}>
+          ⏱ Artykuł zaplanowany do publikacji: <strong>{formatWarsawDateTime(article.publishedAt)}</strong> (czas warszawski)
         </div>
       )}
 

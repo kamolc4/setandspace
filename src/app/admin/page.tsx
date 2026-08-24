@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPrisma } from "@/lib/prisma";
+import { formatWarsawDateTime } from "@/lib/timezone";
 
 export const dynamic = "force-dynamic";
 
@@ -7,26 +8,47 @@ async function getStats() {
   try {
     const db = getPrisma();
     const [
-      articlesPublished, articlesDraft,
+      articlesPublished, articlesScheduled, articlesDraft,
       projectsPublished, projectsDraft,
-      latestArticles, latestProjects,
+      latestArticles, latestProjects, upcomingScheduled,
     ] = await Promise.all([
       db.article.count({ where: { status: "PUBLISHED" } }),
+      db.article.count({ where: { status: "SCHEDULED" } }),
       db.article.count({ where: { status: "DRAFT" } }),
       db.portfolioProject.count({ where: { status: "PUBLISHED" } }),
       db.portfolioProject.count({ where: { status: "DRAFT" } }),
-      db.article.findMany({ orderBy: { updatedAt: "desc" }, take: 4, select: { id: true, title: true, slug: true, status: true, updatedAt: true } }),
-      db.portfolioProject.findMany({ orderBy: { updatedAt: "desc" }, take: 4, select: { id: true, title: true, slug: true, status: true, updatedAt: true } }),
+      db.article.findMany({
+        orderBy: { updatedAt: "desc" },
+        take: 4,
+        select: { id: true, title: true, slug: true, status: true, updatedAt: true, publishedAt: true },
+      }),
+      db.portfolioProject.findMany({
+        orderBy: { updatedAt: "desc" },
+        take: 4,
+        select: { id: true, title: true, slug: true, status: true, updatedAt: true },
+      }),
+      db.article.findMany({
+        where: { status: "SCHEDULED", publishedAt: { gt: new Date() } },
+        orderBy: { publishedAt: "asc" },
+        take: 5,
+        select: { id: true, title: true, publishedAt: true },
+      }),
     ]);
-    return { articlesPublished, articlesDraft, projectsPublished, projectsDraft, latestArticles, latestProjects };
+
+    return { articlesPublished, articlesScheduled, articlesDraft, projectsPublished, projectsDraft, latestArticles, latestProjects, upcomingScheduled };
   } catch {
-    return { articlesPublished: 0, articlesDraft: 0, projectsPublished: 0, projectsDraft: 0, latestArticles: [], latestProjects: [] };
+    return {
+      articlesPublished: 0, articlesScheduled: 0, articlesDraft: 0,
+      projectsPublished: 0, projectsDraft: 0,
+      latestArticles: [], latestProjects: [], upcomingScheduled: [],
+    };
   }
 }
 
-const STATUS_BADGE = {
+const STATUS_BADGE: Record<string, { bg: string; color: string; label: string }> = {
   PUBLISHED: { bg: "#dcfce7", color: "#166534", label: "Opublikowany" },
-  DRAFT: { bg: "#E8DED2", color: "#6B5040", label: "Draft" },
+  SCHEDULED: { bg: "#1F1916", color: "#F7F3EE", label: "Zaplanowany" },
+  DRAFT: { bg: "#E8DED2", color: "#6B5040", label: "Szkic" },
 };
 
 function formatDate(d: Date) {
@@ -34,13 +56,14 @@ function formatDate(d: Date) {
 }
 
 export default async function AdminDashboard() {
-  const { articlesPublished, articlesDraft, projectsPublished, projectsDraft, latestArticles, latestProjects } = await getStats();
+  const { articlesPublished, articlesScheduled, articlesDraft, projectsPublished, projectsDraft, latestArticles, latestProjects, upcomingScheduled } = await getStats();
 
-  const stats = [
+  const articleStats = [
     { label: "Poradniki — opublikowane", value: articlesPublished, color: "#166534" },
-    { label: "Poradniki — drafty", value: articlesDraft, color: "#6B5040" },
+    { label: "Poradniki — zaplanowane", value: articlesScheduled, color: "#1F1916" },
+    { label: "Poradniki — szkice", value: articlesDraft, color: "#6B5040" },
     { label: "Realizacje — opublikowane", value: projectsPublished, color: "#166534" },
-    { label: "Realizacje — drafty", value: projectsDraft, color: "#6B5040" },
+    { label: "Realizacje — szkice", value: projectsDraft, color: "#6B5040" },
   ];
 
   return (
@@ -49,14 +72,51 @@ export default async function AdminDashboard() {
         Dashboard
       </h1>
 
+      {/* Stats */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: "1rem", marginBottom: "2.5rem" }}>
-        {stats.map((stat) => (
+        {articleStats.map((stat) => (
           <div key={stat.label} style={{ backgroundColor: "#fff", border: "1px solid #C4B5A5", borderRadius: "10px", padding: "1.25rem 1.5rem" }}>
             <p style={{ fontSize: "0.75rem", color: "#8C7B6E", marginBottom: "0.375rem", lineHeight: 1.3 }}>{stat.label}</p>
             <p style={{ fontSize: "2rem", fontWeight: 700, color: stat.color }}>{stat.value}</p>
           </div>
         ))}
       </div>
+
+      {/* Upcoming scheduled */}
+      {upcomingScheduled.length > 0 && (
+        <div style={{ marginBottom: "2rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}>
+            <h2 style={{ fontSize: "1rem", fontWeight: 600, color: "#1F1916" }}>Najbliższe publikacje</h2>
+            <Link href="/admin/planer" style={{ fontSize: "0.875rem", color: "#765C49", textDecoration: "none" }}>
+              Zobacz planer →
+            </Link>
+          </div>
+          <div style={{ backgroundColor: "#1F1916", borderRadius: "10px", overflow: "hidden" }}>
+            {upcomingScheduled.map((a, i) => (
+              <div key={a.id} style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "0.75rem 1rem",
+                borderTop: i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)",
+                gap: "1rem", flexWrap: "wrap",
+              }}>
+                <div style={{ minWidth: 0 }}>
+                  <Link href={`/admin/poradniki/${a.id}`} style={{ color: "#F7F3EE", textDecoration: "none", fontWeight: 500, fontSize: "0.875rem", display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {a.title}
+                  </Link>
+                  {a.publishedAt && (
+                    <p style={{ fontSize: "0.75rem", color: "rgba(247,243,238,0.55)", marginTop: "0.1rem" }}>
+                      {formatWarsawDateTime(a.publishedAt)}
+                    </p>
+                  )}
+                </div>
+                <span style={{ backgroundColor: "rgba(255,255,255,0.1)", color: "#F7F3EE", padding: "0.2rem 0.6rem", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0 }}>
+                  Zaplanowany
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Ostatnie poradniki */}
       <div style={{ marginBottom: "2rem" }}>
@@ -74,16 +134,20 @@ export default async function AdminDashboard() {
             </p>
           ) : (
             latestArticles.map((a, i) => {
-              const badge = STATUS_BADGE[a.status as keyof typeof STATUS_BADGE];
+              const badge = STATUS_BADGE[a.status] ?? STATUS_BADGE.DRAFT;
               return (
                 <div key={a.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.75rem 1rem", borderTop: i === 0 ? "none" : "1px solid #F1E9E0", gap: "1rem", flexWrap: "wrap" }}>
                   <div style={{ minWidth: 0 }}>
                     <Link href={`/admin/poradniki/${a.id}`} style={{ color: "#1F1916", textDecoration: "none", fontWeight: 500, fontSize: "0.875rem", display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {a.title}
                     </Link>
-                    <p style={{ fontSize: "0.75rem", color: "#8C7B6E", marginTop: "0.1rem" }}>{formatDate(a.updatedAt)}</p>
+                    <p style={{ fontSize: "0.75rem", color: "#8C7B6E", marginTop: "0.1rem" }}>
+                      {a.status === "SCHEDULED" && a.publishedAt
+                        ? `⏱ ${formatWarsawDateTime(a.publishedAt)}`
+                        : formatDate(a.updatedAt)}
+                    </p>
                   </div>
-                  <span style={{ backgroundColor: badge.bg, color: badge.color, padding: "0.2rem 0.6rem", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0 }}>
+                  <span style={{ backgroundColor: badge.bg, color: badge.color, padding: "0.2rem 0.6rem", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0, border: a.status === "SCHEDULED" ? "1px solid #3a2e2a" : "none" }}>
                     {badge.label}
                   </span>
                 </div>
@@ -109,7 +173,7 @@ export default async function AdminDashboard() {
             </p>
           ) : (
             latestProjects.map((p, i) => {
-              const badge = STATUS_BADGE[p.status as keyof typeof STATUS_BADGE];
+              const badge = STATUS_BADGE[p.status] ?? STATUS_BADGE.DRAFT;
               return (
                 <div key={p.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.75rem 1rem", borderTop: i === 0 ? "none" : "1px solid #F1E9E0", gap: "1rem", flexWrap: "wrap" }}>
                   <div style={{ minWidth: 0 }}>
@@ -131,6 +195,9 @@ export default async function AdminDashboard() {
       <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
         <Link href="/admin/poradniki/nowy" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", backgroundColor: "#1F1916", color: "#F1E9E0", padding: "0.625rem 1.25rem", borderRadius: "6px", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
           + Dodaj poradnik
+        </Link>
+        <Link href="/admin/planer" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", backgroundColor: "#F1E9E0", color: "#1F1916", border: "1px solid #C4B5A5", padding: "0.625rem 1.25rem", borderRadius: "6px", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
+          Planer publikacji →
         </Link>
         <Link href="/admin/realizacje/nowa" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", backgroundColor: "#F1E9E0", color: "#1F1916", border: "1px solid #C4B5A5", padding: "0.625rem 1.25rem", borderRadius: "6px", textDecoration: "none", fontSize: "0.875rem", fontWeight: 600 }}>
           + Dodaj realizację

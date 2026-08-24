@@ -3,10 +3,12 @@
 import { useActionState, useCallback, useRef, useState } from "react";
 import { generateSlug } from "@/lib/slug";
 import { parseArticle } from "@/lib/article-parser";
+import { utcToWarsawDateInput, utcToWarsawTimeInput } from "@/lib/timezone";
 import type { Article } from "@/generated/prisma/client";
 
 type FaqItem = { question: string; answer: string };
 type FormState = { error?: string; fieldErrors?: Record<string, string[]> } | null;
+type PubStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED";
 
 interface ArticleFormProps {
   action: (prev: FormState, formData: FormData) => Promise<FormState>;
@@ -28,7 +30,6 @@ const C = {
   errorColor: "#dc2626",
 };
 
-// ── Shared styles ─────────────────────────────────────────────────────────────
 const INPUT: React.CSSProperties = {
   width: "100%",
   padding: "0.5rem 0.75rem",
@@ -164,6 +165,32 @@ const SERVICES = [
   "filmy-dla-butikowych-hoteli",
 ];
 
+function getInitialPubStatus(article?: Article | null): PubStatus {
+  if (!article) return "DRAFT";
+  const s = article.status as string;
+  if (s === "SCHEDULED") return "SCHEDULED";
+  if (s === "PUBLISHED") return "PUBLISHED";
+  return "DRAFT";
+}
+
+function getInitialDate(article?: Article | null): string {
+  if (!article?.publishedAt) return "";
+  try {
+    return utcToWarsawDateInput(new Date(article.publishedAt as unknown as string));
+  } catch {
+    return "";
+  }
+}
+
+function getInitialTime(article?: Article | null): string {
+  if (!article?.publishedAt) return "10:00";
+  try {
+    return utcToWarsawTimeInput(new Date(article.publishedAt as unknown as string));
+  } catch {
+    return "10:00";
+  }
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 export function ArticleForm({ action, article, submitLabel = "Zapisz" }: ArticleFormProps) {
   const [state, formAction, pending] = useActionState(action, null);
@@ -181,12 +208,9 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
   const [content, setContent] = useState(article?.content ?? "");
   const [category, setCategory] = useState(article?.category ?? "");
   const [author, setAuthor] = useState(article?.author ?? "");
-  const [status, setStatus] = useState<"DRAFT" | "PUBLISHED">(
-    (article?.status as "DRAFT" | "PUBLISHED") ?? "DRAFT"
-  );
-  const [publishedAt, setPublishedAt] = useState(
-    article?.publishedAt ? article.publishedAt.toISOString().slice(0, 10) : ""
-  );
+  const [pubStatus, setPubStatus] = useState<PubStatus>(getInitialPubStatus(article));
+  const [pubDate, setPubDate] = useState(getInitialDate(article));
+  const [pubTime, setPubTime] = useState(getInitialTime(article));
   const [featured, setFeatured] = useState(article?.featured ?? false);
   const [seoTitle, setSeoTitle] = useState(article?.seoTitle ?? "");
   const [seoDescription, setSeoDescription] = useState(article?.seoDescription ?? "");
@@ -246,10 +270,14 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
 
   const fErr = state?.fieldErrors ?? {};
 
-  // SEO preview data
   const previewTitle = seoTitle || title || "Tytuł poradnika";
   const previewSlug = slug || "adres-url";
   const previewDesc = seoDescription || excerpt || "Opis artykułu pojawi się tutaj.";
+
+  // Tomorrow date for min attribute (Warsaw, close enough)
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const minDate = tomorrow.toISOString().slice(0, 10);
 
   return (
     <div style={{ maxWidth: "100%" }}>
@@ -259,6 +287,11 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
         .af-faq-item { border: 1px solid ${C.border}; border-radius: 8px; padding: 1rem; margin-bottom: 0.75rem; position: relative; background: #fff; }
         .af-serp { background: #fff; border: 1px solid ${C.border}; border-radius: 8px; padding: 1rem 1.25rem; margin-top: 0.75rem; }
         .af-template-box { background: ${C.surface}; border: 1px solid ${C.borderLight}; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+        .af-pub-radio { display: flex; flex-direction: column; gap: 0.75rem; }
+        .af-pub-option { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.875rem 1rem; border: 1px solid ${C.borderLight}; border-radius: 8px; cursor: pointer; background: #fff; transition: border-color 0.15s; }
+        .af-pub-option:hover { border-color: ${C.border}; }
+        .af-pub-option.active { border-color: ${C.text}; background: ${C.surface}; }
+        .af-schedule-fields { margin-top: 1rem; padding: 1rem; background: ${C.surface}; border-radius: 8px; border: 1px solid ${C.borderLight}; }
         @media (max-width: 599px) {
           .af-grid-2 { grid-template-columns: 1fr !important; }
           .af-tabs button { flex: 1; min-width: 0; }
@@ -294,7 +327,6 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
       ═══════════════════════════════════════════════════════════════════ */}
       {tab === "paste" && (
         <div>
-          {/* Template section */}
           <div className="af-template-box">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem", marginBottom: showTemplate ? "1rem" : 0 }}>
               <p style={{ fontWeight: 700, fontSize: "0.875rem", color: C.text, margin: 0 }}>
@@ -318,16 +350,7 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
               </div>
             </div>
             {showTemplate && (
-              <pre style={{
-                fontFamily: "monospace",
-                fontSize: "0.75rem",
-                color: C.textSec,
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-word",
-                lineHeight: 1.6,
-                margin: 0,
-                overflowX: "auto",
-              }}>
+              <pre style={{ fontFamily: "monospace", fontSize: "0.75rem", color: C.textSec, whiteSpace: "pre-wrap", wordBreak: "break-word", lineHeight: 1.6, margin: 0, overflowX: "auto" }}>
                 {PASTE_TEMPLATE}
               </pre>
             )}
@@ -347,19 +370,7 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
           <button
             type="button"
             onClick={processPaste}
-            style={{
-              marginTop: "0.75rem",
-              padding: "0.625rem 1.5rem",
-              backgroundColor: C.btnPrimary,
-              color: "#F1E9E0",
-              border: "none",
-              borderRadius: "6px",
-              fontSize: "0.875rem",
-              fontWeight: 600,
-              cursor: "pointer",
-              width: "100%",
-              maxWidth: "320px",
-            }}
+            style={{ marginTop: "0.75rem", padding: "0.625rem 1.5rem", backgroundColor: C.btnPrimary, color: "#F1E9E0", border: "none", borderRadius: "6px", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer", width: "100%", maxWidth: "320px" }}
           >
             Przetwórz artykuł →
           </button>
@@ -376,6 +387,13 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
           <input type="hidden" name="quickAnswer" value={quickAnswer} />
           <input type="hidden" name="faq" value={JSON.stringify(faq)} />
           <input type="hidden" name="featured" value={String(featured)} />
+          <input type="hidden" name="status" value={pubStatus} />
+          {pubStatus === "SCHEDULED" && (
+            <>
+              <input type="hidden" name="publishedAtDate" value={pubDate} />
+              <input type="hidden" name="publishedAtTime" value={pubTime} />
+            </>
+          )}
 
           {state?.error && (
             <div style={{ backgroundColor: C.errorBg, border: `1px solid #fecaca`, borderRadius: "6px", padding: "0.75rem 1rem", marginBottom: "1rem", color: C.errorColor, fontSize: "0.875rem" }}>
@@ -419,68 +437,37 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
           <div className="af-grid-2">
             <div style={FIELD}>
               <label style={LABEL}>Kategoria</label>
-              <input
-                name="category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                style={INPUT}
-                list="af-category-list"
-                placeholder="np. Filmy dla nieruchomości"
-              />
+              <input name="category" value={category} onChange={(e) => setCategory(e.target.value)} style={INPUT} list="af-category-list" placeholder="np. Filmy dla nieruchomości" />
               <datalist id="af-category-list">
                 {CATEGORIES.map((c) => <option key={c} value={c} />)}
               </datalist>
             </div>
             <div style={FIELD}>
               <label style={LABEL}>Autor</label>
-              <input
-                name="author"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                style={INPUT}
-                placeholder="Imię Nazwisko"
-              />
+              <input name="author" value={author} onChange={(e) => setAuthor(e.target.value)} style={INPUT} placeholder="Imię Nazwisko" />
             </div>
           </div>
 
           <div className="af-grid-2">
             <div style={FIELD}>
-              <label style={LABEL}>Data publikacji</label>
-              <input
-                type="date"
-                name="publishedAt"
-                value={publishedAt}
-                onChange={(e) => setPublishedAt(e.target.value)}
-                style={INPUT}
-              />
-            </div>
-            <div style={FIELD}>
               <label style={LABEL}>Powiązana usługa</label>
-              <input
-                name="relatedService"
-                value={relatedService}
-                onChange={(e) => setRelatedService(e.target.value)}
-                style={INPUT}
-                list="af-service-list"
-                placeholder="slug usługi lub puste"
-              />
+              <input name="relatedService" value={relatedService} onChange={(e) => setRelatedService(e.target.value)} style={INPUT} list="af-service-list" placeholder="slug usługi lub puste" />
               <datalist id="af-service-list">
                 {SERVICES.map((s) => <option key={s} value={s} />)}
               </datalist>
             </div>
-          </div>
-
-          <div style={{ ...FIELD, display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <input
-              type="checkbox"
-              id="af-featured"
-              checked={featured}
-              onChange={(e) => setFeatured(e.target.checked)}
-              style={{ width: "1.125rem", height: "1.125rem", accentColor: C.text, flexShrink: 0 }}
-            />
-            <label htmlFor="af-featured" style={{ ...LABEL, marginBottom: 0, cursor: "pointer" }}>
-              Wyróżniony poradnik
-            </label>
+            <div style={{ ...FIELD, display: "flex", alignItems: "center", gap: "0.5rem", paddingTop: "1.5rem" }}>
+              <input
+                type="checkbox"
+                id="af-featured"
+                checked={featured}
+                onChange={(e) => setFeatured(e.target.checked)}
+                style={{ width: "1.125rem", height: "1.125rem", accentColor: C.text, flexShrink: 0 }}
+              />
+              <label htmlFor="af-featured" style={{ ...LABEL, marginBottom: 0, cursor: "pointer" }}>
+                Wyróżniony poradnik
+              </label>
+            </div>
           </div>
 
           {/* ── B. WYNIK W GOOGLE ─────────────────────────────────────────── */}
@@ -491,13 +478,7 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
               <label style={LABEL}>Tytuł SEO</label>
               <CharCounter current={seoTitle.length} max={70} warn={60} />
             </div>
-            <input
-              name="seoTitle"
-              value={seoTitle}
-              onChange={(e) => setSeoTitle(e.target.value)}
-              style={INPUT}
-              placeholder={title || "Tytuł w wynikach wyszukiwania"}
-            />
+            <input name="seoTitle" value={seoTitle} onChange={(e) => setSeoTitle(e.target.value)} style={INPUT} placeholder={title || "Tytuł w wynikach wyszukiwania"} />
             <p style={HINT}>Najważniejszy temat umieść możliwie wcześnie. Google może przepisać tytuł.</p>
           </div>
 
@@ -506,14 +487,7 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
               <label style={LABEL}>Opis meta</label>
               <CharCounter current={seoDescription.length} max={160} warn={155} />
             </div>
-            <textarea
-              name="seoDescription"
-              value={seoDescription}
-              onChange={(e) => setSeoDescription(e.target.value)}
-              rows={3}
-              style={INPUT}
-              placeholder="Napisz konkretnie, czego użytkownik dowie się na stronie."
-            />
+            <textarea name="seoDescription" value={seoDescription} onChange={(e) => setSeoDescription(e.target.value)} rows={3} style={INPUT} placeholder="Napisz konkretnie, czego użytkownik dowie się na stronie." />
             <p style={HINT}>Napisz konkretnie, czego użytkownik dowie się na stronie. Google może wyświetlić inny fragment.</p>
           </div>
 
@@ -537,25 +511,13 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
 
           <div style={{ ...FIELD, marginTop: "1.25rem" }}>
             <label style={LABEL}>Canonical URL</label>
-            <input
-              name="canonical"
-              value={canonical}
-              onChange={(e) => setCanonical(e.target.value)}
-              style={INPUT}
-              placeholder="https://www.setandspace.pl/poradniki/…"
-            />
+            <input name="canonical" value={canonical} onChange={(e) => setCanonical(e.target.value)} style={INPUT} placeholder="https://www.setandspace.pl/poradniki/…" />
             <p style={HINT}>Zostaw puste — URL zostanie ustawiony automatycznie.</p>
           </div>
 
           <div style={FIELD}>
             <label style={LABEL}>Obraz Open Graph</label>
-            <input
-              name="ogImage"
-              value={ogImage}
-              onChange={(e) => setOgImage(e.target.value)}
-              style={INPUT}
-              placeholder="/images/poradniki/nazwa-obrazu.jpg"
-            />
+            <input name="ogImage" value={ogImage} onChange={(e) => setOgImage(e.target.value)} style={INPUT} placeholder="/images/poradniki/nazwa-obrazu.jpg" />
             <p style={HINT}>Obraz wyświetlany przy udostępnianiu artykułu w mediach społecznościowych.</p>
           </div>
 
@@ -564,14 +526,7 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
 
           <div style={FIELD}>
             <label style={LABEL}>Krótki opis / zajawka</label>
-            <textarea
-              name="excerpt"
-              value={excerpt}
-              onChange={(e) => setExcerpt(e.target.value)}
-              rows={3}
-              style={INPUT}
-              placeholder="1–2 zdania opisujące poradnik. Używane na liście poradników i jako intro."
-            />
+            <textarea name="excerpt" value={excerpt} onChange={(e) => setExcerpt(e.target.value)} rows={3} style={INPUT} placeholder="1–2 zdania opisujące poradnik. Używane na liście poradników i jako intro." />
             <p style={HINT}>1–2 zdania używane na liście poradników i jako wprowadzenie.</p>
           </div>
 
@@ -582,13 +537,7 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
                 {wordCount(quickAnswer)} słów
               </span>
             </div>
-            <textarea
-              value={quickAnswer}
-              onChange={(e) => setQuickAnswer(e.target.value)}
-              rows={4}
-              style={INPUT}
-              placeholder="W 40-80 slowach odpowiedz bezposrednio na glowne pytanie uzytkownika. Bez wstepu (np. w dzisiejszym artykule...)."
-            />
+            <textarea value={quickAnswer} onChange={(e) => setQuickAnswer(e.target.value)} rows={4} style={INPUT} placeholder="W 40-80 słowach odpowiedz bezpośrednio na główne pytanie użytkownika. Bez wstępu." />
             <p style={HINT}>Odpowiedz bezpośrednio na główne pytanie. Bez wstępu. Pojawi się wysoko na stronie, zaraz po tytule.</p>
           </div>
 
@@ -602,7 +551,6 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
               <li>Główne sekcje używają <code style={{ background: "#fff", padding: "0.05rem 0.25rem", borderRadius: "3px" }}>## H2</code></li>
               <li>Podsekcje używają <code style={{ background: "#fff", padding: "0.05rem 0.25rem", borderRadius: "3px" }}>### H3</code></li>
               <li>Używaj list i krótkich akapitów, kiedy poprawiają czytelność</li>
-              <li>Odpowiadaj konkretnie na intencję użytkownika</li>
             </ul>
           </div>
 
@@ -612,7 +560,7 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
               onChange={(e) => setContent(e.target.value)}
               rows={24}
               style={{ ...INPUT, fontFamily: "monospace", fontSize: "0.8125rem", lineHeight: 1.6, minHeight: "380px" }}
-              placeholder={"## Wprowadzenie\n\nKrótki wstęp do tematu...\n\n## Jak to działa\n\nTreść sekcji...\n\n## Na co zwrócić uwagę\n\nTreść sekcji...\n\n## Podsumowanie\n\nNajważniejsze wnioski..."}
+              placeholder={"## Wprowadzenie\n\nKrótki wstęp do tematu...\n\n## Jak to działa\n\nTreść sekcji...\n\n## Podsumowanie\n\nNajważniejsze wnioski..."}
             />
           </div>
 
@@ -625,78 +573,135 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
 
           {faq.map((item, i) => (
             <div key={i} className="af-faq-item">
-              <button
-                type="button"
-                onClick={() => removeFaq(i)}
-                style={{ position: "absolute", top: "0.75rem", right: "0.75rem", background: "none", border: "none", color: C.textMut, cursor: "pointer", fontSize: "1rem", lineHeight: 1 }}
-                title="Usuń pytanie"
-              >
+              <button type="button" onClick={() => removeFaq(i)} style={{ position: "absolute", top: "0.75rem", right: "0.75rem", background: "none", border: "none", color: C.textMut, cursor: "pointer", fontSize: "1rem", lineHeight: 1 }} title="Usuń pytanie">
                 ✕
               </button>
               <div style={{ ...FIELD, paddingRight: "2rem" }}>
                 <label style={LABEL}>Pytanie {i + 1}</label>
-                <input
-                  value={item.question}
-                  onChange={(e) => updateFaq(i, "question", e.target.value)}
-                  style={INPUT}
-                  placeholder="Naturalne pytanie, które zadają użytkownicy?"
-                />
+                <input value={item.question} onChange={(e) => updateFaq(i, "question", e.target.value)} style={INPUT} placeholder="Naturalne pytanie, które zadają użytkownicy?" />
               </div>
               <div style={{ marginBottom: 0 }}>
                 <label style={LABEL}>Odpowiedź</label>
-                <textarea
-                  value={item.answer}
-                  onChange={(e) => updateFaq(i, "answer", e.target.value)}
-                  rows={3}
-                  style={INPUT}
-                  placeholder="Krótka, samodzielna i konkretna odpowiedź."
-                />
+                <textarea value={item.answer} onChange={(e) => updateFaq(i, "answer", e.target.value)} rows={3} style={INPUT} placeholder="Krótka, samodzielna i konkretna odpowiedź." />
               </div>
             </div>
           ))}
 
-          <button
-            type="button"
-            onClick={addFaq}
-            style={{
-              padding: "0.5rem 1rem",
-              border: `1px dashed ${C.border}`,
-              borderRadius: "6px",
-              background: "none",
-              color: C.textMut,
-              cursor: "pointer",
-              fontSize: "0.875rem",
-              marginBottom: "1.5rem",
-              width: "100%",
-            }}
-          >
+          <button type="button" onClick={addFaq} style={{ padding: "0.5rem 1rem", border: `1px dashed ${C.border}`, borderRadius: "6px", background: "none", color: C.textMut, cursor: "pointer", fontSize: "0.875rem", marginBottom: "1.5rem", width: "100%" }}>
             + Dodaj pytanie
           </button>
 
           {/* ── F. PUBLIKACJA ─────────────────────────────────────────────── */}
           <SectionHeader label="F — Publikacja" />
 
-          <div className="af-grid-2" style={{ marginBottom: "1.5rem" }}>
-            <div style={FIELD}>
-              <label style={LABEL}>Status</label>
-              <select
-                name="status"
-                value={status}
-                onChange={(e) => setStatus(e.target.value as "DRAFT" | "PUBLISHED")}
-                style={INPUT}
-              >
-                <option value="DRAFT">Draft (roboczy)</option>
-                <option value="PUBLISHED">Opublikowany</option>
-              </select>
-              <p style={HINT}>
-                {status === "DRAFT"
-                  ? "Artykuł nie jest widoczny publicznie."
-                  : "Artykuł jest widoczny na stronie i indeksowany."}
-              </p>
-            </div>
+          <div className="af-pub-radio">
+            {/* Szkic */}
+            <label
+              className={`af-pub-option${pubStatus === "DRAFT" ? " active" : ""}`}
+              style={{ userSelect: "none" }}
+            >
+              <div style={{ paddingTop: "0.1rem" }}>
+                <div style={{
+                  width: "1.125rem", height: "1.125rem", borderRadius: "50%",
+                  border: `2px solid ${pubStatus === "DRAFT" ? C.text : C.border}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0, backgroundColor: pubStatus === "DRAFT" ? C.text : "#fff",
+                }}>
+                  {pubStatus === "DRAFT" && <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#F1E9E0" }} />}
+                </div>
+              </div>
+              <input type="radio" name="_pubStatus" value="DRAFT" checked={pubStatus === "DRAFT"} onChange={() => setPubStatus("DRAFT")} style={{ display: "none" }} />
+              <div>
+                <p style={{ fontWeight: 600, fontSize: "0.9375rem", color: C.text, margin: 0 }}>Szkic</p>
+                <p style={{ fontSize: "0.8125rem", color: C.textMut, margin: "0.2rem 0 0" }}>Artykuł nie jest widoczny publicznie.</p>
+              </div>
+            </label>
+
+            {/* Zaplanuj */}
+            <label
+              className={`af-pub-option${pubStatus === "SCHEDULED" ? " active" : ""}`}
+              style={{ userSelect: "none", flexDirection: "column", alignItems: "flex-start" }}
+            >
+              <div style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", width: "100%" }}>
+                <div style={{ paddingTop: "0.1rem" }}>
+                  <div style={{
+                    width: "1.125rem", height: "1.125rem", borderRadius: "50%",
+                    border: `2px solid ${pubStatus === "SCHEDULED" ? C.text : C.border}`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    flexShrink: 0, backgroundColor: pubStatus === "SCHEDULED" ? C.text : "#fff",
+                  }}>
+                    {pubStatus === "SCHEDULED" && <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#F1E9E0" }} />}
+                  </div>
+                </div>
+                <input type="radio" name="_pubStatus" value="SCHEDULED" checked={pubStatus === "SCHEDULED"} onChange={() => setPubStatus("SCHEDULED")} style={{ display: "none" }} />
+                <div>
+                  <p style={{ fontWeight: 600, fontSize: "0.9375rem", color: C.text, margin: 0 }}>Zaplanuj publikację</p>
+                  <p style={{ fontSize: "0.8125rem", color: C.textMut, margin: "0.2rem 0 0" }}>Ustaw datę i godzinę automatycznej publikacji (czas: Europa/Warszawa).</p>
+                </div>
+              </div>
+
+              {pubStatus === "SCHEDULED" && (
+                <div className="af-schedule-fields" style={{ width: "100%", boxSizing: "border-box" }}>
+                  <div className="af-grid-2">
+                    <div>
+                      <label style={LABEL}>Data publikacji *</label>
+                      <input
+                        type="date"
+                        value={pubDate}
+                        min={minDate}
+                        onChange={(e) => setPubDate(e.target.value)}
+                        style={{ ...INPUT, cursor: "pointer" }}
+                        required={pubStatus === "SCHEDULED"}
+                      />
+                    </div>
+                    <div>
+                      <label style={LABEL}>Godzina (czas warszawski) *</label>
+                      <input
+                        type="time"
+                        value={pubTime}
+                        onChange={(e) => setPubTime(e.target.value)}
+                        style={{ ...INPUT, cursor: "pointer" }}
+                        required={pubStatus === "SCHEDULED"}
+                      />
+                    </div>
+                  </div>
+                  {pubDate && pubTime && (
+                    <p style={{ fontSize: "0.8125rem", color: C.textMut, marginTop: "0.5rem", marginBottom: 0 }}>
+                      Artykuł zostanie opublikowany: <strong style={{ color: C.text }}>{pubDate.split("-").reverse().join(".")}, {pubTime}</strong> (czas warszawski)
+                    </p>
+                  )}
+                </div>
+              )}
+            </label>
+
+            {/* Opublikuj teraz */}
+            <label
+              className={`af-pub-option${pubStatus === "PUBLISHED" ? " active" : ""}`}
+              style={{ userSelect: "none" }}
+            >
+              <div style={{ paddingTop: "0.1rem" }}>
+                <div style={{
+                  width: "1.125rem", height: "1.125rem", borderRadius: "50%",
+                  border: `2px solid ${pubStatus === "PUBLISHED" ? "#166534" : C.border}`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0, backgroundColor: pubStatus === "PUBLISHED" ? "#166534" : "#fff",
+                }}>
+                  {pubStatus === "PUBLISHED" && <div style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#F1E9E0" }} />}
+                </div>
+              </div>
+              <input type="radio" name="_pubStatus" value="PUBLISHED" checked={pubStatus === "PUBLISHED"} onChange={() => setPubStatus("PUBLISHED")} style={{ display: "none" }} />
+              <div>
+                <p style={{ fontWeight: 600, fontSize: "0.9375rem", color: C.text, margin: 0 }}>Opublikuj teraz</p>
+                <p style={{ fontSize: "0.8125rem", color: C.textMut, margin: "0.2rem 0 0" }}>
+                  {article?.status === "PUBLISHED"
+                    ? "Artykuł jest już opublikowany. Data publikacji pozostaje niezmieniona."
+                    : "Artykuł pojawi się natychmiast na stronie publicznej."}
+                </p>
+              </div>
+            </label>
           </div>
 
-          <div style={{ display: "flex", gap: "0.75rem", paddingTop: "1.5rem", borderTop: `1px solid ${C.borderLight}`, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "0.75rem", paddingTop: "1.5rem", borderTop: `1px solid ${C.borderLight}`, flexWrap: "wrap", marginTop: "1.5rem" }}>
             <button
               type="submit"
               disabled={pending}
@@ -715,11 +720,11 @@ export function ArticleForm({ action, article, submitLabel = "Zapisz" }: Article
             >
               {pending ? "Zapisuję…" : submitLabel}
             </button>
-            {status === "DRAFT" && (
-              <p style={{ fontSize: "0.8125rem", color: C.textMut, alignSelf: "center", margin: 0 }}>
-                Artykuł zostanie zapisany jako draft.
-              </p>
-            )}
+            <p style={{ fontSize: "0.8125rem", color: C.textMut, alignSelf: "center", margin: 0 }}>
+              {pubStatus === "DRAFT" && "Zostanie zapisany jako szkic."}
+              {pubStatus === "SCHEDULED" && pubDate && pubTime && `Zaplanowany na ${pubDate.split("-").reverse().join(".")}, ${pubTime}.`}
+              {pubStatus === "PUBLISHED" && "Zostanie opublikowany."}
+            </p>
           </div>
         </form>
       )}

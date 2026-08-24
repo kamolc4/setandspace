@@ -8,6 +8,7 @@ import { logoutAction } from "@/app/admin/_actions/auth";
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", exact: true },
   { href: "/admin/poradniki", label: "Poradniki", exact: false },
+  { href: "/admin/planer", label: "Planer", exact: false },
   { href: "/admin/realizacje", label: "Realizacje", exact: false },
 ];
 

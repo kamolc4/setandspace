@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { getPrisma } from "@/lib/prisma";
-import { toggleStatusAction } from "@/app/admin/_actions/articles";
+import { cancelScheduleAction, publishNowAction } from "@/app/admin/_actions/articles";
 import { DeleteButton } from "@/components/admin/DeleteButton";
-import type { Article, Status } from "@/generated/prisma/client";
+import { QuickScheduleButton } from "@/components/admin/QuickScheduleButton";
+import { formatWarsawDateTime, utcToWarsawDateInput, utcToWarsawTimeInput } from "@/lib/timezone";
+import type { Article } from "@/generated/prisma/client";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +19,8 @@ async function getArticles() {
 
 const STATUS_BADGE = {
   PUBLISHED: { bg: "#dcfce7", color: "#166534", label: "Opublikowany" },
-  DRAFT: { bg: "#E8DED2", color: "#6B5040", label: "Draft" },
+  SCHEDULED: { bg: "#1F1916", color: "#F7F3EE", label: "Zaplanowany" },
+  DRAFT: { bg: "#E8DED2", color: "#6B5040", label: "Szkic" },
 };
 
 function formatDate(d: Date) {
@@ -33,12 +36,8 @@ export default async function AdminPoradnikiPage() {
         .articles-grid-header { display: grid; }
         .articles-grid-row { display: grid; }
         @media (min-width: 640px) {
-          .articles-grid-header {
-            grid-template-columns: 1fr 110px 120px 100px 160px;
-          }
-          .articles-grid-row {
-            grid-template-columns: 1fr 110px 120px 100px 160px;
-          }
+          .articles-grid-header { grid-template-columns: 1fr 110px 140px 100px 200px; }
+          .articles-grid-row { grid-template-columns: 1fr 110px 140px 100px 200px; }
           .article-card-mobile { display: none !important; }
           .article-row-desktop { display: grid !important; }
         }
@@ -47,6 +46,7 @@ export default async function AdminPoradnikiPage() {
           .article-row-desktop { display: none !important; }
           .article-card-mobile { display: block !important; }
         }
+        .qs-wrap { position: relative; display: inline-block; }
       `}</style>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
@@ -69,17 +69,7 @@ export default async function AdminPoradnikiPage() {
       ) : (
         <div style={{ backgroundColor: "#fff", border: "1px solid #C4B5A5", borderRadius: "10px", overflow: "hidden" }}>
           {/* Desktop header */}
-          <div className="articles-grid-header" style={{
-            gap: "0.75rem",
-            padding: "0.625rem 1rem",
-            backgroundColor: "#F7F3EE",
-            borderBottom: "1px solid #C4B5A5",
-            fontSize: "0.75rem",
-            fontWeight: 700,
-            color: "#8C7B6E",
-            textTransform: "uppercase",
-            letterSpacing: "0.04em",
-          }}>
+          <div className="articles-grid-header" style={{ gap: "0.75rem", padding: "0.625rem 1rem", backgroundColor: "#F7F3EE", borderBottom: "1px solid #C4B5A5", fontSize: "0.75rem", fontWeight: 700, color: "#8C7B6E", textTransform: "uppercase", letterSpacing: "0.04em" }}>
             <span>Tytuł</span>
             <span>Kategoria</span>
             <span>Status</span>
@@ -88,44 +78,91 @@ export default async function AdminPoradnikiPage() {
           </div>
 
           {articles.map((a) => {
-            const badge = STATUS_BADGE[a.status as keyof typeof STATUS_BADGE];
+            const badge = STATUS_BADGE[a.status as keyof typeof STATUS_BADGE] ?? STATUS_BADGE.DRAFT;
+            const isScheduled = a.status === "SCHEDULED";
+            const isPublished = a.status === "PUBLISHED";
+            const isDraft = a.status === "DRAFT";
+
+            const scheduledLabel = isScheduled && a.publishedAt
+              ? formatWarsawDateTime(a.publishedAt)
+              : null;
+
+            const initDate = isScheduled && a.publishedAt ? utcToWarsawDateInput(a.publishedAt) : "";
+            const initTime = isScheduled && a.publishedAt ? utcToWarsawTimeInput(a.publishedAt) : "10:00";
+
             return (
               <div key={a.id} style={{ borderBottom: "1px solid #F1E9E0" }}>
                 {/* Desktop row */}
-                <div className="article-row-desktop" style={{
-                  gap: "0.75rem",
-                  padding: "0.75rem 1rem",
-                  alignItems: "center",
-                }}>
+                <div className="article-row-desktop" style={{ gap: "0.75rem", padding: "0.75rem 1rem", alignItems: "center" }}>
                   <div style={{ minWidth: 0 }}>
                     <Link href={`/admin/poradniki/${a.id}`} style={{ color: "#1F1916", fontWeight: 500, fontSize: "0.875rem", textDecoration: "none", display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                       {a.title}
                     </Link>
-                    <p style={{ fontSize: "0.75rem", color: "#8C7B6E", marginTop: "0.1rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                      /poradniki/{a.slug}
-                    </p>
+                    {isScheduled && scheduledLabel ? (
+                      <p style={{ fontSize: "0.75rem", color: "#1F1916", marginTop: "0.1rem", fontWeight: 500 }}>
+                        ⏱ {scheduledLabel}
+                      </p>
+                    ) : (
+                      <p style={{ fontSize: "0.75rem", color: "#8C7B6E", marginTop: "0.1rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        /poradniki/{a.slug}
+                      </p>
+                    )}
                   </div>
                   <span style={{ fontSize: "0.8125rem", color: "#6B5040" }}>{a.category || "—"}</span>
-                  <span style={{ backgroundColor: badge.bg, color: badge.color, padding: "0.2rem 0.6rem", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 600, display: "inline-block", whiteSpace: "nowrap" }}>
+                  <span style={{ backgroundColor: badge.bg, color: badge.color, padding: "0.2rem 0.6rem", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 600, display: "inline-block", whiteSpace: "nowrap", border: isScheduled ? "1px solid #3a2e2a" : "none" }}>
                     {badge.label}
                   </span>
                   <span style={{ fontSize: "0.8125rem", color: "#8C7B6E" }}>{formatDate(a.updatedAt)}</span>
                   <div style={{ display: "flex", gap: "0.375rem", justifyContent: "flex-end", flexWrap: "wrap" }}>
-                    <Link href={`/admin/poradniki/${a.id}`} style={{ padding: "0.25rem 0.6rem", backgroundColor: "#F1E9E0", color: "#1F1916", borderRadius: "5px", fontSize: "0.75rem", textDecoration: "none", whiteSpace: "nowrap" }}>
+                    <Link href={`/admin/poradniki/${a.id}`} style={{ padding: "0.25rem 0.6rem", backgroundColor: "#F1E9E0", color: "#1F1916", borderRadius: "5px", fontSize: "0.75rem", textDecoration: "none", whiteSpace: "nowrap", border: "1px solid #C4B5A5" }}>
                       Edytuj
                     </Link>
-                    <Link href={`/poradniki/${a.slug}`} target="_blank" style={{ padding: "0.25rem 0.6rem", backgroundColor: "#F1E9E0", color: "#1F1916", borderRadius: "5px", fontSize: "0.75rem", textDecoration: "none", whiteSpace: "nowrap" }}>
+                    <Link href={`/admin/podglad/${a.id}`} target="_blank" style={{ padding: "0.25rem 0.6rem", backgroundColor: "#F1E9E0", color: "#1F1916", borderRadius: "5px", fontSize: "0.75rem", textDecoration: "none", whiteSpace: "nowrap", border: "1px solid #C4B5A5" }}>
                       Podgląd ↗
                     </Link>
-                    <form action={async () => {
-                      "use server";
-                      const next: Status = a.status === "PUBLISHED" ? "DRAFT" : "PUBLISHED";
-                      await toggleStatusAction(a.id, next);
-                    }}>
-                      <button type="submit" style={{ padding: "0.25rem 0.6rem", backgroundColor: a.status === "PUBLISHED" ? "#fff7ed" : "#f0fdf4", color: a.status === "PUBLISHED" ? "#c2410c" : "#166534", border: "1px solid", borderColor: a.status === "PUBLISHED" ? "#fed7aa" : "#bbf7d0", borderRadius: "5px", fontSize: "0.75rem", cursor: "pointer", whiteSpace: "nowrap" }}>
-                        {a.status === "PUBLISHED" ? "Cofnij" : "Opublikuj"}
-                      </button>
-                    </form>
+
+                    {isDraft && (
+                      <div className="qs-wrap">
+                        <QuickScheduleButton articleId={a.id} mode="schedule" />
+                      </div>
+                    )}
+
+                    {isScheduled && (
+                      <>
+                        <div className="qs-wrap">
+                          <QuickScheduleButton articleId={a.id} mode="change" initialDate={initDate} initialTime={initTime} />
+                        </div>
+                        <form action={async () => {
+                          "use server";
+                          await cancelScheduleAction(a.id);
+                        }}>
+                          <button type="submit" style={{ padding: "0.25rem 0.6rem", backgroundColor: "#fff7ed", color: "#c2410c", border: "1px solid #fed7aa", borderRadius: "5px", fontSize: "0.75rem", cursor: "pointer", whiteSpace: "nowrap" }}>
+                            Anuluj
+                          </button>
+                        </form>
+                        <form action={async () => {
+                          "use server";
+                          await publishNowAction(a.id);
+                        }}>
+                          <button type="submit" style={{ padding: "0.25rem 0.6rem", backgroundColor: "#f0fdf4", color: "#166534", border: "1px solid #bbf7d0", borderRadius: "5px", fontSize: "0.75rem", cursor: "pointer", whiteSpace: "nowrap" }}>
+                            Opublikuj teraz
+                          </button>
+                        </form>
+                      </>
+                    )}
+
+                    {isPublished && (
+                      <form action={async () => {
+                        "use server";
+                        const { toggleStatusAction } = await import("@/app/admin/_actions/articles");
+                        await toggleStatusAction(a.id, "DRAFT");
+                      }}>
+                        <button type="submit" style={{ padding: "0.25rem 0.6rem", backgroundColor: "#fff7ed", color: "#c2410c", border: "1px solid #fed7aa", borderRadius: "5px", fontSize: "0.75rem", cursor: "pointer", whiteSpace: "nowrap" }}>
+                          Cofnij
+                        </button>
+                      </form>
+                    )}
+
                     <DeleteButton id={a.id} title={a.title} small />
                   </div>
                 </div>
@@ -137,15 +174,17 @@ export default async function AdminPoradnikiPage() {
                       <Link href={`/admin/poradniki/${a.id}`} style={{ color: "#1F1916", fontWeight: 600, fontSize: "0.9375rem", textDecoration: "none", display: "block" }}>
                         {a.title}
                       </Link>
-                      <p style={{ fontSize: "0.75rem", color: "#8C7B6E", marginTop: "0.2rem", wordBreak: "break-all" }}>
-                        /poradniki/{a.slug}
-                      </p>
+                      {isScheduled && scheduledLabel ? (
+                        <p style={{ fontSize: "0.75rem", color: "#1F1916", marginTop: "0.2rem", fontWeight: 500 }}>⏱ {scheduledLabel}</p>
+                      ) : (
+                        <p style={{ fontSize: "0.75rem", color: "#8C7B6E", marginTop: "0.2rem", wordBreak: "break-all" }}>/poradniki/{a.slug}</p>
+                      )}
                     </div>
-                    <span style={{ backgroundColor: badge.bg, color: badge.color, padding: "0.2rem 0.6rem", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0 }}>
+                    <span style={{ backgroundColor: badge.bg, color: badge.color, padding: "0.2rem 0.6rem", borderRadius: "99px", fontSize: "0.75rem", fontWeight: 600, whiteSpace: "nowrap", flexShrink: 0, border: isScheduled ? "1px solid #3a2e2a" : "none" }}>
                       {badge.label}
                     </span>
                   </div>
-                  <div style={{ display: "flex", fontSize: "0.75rem", color: "#8C7B6E", marginBottom: "0.75rem", gap: "1rem" }}>
+                  <div style={{ fontSize: "0.75rem", color: "#8C7B6E", marginBottom: "0.75rem", display: "flex", gap: "1rem" }}>
                     {a.category && <span>{a.category}</span>}
                     <span>Aktualizacja: {formatDate(a.updatedAt)}</span>
                   </div>
@@ -153,18 +192,49 @@ export default async function AdminPoradnikiPage() {
                     <Link href={`/admin/poradniki/${a.id}`} style={{ padding: "0.4rem 0.875rem", backgroundColor: "#1F1916", color: "#F1E9E0", borderRadius: "5px", fontSize: "0.8125rem", textDecoration: "none", fontWeight: 500 }}>
                       Edytuj
                     </Link>
-                    <Link href={`/poradniki/${a.slug}`} target="_blank" style={{ padding: "0.4rem 0.875rem", backgroundColor: "#F1E9E0", color: "#1F1916", borderRadius: "5px", fontSize: "0.8125rem", textDecoration: "none", border: "1px solid #C4B5A5" }}>
+                    <Link href={`/admin/podglad/${a.id}`} target="_blank" style={{ padding: "0.4rem 0.875rem", backgroundColor: "#F1E9E0", color: "#1F1916", borderRadius: "5px", fontSize: "0.8125rem", textDecoration: "none", border: "1px solid #C4B5A5" }}>
                       Podgląd ↗
                     </Link>
-                    <form action={async () => {
-                      "use server";
-                      const next: Status = a.status === "PUBLISHED" ? "DRAFT" : "PUBLISHED";
-                      await toggleStatusAction(a.id, next);
-                    }}>
-                      <button type="submit" style={{ padding: "0.4rem 0.875rem", backgroundColor: a.status === "PUBLISHED" ? "#fff7ed" : "#f0fdf4", color: a.status === "PUBLISHED" ? "#c2410c" : "#166534", border: "1px solid", borderColor: a.status === "PUBLISHED" ? "#fed7aa" : "#bbf7d0", borderRadius: "5px", fontSize: "0.8125rem", cursor: "pointer" }}>
-                        {a.status === "PUBLISHED" ? "Cofnij do draftu" : "Opublikuj"}
-                      </button>
-                    </form>
+
+                    {isDraft && (
+                      <div className="qs-wrap">
+                        <QuickScheduleButton articleId={a.id} mode="schedule" />
+                      </div>
+                    )}
+                    {isScheduled && (
+                      <>
+                        <div className="qs-wrap">
+                          <QuickScheduleButton articleId={a.id} mode="change" initialDate={initDate} initialTime={initTime} />
+                        </div>
+                        <form action={async () => {
+                          "use server";
+                          await cancelScheduleAction(a.id);
+                        }}>
+                          <button type="submit" style={{ padding: "0.4rem 0.875rem", backgroundColor: "#fff7ed", color: "#c2410c", border: "1px solid #fed7aa", borderRadius: "5px", fontSize: "0.8125rem", cursor: "pointer" }}>
+                            Anuluj planowanie
+                          </button>
+                        </form>
+                        <form action={async () => {
+                          "use server";
+                          await publishNowAction(a.id);
+                        }}>
+                          <button type="submit" style={{ padding: "0.4rem 0.875rem", backgroundColor: "#f0fdf4", color: "#166534", border: "1px solid #bbf7d0", borderRadius: "5px", fontSize: "0.8125rem", cursor: "pointer" }}>
+                            Opublikuj teraz
+                          </button>
+                        </form>
+                      </>
+                    )}
+                    {isPublished && (
+                      <form action={async () => {
+                        "use server";
+                        const { toggleStatusAction } = await import("@/app/admin/_actions/articles");
+                        await toggleStatusAction(a.id, "DRAFT");
+                      }}>
+                        <button type="submit" style={{ padding: "0.4rem 0.875rem", backgroundColor: "#fff7ed", color: "#c2410c", border: "1px solid #fed7aa", borderRadius: "5px", fontSize: "0.8125rem", cursor: "pointer" }}>
+                          Cofnij do szkicu
+                        </button>
+                      </form>
+                    )}
                     <DeleteButton id={a.id} title={a.title} small />
                   </div>
                 </div>
