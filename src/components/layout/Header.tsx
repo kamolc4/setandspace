@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { mainNav } from "@/data/navigation";
+import { business } from "@/data/business";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -241,7 +242,7 @@ export default function Header() {
           }}
         >
           <p className="text-label" style={{ color: "var(--text-muted)" }}>
-            kontakt@setandspace.pl
+            {business.email}
           </p>
         </div>
       </div>

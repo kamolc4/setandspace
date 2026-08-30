@@ -19,7 +19,7 @@ export const business = {
   krs: "0001125572",
   regon: "529580930",
 
-  email: "kontakt@setandspace.pl",
+  email: "paulinaolczykk@gmail.com",
   phone: null as string | null, // PLACEHOLDER — replace with real phone number
 
   // PLACEHOLDER — replace with real social profile URLs
