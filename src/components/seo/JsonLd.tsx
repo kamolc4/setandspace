@@ -9,8 +9,17 @@ export function OrganizationJsonLd() {
     "@type": "Organization",
     "@id": business.url,
     name: business.name,
+    legalName: business.legalName,
     url: business.url,
     description: business.description,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: business.address.street,
+      postalCode: business.address.postalCode,
+      addressLocality: business.address.city,
+      addressCountry: "PL",
+    },
+    vatID: business.nip,
     ...(business.email && { email: business.email }),
     ...(business.phone && { telephone: business.phone }),
     ...(business.social.instagram && {

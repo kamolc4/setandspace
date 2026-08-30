@@ -72,7 +72,6 @@ export default function OMniePage() {
                 alignSelf: "start",
               }}
             >
-              {/* PLACEHOLDER — replace with real bio */}
               <p className="text-label" style={{ color: "var(--clay)", marginBottom: "1rem" }}>
                 Set & Space
               </p>

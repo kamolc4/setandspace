@@ -28,28 +28,8 @@ export default function PolitykaPrywatnosciPage() {
         Polityka prywatności
       </h1>
       <p className="text-label" style={{ color: "var(--text-muted)", marginBottom: "3rem" }}>
-        Ostatnia aktualizacja: 17 sierpnia 2026
+        Ostatnia aktualizacja: 30 sierpnia 2026
       </p>
-
-      {/* TODO notice — visible only to site owner during development */}
-      <div
-        style={{
-          backgroundColor: "var(--surface-alt)",
-          borderRadius: "var(--radius-sm)",
-          padding: "1.25rem 1.5rem",
-          marginBottom: "2.5rem",
-          borderLeft: "3px solid var(--clay)",
-        }}
-      >
-        <p style={{ fontWeight: 700, color: "var(--text-primary)", marginBottom: "0.5rem", fontSize: "0.875rem" }}>
-          TODO dla właścicielki serwisu
-        </p>
-        <p style={{ color: "var(--text-secondary)", fontSize: "0.8125rem", lineHeight: 1.6 }}>
-          Przed uruchomieniem uzupełnij w sekcji &bdquo;Administrator danych&rdquo; pełną nazwę działalności
-          lub firmy, adres rejestrowy i NIP/REGON jeżeli dotyczy. Następnie usuń tę ramkę.
-          Skonsultuj ostateczny tekst z prawnikiem przed publikacją.
-        </p>
-      </div>
 
       <div className="prose">
         <h2>Administrator danych</h2>
@@ -57,8 +37,9 @@ export default function PolitykaPrywatnosciPage() {
           Administratorem danych osobowych przetwarzanych w związku z korzystaniem z serwisu{" "}
           <strong>setandspace.pl</strong> jest{" "}
           <strong>
-            {/* TODO — replace with full legal name, address and tax ID */}
-            [IMIĘ I NAZWISKO / NAZWA FIRMY], [ADRES], [NIP jeżeli dotyczy]
+            {business.legalName} z siedzibą w {business.address.cityLocative},{" "}
+            {business.address.street}, {business.address.postalCode} {business.address.city},
+            NIP: {business.nip}, KRS: {business.krs}, REGON: {business.regon}
           </strong>
           .
         </p>

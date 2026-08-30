@@ -15,7 +15,7 @@ const PAGE_DATES: Record<string, string> = {
   "/poradniki":            "2026-08-19",
   "/o-mnie":               "2026-08-17",
   "/kontakt":              "2026-08-19",
-  "/polityka-prywatnosci": "2026-08-17",
+  "/polityka-prywatnosci": "2026-08-30",
 };
 
 export const dynamic = "force-dynamic";

@@ -1,7 +1,3 @@
-/**
- * Global business information for Set & Space.
- * Replace PLACEHOLDER values with real data before launch.
- */
 export const business = {
   name: "Set & Space",
   tagline: "Filmy, które pozwalają poczuć miejsce.",
@@ -10,19 +6,31 @@ export const business = {
   domain: "www.setandspace.pl",
   url: "https://www.setandspace.pl",
 
-  // PLACEHOLDER — replace with real contact data
+  // Legal entity
+  legalName: "Cyprian Corp Sp. z o.o.",
+  address: {
+    street: "ul. Tomasza Zana 43",
+    postalCode: "20-601",
+    city: "Lublin",
+    cityLocative: "Lublinie",
+    country: "Polska",
+  },
+  nip: "7123480923",
+  krs: "0001125572",
+  regon: "529580930",
+
   email: "kontakt@setandspace.pl",
-  phone: null as string | null, // e.g. "+48 000 000 000"
+  phone: null as string | null, // PLACEHOLDER — replace with real phone number
 
   // PLACEHOLDER — replace with real social profile URLs
   social: {
-    instagram: null as string | null, // "https://instagram.com/setandspace"
-    vimeo: null as string | null,     // "https://vimeo.com/setandspace"
-    youtube: null as string | null,   // "https://youtube.com/@setandspace"
+    instagram: null as string | null,
+    vimeo: null as string | null,
+    youtube: null as string | null,
   },
 
   // PLACEHOLDER — replace with Google Analytics measurement ID
-  ga4Id: null as string | null, // "G-XXXXXXXXXX"
+  ga4Id: null as string | null,
 
   // PLACEHOLDER — replace with GSC verification token
   gscVerification: null as string | null,
