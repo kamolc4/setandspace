@@ -5,18 +5,29 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logoutAction } from "@/app/admin/_actions/auth";
 
-const NAV_ITEMS = [
-  { href: "/admin", label: "Dashboard", exact: true },
-  { href: "/admin/poradniki", label: "Poradniki", exact: false },
-  { href: "/admin/planer", label: "Planer", exact: false },
-  { href: "/admin/realizacje", label: "Realizacje", exact: false },
-];
+interface NavItem {
+  href: string;
+  label: string;
+  exact: boolean;
+  badge?: number;
+}
 
-export function AdminNav() {
+interface Props {
+  newLeadsCount?: number;
+}
+
+export function AdminNav({ newLeadsCount = 0 }: Props) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // Close on Escape
+  const NAV_ITEMS: NavItem[] = [
+    { href: "/admin", label: "Dashboard", exact: true },
+    { href: "/admin/poradniki", label: "Poradniki", exact: false },
+    { href: "/admin/planer", label: "Planer", exact: false },
+    { href: "/admin/realizacje", label: "Realizacje", exact: false },
+    { href: "/admin/leady", label: "Leady", exact: false, badge: newLeadsCount },
+  ];
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -34,68 +45,115 @@ export function AdminNav() {
 
   const close = () => setOpen(false);
 
+  function NavLabel({ item }: { item: NavItem }) {
+    return (
+      <span style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+        {item.label}
+        {item.badge && item.badge > 0 ? (
+          <span
+            style={{
+              backgroundColor: "#A6856B",
+              color: "#fff",
+              borderRadius: "99px",
+              fontSize: "0.6rem",
+              fontWeight: 700,
+              padding: "0.1rem 0.4rem",
+              minWidth: "1.2rem",
+              textAlign: "center",
+              lineHeight: 1.5,
+            }}
+          >
+            {item.badge}
+          </span>
+        ) : null}
+      </span>
+    );
+  }
+
   return (
     <>
-      <nav style={{
-        backgroundColor: "#1F1916",
-        padding: "0 1.25rem",
-        height: "3.25rem",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        boxSizing: "border-box",
-      }}>
-        <Link href="/admin" style={{
-          color: "#F1E9E0",
-          fontWeight: 700,
-          fontSize: "0.9375rem",
-          textDecoration: "none",
-          letterSpacing: "0.01em",
-          flexShrink: 0,
-          whiteSpace: "nowrap",
-        }}>
+      <nav
+        style={{
+          backgroundColor: "#1F1916",
+          padding: "0 1.25rem",
+          height: "3.25rem",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          boxSizing: "border-box",
+        }}
+      >
+        <Link
+          href="/admin"
+          style={{
+            color: "#F1E9E0",
+            fontWeight: 700,
+            fontSize: "0.9375rem",
+            textDecoration: "none",
+            letterSpacing: "0.01em",
+            flexShrink: 0,
+            whiteSpace: "nowrap",
+          }}
+        >
           Set &amp; Space
         </Link>
 
         {/* Desktop navigation */}
-        <div className="admin-desktop" style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+        <div
+          className="admin-desktop"
+          style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}
+        >
           {NAV_ITEMS.map((item) => (
-            <Link key={item.href} href={item.href} style={{
-              color: isActive(item.href, item.exact) ? "#F7F3EE" : "#8C7B6E",
-              textDecoration: "none",
-              fontSize: "0.875rem",
-              fontWeight: isActive(item.href, item.exact) ? 600 : 400,
-              whiteSpace: "nowrap",
-            }}>
-              {item.label}
+            <Link
+              key={item.href}
+              href={item.href}
+              style={{
+                color: isActive(item.href, item.exact) ? "#F7F3EE" : "#8C7B6E",
+                textDecoration: "none",
+                fontSize: "0.875rem",
+                fontWeight: isActive(item.href, item.exact) ? 600 : 400,
+                whiteSpace: "nowrap",
+              }}
+            >
+              <NavLabel item={item} />
             </Link>
           ))}
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <div className="admin-desktop" style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-            <Link href="/" target="_blank" style={{
-              color: "#8C7B6E",
-              textDecoration: "none",
-              fontSize: "0.8125rem",
-              whiteSpace: "nowrap",
-            }}>
+          <div
+            className="admin-desktop"
+            style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}
+          >
+            <Link
+              href="/"
+              target="_blank"
+              style={{
+                color: "#8C7B6E",
+                textDecoration: "none",
+                fontSize: "0.8125rem",
+                whiteSpace: "nowrap",
+              }}
+            >
               ↗ Strona
             </Link>
             <form action={logoutAction}>
-              <button type="submit" style={{
-                background: "none",
-                border: "1px solid #4a3a35",
-                color: "#8C7B6E",
-                padding: "0.3rem 0.75rem",
-                borderRadius: "5px",
-                fontSize: "0.8125rem",
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-              }}>
+              <button
+                type="submit"
+                style={{
+                  background: "none",
+                  border: "1px solid #4a3a35",
+                  color: "#8C7B6E",
+                  padding: "0.3rem 0.75rem",
+                  borderRadius: "5px",
+                  fontSize: "0.8125rem",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                }}
+              >
                 Wyloguj
               </button>
             </form>
@@ -128,7 +186,6 @@ export function AdminNav() {
       {/* Mobile drawer */}
       {open && (
         <>
-          {/* Backdrop */}
           <div
             onClick={close}
             style={{
@@ -139,51 +196,67 @@ export function AdminNav() {
               background: "rgba(0,0,0,0.35)",
             }}
           />
-          {/* Panel */}
-          <div style={{
-            position: "fixed",
-            top: "3.25rem",
-            left: 0,
-            right: 0,
-            backgroundColor: "#2D241F",
-            zIndex: 49,
-            padding: "0.5rem 1.25rem 1.25rem",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-          }}>
+          <div
+            style={{
+              position: "fixed",
+              top: "3.25rem",
+              left: 0,
+              right: 0,
+              backgroundColor: "#2D241F",
+              zIndex: 49,
+              padding: "0.5rem 1.25rem 1.25rem",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+            }}
+          >
             {NAV_ITEMS.map((item) => (
-              <Link key={item.href} href={item.href} onClick={close} style={{
-                color: isActive(item.href, item.exact) ? "#F7F3EE" : "#C4B5A5",
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={close}
+                style={{
+                  color: isActive(item.href, item.exact) ? "#F7F3EE" : "#C4B5A5",
+                  textDecoration: "none",
+                  fontSize: "1rem",
+                  fontWeight: isActive(item.href, item.exact) ? 600 : 400,
+                  padding: "0.875rem 0",
+                  borderBottom: "1px solid #3d302a",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <NavLabel item={item} />
+              </Link>
+            ))}
+            <Link
+              href="/"
+              target="_blank"
+              onClick={close}
+              style={{
+                color: "#8C7B6E",
                 textDecoration: "none",
-                fontSize: "1rem",
-                fontWeight: isActive(item.href, item.exact) ? 600 : 400,
+                fontSize: "0.9375rem",
                 padding: "0.875rem 0",
                 borderBottom: "1px solid #3d302a",
                 display: "block",
-              }}>
-                {item.label}
-              </Link>
-            ))}
-            <Link href="/" target="_blank" onClick={close} style={{
-              color: "#8C7B6E",
-              textDecoration: "none",
-              fontSize: "0.9375rem",
-              padding: "0.875rem 0",
-              borderBottom: "1px solid #3d302a",
-              display: "block",
-            }}>
+              }}
+            >
               ↗ Strona publiczna
             </Link>
             <form action={logoutAction} style={{ paddingTop: "1rem" }}>
-              <button type="submit" style={{
-                background: "none",
-                border: "1px solid #4a3a35",
-                color: "#8C7B6E",
-                padding: "0.625rem 1.25rem",
-                borderRadius: "6px",
-                fontSize: "0.9375rem",
-                cursor: "pointer",
-                width: "100%",
-              }}>
+              <button
+                type="submit"
+                style={{
+                  background: "none",
+                  border: "1px solid #4a3a35",
+                  color: "#8C7B6E",
+                  padding: "0.625rem 1.25rem",
+                  borderRadius: "6px",
+                  fontSize: "0.9375rem",
+                  cursor: "pointer",
+                  width: "100%",
+                }}
+              >
                 Wyloguj
               </button>
             </form>

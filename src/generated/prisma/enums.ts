@@ -18,6 +18,17 @@ export const Status = {
 export type Status = (typeof Status)[keyof typeof Status]
 
 
+export const LeadStatus = {
+  NEW: 'NEW',
+  CONTACTED: 'CONTACTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  WON: 'WON',
+  LOST: 'LOST'
+} as const
+
+export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]
+
+
 export const AspectRatio = {
   PORTRAIT: 'PORTRAIT',
   LANDSCAPE: 'LANDSCAPE',

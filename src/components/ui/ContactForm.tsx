@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, useRef, type FormEvent } from "react";
 import { business } from "@/data/business";
+import { submitLeadAction } from "@/app/admin/_actions/leads";
 
 const projectTypes = [
   "Film dla hotelu / obiektu hospitality",
@@ -14,24 +15,53 @@ const projectTypes = [
 interface FormState {
   name: string;
   email: string;
+  phone: string;
   company: string;
   projectType: string;
   location: string;
   message: string;
+  website: string; // honeypot — always empty for humans
 }
+
+const EMPTY_FORM: FormState = {
+  name: "",
+  email: "",
+  phone: "",
+  company: "",
+  projectType: "",
+  location: "",
+  message: "",
+  website: "",
+};
 
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
-  const [form, setForm] = useState<FormState>({
-    name: "",
-    email: "",
-    company: "",
-    projectType: "",
-    location: "",
-    message: "",
-  });
+  const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  // Tracking — captured once on mount via ref (no re-render needed)
+  const trackingRef = useRef({
+    pageUrl: "",
+    utmSource: "",
+    utmMedium: "",
+    utmCampaign: "",
+    utmContent: "",
+    utmTerm: "",
+  });
+
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    trackingRef.current = {
+      pageUrl: window.location.pathname + window.location.search,
+      utmSource: sp.get("utm_source") ?? "",
+      utmMedium: sp.get("utm_medium") ?? "",
+      utmCampaign: sp.get("utm_campaign") ?? "",
+      utmContent: sp.get("utm_content") ?? "",
+      utmTerm: sp.get("utm_term") ?? "",
+    };
+  }, []);
 
   function handleChange(
     e: React.ChangeEvent<
@@ -43,25 +73,28 @@ export default function ContactForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (status === "loading") return; // double-submit guard
     setStatus("loading");
+    setErrorMsg("");
 
-    /**
-     * INTEGRATION POINT
-     * Replace this with your actual form submission logic:
-     * - Email API (e.g., Resend, SendGrid, Formspree)
-     * - Next.js Server Action
-     * - Any backend endpoint
-     *
-     * For now, this simulates a successful submission.
-     */
-    await new Promise((r) => setTimeout(r, 800));
+    const result = await submitLeadAction({
+      name: form.name,
+      email: form.email,
+      phone: form.phone || undefined,
+      company: form.company || undefined,
+      projectType: form.projectType || undefined,
+      location: form.location || undefined,
+      message: form.message,
+      website: form.website, // honeypot
+      ...trackingRef.current,
+    });
 
-    if (business.email) {
-      // When backend is ready: post to /api/contact
+    if (result.ok) {
       setStatus("success");
+      setForm(EMPTY_FORM);
     } else {
-      // No email configured — show success anyway (form captured locally)
-      setStatus("success");
+      setStatus("error");
+      setErrorMsg(result.error);
     }
   }
 
@@ -78,6 +111,7 @@ export default function ContactForm() {
     transition: "border-color 0.2s ease",
     appearance: "none",
     WebkitAppearance: "none",
+    boxSizing: "border-box",
   };
 
   const labelStyle: React.CSSProperties = {
@@ -114,7 +148,16 @@ export default function ContactForm() {
             margin: "0 auto 1.5rem",
           }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
@@ -127,10 +170,10 @@ export default function ContactForm() {
             marginBottom: "0.75rem",
           }}
         >
-          Wiadomość wysłana.
+          Dziękuję.
         </h3>
         <p style={{ color: "var(--text-secondary)", fontSize: "0.9375rem" }}>
-          Odpiszę w ciągu jednego dnia roboczego.
+          Wiadomość została wysłana. Odpiszę w ciągu jednego dnia roboczego.
         </p>
       </div>
     );
@@ -138,20 +181,40 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate>
+      {/* Honeypot — invisible to humans, filled by bots */}
       <div
+        aria-hidden="true"
         style={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: "1.25rem",
+          position: "absolute",
+          left: "-9999px",
+          top: "auto",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
         }}
+      >
+        <label htmlFor="cf-website">Website</label>
+        <input
+          id="cf-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={form.website}
+          onChange={handleChange}
+        />
+      </div>
+
+      <div
+        style={{ display: "grid", gridTemplateColumns: "1fr", gap: "1.25rem" }}
         className="contact-form-grid"
       >
         <div>
-          <label htmlFor="name" style={labelStyle}>
+          <label htmlFor="cf-name" style={labelStyle}>
             Imię <span aria-label="pole wymagane">*</span>
           </label>
           <input
-            id="name"
+            id="cf-name"
             name="name"
             type="text"
             required
@@ -164,11 +227,11 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="email" style={labelStyle}>
+          <label htmlFor="cf-email" style={labelStyle}>
             E-mail <span aria-label="pole wymagane">*</span>
           </label>
           <input
-            id="email"
+            id="cf-email"
             name="email"
             type="email"
             required
@@ -181,11 +244,27 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="company" style={labelStyle}>
+          <label htmlFor="cf-phone" style={labelStyle}>
+            Telefon
+          </label>
+          <input
+            id="cf-phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            value={form.phone}
+            onChange={handleChange}
+            style={inputStyle}
+            placeholder="+48 000 000 000"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="cf-company" style={labelStyle}>
             Firma / obiekt
           </label>
           <input
-            id="company"
+            id="cf-company"
             name="company"
             type="text"
             autoComplete="organization"
@@ -197,11 +276,11 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="projectType" style={labelStyle}>
+          <label htmlFor="cf-projectType" style={labelStyle}>
             Rodzaj projektu
           </label>
           <select
-            id="projectType"
+            id="cf-projectType"
             name="projectType"
             value={form.projectType}
             onChange={handleChange}
@@ -217,11 +296,11 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="location" style={labelStyle}>
+          <label htmlFor="cf-location" style={labelStyle}>
             Lokalizacja
           </label>
           <input
-            id="location"
+            id="cf-location"
             name="location"
             type="text"
             value={form.location}
@@ -232,11 +311,11 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="message" style={labelStyle}>
+          <label htmlFor="cf-message" style={labelStyle}>
             Wiadomość <span aria-label="pole wymagane">*</span>
           </label>
           <textarea
-            id="message"
+            id="cf-message"
             name="message"
             required
             rows={5}
@@ -257,7 +336,8 @@ export default function ContactForm() {
             marginTop: "1rem",
           }}
         >
-          Wystąpił błąd. Spróbuj ponownie lub napisz bezpośrednio na adres{" "}
+          {errorMsg || "Nie udało się wysłać wiadomości."} Możesz też napisać
+          bezpośrednio na{" "}
           <a href={`mailto:${business.email}`}>{business.email}</a>.
         </p>
       )}
@@ -270,7 +350,8 @@ export default function ContactForm() {
           display: "inline-flex",
           alignItems: "center",
           gap: "0.625rem",
-          backgroundColor: status === "loading" ? "var(--stone)" : "var(--text-primary)",
+          backgroundColor:
+            status === "loading" ? "var(--stone)" : "var(--text-primary)",
           color: "var(--surface)",
           padding: "1rem 2.25rem",
           borderRadius: "99px",
@@ -292,8 +373,8 @@ export default function ContactForm() {
           .contact-form-grid {
             grid-template-columns: 1fr 1fr !important;
           }
-          .contact-form-grid > div:nth-child(5),
-          .contact-form-grid > div:nth-child(6) {
+          .contact-form-grid > div:nth-child(6),
+          .contact-form-grid > div:nth-child(7) {
             grid-column: span 2;
           }
         }
