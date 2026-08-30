@@ -233,6 +233,23 @@ export type EnumLeadStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumLeadStatusFilter<$PrismaModel>
 }
 
+export type EnumGmailStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.GmailStatus | Prisma.EnumGmailStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGmailStatusFilter<$PrismaModel> | $Enums.GmailStatus
+}
+
+export type EnumGmailStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GmailStatus | Prisma.EnumGmailStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGmailStatusWithAggregatesFilter<$PrismaModel> | $Enums.GmailStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGmailStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGmailStatusFilter<$PrismaModel>
+}
+
 export type EnumAspectRatioFilter<$PrismaModel = never> = {
   equals?: $Enums.AspectRatio | Prisma.EnumAspectRatioFieldRefInput<$PrismaModel>
   in?: $Enums.AspectRatio[] | Prisma.ListEnumAspectRatioFieldRefInput<$PrismaModel>
@@ -480,6 +497,23 @@ export type NestedEnumLeadStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLeadStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLeadStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumGmailStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.GmailStatus | Prisma.EnumGmailStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGmailStatusFilter<$PrismaModel> | $Enums.GmailStatus
+}
+
+export type NestedEnumGmailStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.GmailStatus | Prisma.EnumGmailStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.GmailStatus[] | Prisma.ListEnumGmailStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumGmailStatusWithAggregatesFilter<$PrismaModel> | $Enums.GmailStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumGmailStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumGmailStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumAspectRatioFilter<$PrismaModel = never> = {

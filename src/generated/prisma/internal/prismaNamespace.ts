@@ -399,6 +399,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Article: 'Article',
   Lead: 'Lead',
+  GmailIntegration: 'GmailIntegration',
   PortfolioProject: 'PortfolioProject'
 } as const
 
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "article" | "lead" | "portfolioProject"
+    modelProps: "article" | "lead" | "gmailIntegration" | "portfolioProject"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -564,6 +565,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadCountAggregateOutputType> | number
+        }
+      }
+    }
+    GmailIntegration: {
+      payload: Prisma.$GmailIntegrationPayload<ExtArgs>
+      fields: Prisma.GmailIntegrationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GmailIntegrationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GmailIntegrationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>
+        }
+        findFirst: {
+          args: Prisma.GmailIntegrationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GmailIntegrationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>
+        }
+        findMany: {
+          args: Prisma.GmailIntegrationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>[]
+        }
+        create: {
+          args: Prisma.GmailIntegrationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>
+        }
+        createMany: {
+          args: Prisma.GmailIntegrationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GmailIntegrationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>[]
+        }
+        delete: {
+          args: Prisma.GmailIntegrationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>
+        }
+        update: {
+          args: Prisma.GmailIntegrationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>
+        }
+        deleteMany: {
+          args: Prisma.GmailIntegrationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GmailIntegrationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GmailIntegrationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>[]
+        }
+        upsert: {
+          args: Prisma.GmailIntegrationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GmailIntegrationPayload>
+        }
+        aggregate: {
+          args: Prisma.GmailIntegrationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGmailIntegration>
+        }
+        groupBy: {
+          args: Prisma.GmailIntegrationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GmailIntegrationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GmailIntegrationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GmailIntegrationCountAggregateOutputType> | number
         }
       }
     }
@@ -729,6 +804,23 @@ export const LeadScalarFieldEnum = {
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
 
 
+export const GmailIntegrationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  encryptedPassword: 'encryptedPassword',
+  notifyEmail: 'notifyEmail',
+  enabled: 'enabled',
+  status: 'status',
+  lastTestAt: 'lastTestAt',
+  lastSuccessAt: 'lastSuccessAt',
+  lastErrorAt: 'lastErrorAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GmailIntegrationScalarFieldEnum = (typeof GmailIntegrationScalarFieldEnum)[keyof typeof GmailIntegrationScalarFieldEnum]
+
+
 export const PortfolioProjectScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -879,6 +971,20 @@ export type EnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'LeadStatus[]'
  */
 export type ListEnumLeadStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'GmailStatus'
+ */
+export type EnumGmailStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GmailStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'GmailStatus[]'
+ */
+export type ListEnumGmailStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GmailStatus[]'>
     
 
 
@@ -1076,6 +1182,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   article?: Prisma.ArticleOmit
   lead?: Prisma.LeadOmit
+  gmailIntegration?: Prisma.GmailIntegrationOmit
   portfolioProject?: Prisma.PortfolioProjectOmit
 }
 

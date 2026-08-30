@@ -25,7 +25,7 @@ export function AdminNav({ newLeadsCount = 0 }: Props) {
     { href: "/admin/poradniki", label: "Poradniki", exact: false },
     { href: "/admin/planer", label: "Planer", exact: false },
     { href: "/admin/realizacje", label: "Realizacje", exact: false },
-    { href: "/admin/leady", label: "Leady", exact: false, badge: newLeadsCount },
+    { href: "/admin/leady", label: "Leady i Google", exact: false, badge: newLeadsCount },
   ];
 
   useEffect(() => {

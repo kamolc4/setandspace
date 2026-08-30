@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getPrisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
 import { formatWarsawDateTime } from "@/lib/timezone";
+import { LeadyGoogleTabs } from "@/components/admin/LeadyGoogleTabs";
 import type { LeadStatus, Prisma } from "@/generated/prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -98,39 +99,30 @@ export default async function LeadyPage({ searchParams }: Props) {
   return (
     <div>
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          marginBottom: "1.5rem",
-          flexWrap: "wrap",
-          gap: "0.75rem",
-        }}
-      >
-        <div>
-          <h1
-            style={{
-              fontSize: "1.5rem",
-              fontWeight: 700,
-              color: "#1F1916",
-              marginBottom: "0.25rem",
-            }}
-          >
-            Leady
-          </h1>
-          <p style={{ fontSize: "0.875rem", color: "#8C7B6E" }}>
-            {totalNew > 0 ? (
-              <>
-                <strong style={{ color: "#7D5A00" }}>{totalNew} nowych</strong>{" "}
-                · {leads.length} wyników
-              </>
-            ) : (
-              <>{leads.length} wyników</>
-            )}
-          </p>
-        </div>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <h1
+          style={{
+            fontSize: "1.5rem",
+            fontWeight: 700,
+            color: "#1F1916",
+            marginBottom: "0.25rem",
+          }}
+        >
+          Leady i Google
+        </h1>
+        <p style={{ fontSize: "0.875rem", color: "#8C7B6E" }}>
+          {totalNew > 0 ? (
+            <>
+              <strong style={{ color: "#7D5A00" }}>{totalNew} nowych</strong>{" "}
+              · {leads.length} wyników
+            </>
+          ) : (
+            <>{leads.length} wyników</>
+          )}
+        </p>
       </div>
+
+      <LeadyGoogleTabs />
 
       {/* Filters */}
       <div

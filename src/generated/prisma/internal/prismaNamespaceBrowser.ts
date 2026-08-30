@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Article: 'Article',
   Lead: 'Lead',
+  GmailIntegration: 'GmailIntegration',
   PortfolioProject: 'PortfolioProject'
 } as const
 
@@ -119,6 +120,23 @@ export const LeadScalarFieldEnum = {
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const GmailIntegrationScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  encryptedPassword: 'encryptedPassword',
+  notifyEmail: 'notifyEmail',
+  enabled: 'enabled',
+  status: 'status',
+  lastTestAt: 'lastTestAt',
+  lastSuccessAt: 'lastSuccessAt',
+  lastErrorAt: 'lastErrorAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GmailIntegrationScalarFieldEnum = (typeof GmailIntegrationScalarFieldEnum)[keyof typeof GmailIntegrationScalarFieldEnum]
 
 
 export const PortfolioProjectScalarFieldEnum = {

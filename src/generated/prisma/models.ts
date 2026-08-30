@@ -10,5 +10,6 @@
  */
 export type * from './models/Article'
 export type * from './models/Lead'
+export type * from './models/GmailIntegration'
 export type * from './models/PortfolioProject'
 export type * from './commonInputTypes'

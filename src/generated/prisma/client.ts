@@ -52,6 +52,11 @@ export type Article = Prisma.ArticleModel
  */
 export type Lead = Prisma.LeadModel
 /**
+ * Model GmailIntegration
+ * 
+ */
+export type GmailIntegration = Prisma.GmailIntegrationModel
+/**
  * Model PortfolioProject
  * 
  */

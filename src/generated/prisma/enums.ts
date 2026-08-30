@@ -36,3 +36,12 @@ export const AspectRatio = {
 } as const
 
 export type AspectRatio = (typeof AspectRatio)[keyof typeof AspectRatio]
+
+
+export const GmailStatus = {
+  PENDING: 'PENDING',
+  CONNECTED: 'CONNECTED',
+  ERROR: 'ERROR'
+} as const
+
+export type GmailStatus = (typeof GmailStatus)[keyof typeof GmailStatus]
